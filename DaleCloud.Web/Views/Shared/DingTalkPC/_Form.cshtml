@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    @*<meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">*@
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> <!--通过为视口（viewport）设置 meta 属性为 user-scalable=no 可以禁用其缩放（zooming）功能-->
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/css/framework-font.css" rel="stylesheet" />
+    <link href="~/Content/css/framework-theme.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery/jquery-2.1.1.min.js"></script>
+    <script src="~/Content/js/bootstrap/bootstrap.min.js"></script>
+    <link href="~/Content/js/bootstrap/bootstrap.min-dd.css" rel="stylesheet" />
+    <script src="~/Content/js/wdtree/tree.js"></script>
+    <link href="~/Content/js/wdtree/tree.css" rel="stylesheet" />
+    <link href="~/Content/js/select2/select2.min.css" rel="stylesheet" />
+    <script src="~/Content/js/select2/select2.min.js"></script>
+    <link href="~/Content/js/wizard/wizard.css" rel="stylesheet" />
+    <script src="~/Content/js/wizard/wizard.js"></script>
+    <script src="~/Content/js/validate/jquery.validate.min.js"></script>
+    <script src="~/Content/js/datepicker/WdatePicker.js"></script>
+    <link href="~/Content/css/framework-ui.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/dingtalk-pc-api/2.7.0/index.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/dingtalk-jsapi/2.3.0/dingtalk.open.js"></script>
+    
+    <script src="/Content/js/dingtalk/dingtalkinit.js?v=@DaleCloud.Code.GetJsVesion.GetVcode()"></script>
+
+</head>
+<body>
+    @RenderBody()
+    @Html.AntiForgeryToken()
+</body>
+</html>

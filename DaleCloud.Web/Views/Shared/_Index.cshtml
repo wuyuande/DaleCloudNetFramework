@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/css/framework-font.css" rel="stylesheet" />
+    <link href="~/Content/css/framework-theme.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery/jquery-2.1.1.min.js"></script>
+    <script src="~/Content/js/bootstrap/bootstrap.js"></script>
+    <link href="~/Content/js/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/js/datepicker/WdatePicker.js"></script>
+    <link href="~/Content/css/framework-ui.css" rel="stylesheet" />
+    <link href="~/Content/css/layout.css" rel="stylesheet" />
+    <script src="~/Content/js/framework-ui.js"></script>
+    <script src="~/Content/js/framework-bizdata.js"></script>
+    <link rel="stylesheet" href="~/Content/js/easyui/themes/bootstrap/easyui-green.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/js/easyui/themes/icon.css" type="text/css" >
+    <script src="~/Content/js/easyui/jquery.easyui.min.js"></script>
+    <script src="~/Content/js/easyui/easyui-lang-zh_CN.js"></script>
+    <script src="~/Content/js/easyui/datagrid-export.js"></script>
+
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/dingtalk-jsapi/2.6.0/dingtalk.open.js"></script>
+    <script src="~/Content/js/dingtalk/dingtalkinit.js"></script>
+
+</head>
+<body class="easyui-layout">
+    @RenderBody()
+    @Html.AntiForgeryToken()
+</body>
+</html>

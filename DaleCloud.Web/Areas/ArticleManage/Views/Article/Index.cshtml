@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+    $(function () {
+        gridList();
+    })
+    function gridList() {
+        $("#gridList").dataGrid({
+            treeGrid: true,
+            treeGridModel: "adjacency",
+            ExpandColumn: "F_EnCode",
+            url: "/ProductManage/ProductInfo/GetGridJson",
+            height: $(window).height() - 90,
+            colModel: [
+                { label: "主键", name: "T_Id", hidden: true, key: true },
+                { label: '名称', name: 'T_FullName', width: 260, align: 'left' },
+                { label: '型号', name: 'T_ModelCode', width: 120, align: 'left' },
+                { label: '版本', name: 'T_Version', width: 100, align: 'left' },
+                { label: '规格', name: 'T_Size', width: 160, align: 'left' },
+                {
+                    label: "有效", name: "T_State", width: 60, align: "center",
+                    formatter: function (cellvalue) {
+                        return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                { label: '创建日期', name: 'T_CreateTime', width: 120, align: 'left' },
+            ]
+        });
+        $("#btn_search").click(function () {
+            var queryJson = {
+                keyword: $("#txt_keyword").val()
+            }
+            $("#gridList").jqGrid('setGridParam', {
+                postData: queryJson,
+            }).trigger('reloadGrid');
+        });
+    }
+    function btn_add() {
+        var width = $(document).width() + "px";
+        var height = $(document).height() + "px";
+        $.modalOpen({
+            id: "Form",
+            title: "新增产品",
+            url: "/ProductManage/ProductInfo/Form",
+            width: "800px",
+            height: height,
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_edit() {
+
+        var keyValue = $("#gridList").jqGridRowValue().T_Id;
+        var width = $(document).width() + "px";
+        var height = $(document).height() + "px";
+        $.modalOpen({
+            id: "Form",
+            title: "修改产品",
+            url: "/ProductManage/ProductInfo/Form?keyValue=" + keyValue,
+            width: "800px",
+            height: height,
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_delete() {
+        $.deleteForm({
+            url: "/ProductManage/ProductInfo/DeleteForm",
+            param: { keyValue: $("#gridList").jqGridRowValue().T_Id },
+            success: function () {
+                $("#gridList").resetSelection();
+                $("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+    function btn_details() {
+        var keyValue = $("#gridList").jqGridRowValue().T_Id;
+        var width = $(document).width() + "px";
+        var height = $(document).height() + "px";
+        $.modalOpen({
+            id: "ProductInfo",
+            title: "查看产品",
+            url: "/ProductManage/ProductInfo/Details?keyValue=" + keyValue,
+            width: "800px",
+            height: height,
+            btn: null,
+        });
+    }
+</script>
+<div class="topPanel" style="border: 0px;">
+    <div class="search">
+        <table>
+            <tr>
+                <td>
+                    <div class="input-group">
+                        <input type="text" id="txt_keyword" class="form-control" placeholder="请输入要查询关键字" style="width: 200px;">
+                        <span class="input-group-btn">
+                            <button type="button" id="btn_search" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="toolbar">
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+        </div>
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="btn_add()"><i class="fa fa-plus"></i>新建产品</a>
+        </div>
+        <div class="operate">
+            <ul class="nav nav-pills">
+                <li class="first">已选中<span>1</span>项</li>
+                <li><a onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改产品</a></li>
+                <li><a onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除产品</a></li>
+                <li><a onclick="btn_details()"><i class="fa fa-search-plus"></i>查看产品</a></li>
+            </ul>
+            <a href="javascript:;" class="close"></a>
+        </div>
+        <script>$('.toolbar').authorizeButton()</script>
+    </div>
+</div>
+<div class="gridPanel">
+    <table id="gridList"></table>
+    <style>
+        .ui-jqgrid {
+            border-left: 0px;
+            border-right: 0px;
+            border-bottom: 0px;
+        }
+    </style>
+</div>

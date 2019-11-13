@@ -1,0 +1,172 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+<script>
+    $(function () {
+       
+        //gridList();
+    });
+   
+    function gridList() {
+        var $gridList = $("#gridList");
+        $gridList.dataGrid({
+            height: $(window).height() - 96,
+            colModel: [
+                { label: "主键", name: "F_Id", hidden: true, key: true },
+                { label: '名称', name: 'F_ItemName', width: 150, align: 'left' },
+                { label: '编号', name: 'F_ItemCode', width: 150, align: 'left' },
+                { label: '排序', name: 'F_SortCode', width: 80, align: 'center' },
+                {
+                    label: "默认", name: "F_IsDefault", width: 60, align: "center",
+                    formatter: function (cellvalue) {
+                        return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                {
+                    label: '创建时间', name: 'F_CreatorTime', width: 80, align: 'left',
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
+                },
+                {
+                    label: "有效", name: "F_EnabledMark", width: 60, align: "center",
+                    formatter: function (cellvalue) {
+                        return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                { label: "备注", name: "F_Description", index: "F_Description", width: 200, align: "left", sortable: false }
+            ]
+        });
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                url: "/SystemManage/ItemsData/GetGridJson",
+                postData: { itemId: $("#itemTree").getCurrentNode().id, keyword: $("#txt_keyword").val() },
+            }).trigger('reloadGrid');
+        });
+    }
+    function btn_add() {
+        var itemId = $("#itemTree").getCurrentNode().id;
+        var itemName = $("#itemTree").getCurrentNode().text;
+        if (!itemId) {
+            return false;
+        }
+        $.modalOpen({
+            id: "Form",
+            title: itemName + " 》新增字典",
+            url: "/SystemManage/ItemsData/Form?itemId=" + itemId,
+            width: "450px",
+            height: "350px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_edit() {
+        var itemName = $("#itemTree").getCurrentNode().text;
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "Form",
+            title: itemName + " 》修改字典",
+            url: "/SystemManage/ItemsData/Form?keyValue=" + keyValue,
+            width: "450px",
+            height: "350px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_delete() {
+        $.deleteForm({
+            url: "/SystemManage/ItemsData/DeleteForm",
+            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
+            success: function () {
+                $("#gridList").resetSelection();
+                $("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+    function btn_details() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "Details",
+            title: "查看字典",
+            url: "/SystemManage/ItemsData/Details?keyValue=" + keyValue,
+            width: "450px",
+            height: "470px",
+            btn: null,
+        });
+    }
+    function btn_itemstype() {
+        $.modalOpen({
+            id: "ItemsType",
+            title: "字典分类",
+            url: "/SystemManage/ItemsType/Index",
+            width: "800px",
+            height: "550px",
+            btn: null,
+        });
+    }
+</script>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">关键词回复</a></li>
+    <li><a href="#tab2" id="tab2-head" data-toggle="tab">收到消息回复</a></li>
+    <li><a href="#tab3" id="tab3-head" data-toggle="tab">被关注回复</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="tab1" class="tab-pane fade in active" style="padding-top: 5px; margin-right: 20px;">
+        <div class="gridPanel">
+            <table id="gridList"></table>
+            <style>
+                .ui-jqgrid {
+                    border-left: 0px;
+                    border-right: 0px;
+                    border-bottom: 0px;
+                }
+            </style>
+        </div>
+    </div>
+    <div id="tab2" class="tab-pane fade in " style="padding-top: 20px; margin-right: 20px; ">
+        <div style="font-size: 14px;padding: 0 0 0 20px;margin-top: 10px;font-weight: 600;">客户信息</div>
+        <form id="form2" method="post">
+            <table class="form">
+                <tr>
+                    <th class="formTitle">客户名称</th>
+                    <td class="formValue">
+                        <input id="T_FullName" name="T_FullName" type="text" class="form-control required"  />
+                    </td>
+                </tr>
+
+                <tr>
+                    <th class="formTitle">联系人</th>
+                    <td class="formValue">
+                        <input id="T_Linkman" name="T_Linkman" type="text" class="form-control required"  />
+                    </td>
+                </tr>
+            </table>
+        </form>
+        
+    </div>
+    <div id="tab3" class="tab-pane fade in " style="padding-top: 20px; margin-right: 20px; ">
+       
+        <div style="font-size: 14px;padding: 0 0 0 20px;margin-top: 10px;font-weight: 600;">产品信息</div>
+        <form id="form3" method="post">
+            <table class="form">
+                <tr>
+                    <th class="formTitle">产品名称</th>
+                    <td class="formValue">
+                        <input id="T_ProductName" name="T_ProductName" type="text" class="form-control required"  />
+                    </td>
+                </tr>
+
+                <tr>
+                    <th class="formTitle">设备号SN.</th>
+                    <td class="formValue">
+                        <input id="T_SerialNo" name="T_SerialNo" type="text" class="form-control required"  />
+                    </td>
+                </tr>
+              
+            </table>
+        </form>
+    </div>
+    
+</div>

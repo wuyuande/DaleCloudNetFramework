@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "产品设备详情";
+    Layout = "~/Views/Shared/WeixinApp/_Detail.cshtml";
+}
+
+<header>
+    <span class="user-name"></span>
+</header>
+
+<div class="weui-cells" style="margin-top:0;">
+    <!---工单详情-->
+    <div class="page-service-detail">
+        <div class="content">
+            <div class="aftermain" id="detail_content">
+               
+            </div>
+            <script id="detail_template" type="text/html">
+                <div class="aftermian-head">
+                    <div class="aftermian-head-text" style="font-size:14px;" >{{$data.T_SerialNo}}</div>
+                   
+                    {{if $data.T_State==true}}
+                    <div class="aftermian-head-btn"  style="background-color: #43c4ff;"><span>正常</span></div>
+                    {{/if}}
+                </div>
+              
+                <div class="aftermain-palce" style="text-align:left;">客户名称：<span>{{$data.T_CustomerName}}</span></div>
+                <div class="aftermain-info">
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">产品名称：</div><div class="aftermain-info-h2-desc"><span>{{$data.T_ProductName}}</span>/<span>{{$data.T_ModelCode}}</span></div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">销售人员：</div><div class="aftermain-info-h2-desc">{{$data.T_SalesUser}}</div></div>
+                </div>
+                <div class="aftermain-palce"><span name="T_Title">  </span></div>
+                <div class="aftermain-info">
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">生产制造令：</div><div class="aftermain-info-h2-desc">{{$data.T_ProductOrderNo}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">安装人员：</div><div class="aftermain-info-h2-desc">{{$data.T_Implementer}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">安装日期：</div><div class="aftermain-info-h2-desc">{{$data.T_InstallTime}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">验收日期：</div><div class="aftermain-info-h2-desc">{{$data.T_DeliveryTime}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">服务到期：</div><div class="aftermain-info-h2-desc">{{$data.T_Implementer}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">授权到期：</div><div class="aftermain-info-h2-desc">{{$data.T_LicenseTime}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">最后服务：</div><div class="aftermain-info-h2-desc">{{$data.T_LastServiceTime}}</div></div>
+                </div>
+                <div class="aftermian-doubleline"></div>
+                <div class="aftermain-info">
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">设备清单：</div><div class="aftermain-info-h2-desc">{{$data.T_Content}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">安装实施：</div><div class="aftermain-info-h2-desc">{{$data.T_Service}}</div></div>
+                </div>
+            </script>
+        </div>
+    </div>
+   
+</div>
+<div class="weui-footer">
+    <p class="weui-footer__text"></p>
+</div>
+
+
+<style>
+    .desc_padding {
+        border-left: solid 1px #bbb;
+        padding-left: 5px;
+        margin-left: 5px;
+    }
+</style>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script src="~/Content/weui/js/jquery-weui.min.js"></script>
+<script src="~/Content/weui/js/weui.min.js"></script>
+<script src="~/Content/weui/js/weui.expand.js?t=2"></script>
+<script>
+
+    var detailData = [];
+    var openid = $.cookie('openid');
+    var customerId = $.getQueryString("customerId");
+    var keyValue = $.getQueryString("keyValue");
+    $(document).ready(function () {
+        GetOrder(customerId);
+    });
+
+    function GetOrder(keyValue) {
+        var req = {
+            keyValue: keyValue
+        };
+        $.ajaxGet({
+            data: req,
+            url: '/ProductManage/ProductDevice/GetDetailJson',
+            success: function (oObject) {
+                if (oObject.state != "success") {
+                    $.toptip(oObject.message, 'warning');
+                    $("#detail_content").html(oObject.message);
+                    return false;
+                }
+
+                detailData = oObject.res.data;
+                var htm = template("detail_template", detailData);
+                $("#detail_content").html(htm);
+            }
+        })
+    }
+  
+
+</script>
+
+
+

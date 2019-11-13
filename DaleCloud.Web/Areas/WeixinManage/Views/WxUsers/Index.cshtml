@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+    $(function () {
+        gridList();
+    })
+    function gridList() {
+        var $gridList = $("#gridList");
+        $gridList.dataGrid({
+            url: "/WeixinManage/WxUsers/GetGridJson",
+            height: $(window).height() - 96,
+            colModel: [
+                { label: "主键", name: "T_OpenId", hidden: true, key: true },
+                { label: '用户', name: 'T_Nickname', width: 180, align: 'left' },
+                {
+                    label: "头像", name: "T_HeadImgUrl", width: 80, align: "center",
+                    formatter: function (cellvalue) {
+                        return cellvalue == "" ? "" : "<img src=\"" + cellvalue + "\" style='width: 60px;'></img>";
+                    }
+                },
+                {
+                    label: '性别', name: 'T_Sex', width: 80, align: 'left',
+                    formatter: function (cellvalue) {
+                        return cellvalue == "0" ? "女" : "男";
+                    }
+                },
+                { label: '手机', name: 'T_Mobile', width: 100, align: 'left' },
+                { label: '省份', name: 'T_Province', width: 130, align: 'left' },
+                { label: '城市', name: 'T_City', width: 120, align: 'left' },
+                { label: '关注时间', name: 'T_SubscribeTime', width: 150, align: 'left' },
+                {
+                    label: '状态', name: 'T_Status', width: 80, align: 'left',
+                    formatter: function (cellvalue) {
+                        return cellvalue == "0" ? "废除" : "可用";
+                    }
+                },
+                { label: '创建时间', name: 'T_CreateDate', width: 150, align: 'left' },
+                { label: '更新时间', name: 'T_UpdateDate', width: 150, align: 'left' },
+                
+            ]
+        });
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                postData: { keyword: $("#txt_keyword").val() },
+            }).trigger('reloadGrid');
+        });
+    }
+   
+   
+    function btn_delete() {
+        $.deleteForm({
+            url: "/WeixinManage/WxUsers/DeleteForm",
+            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+    function btn_details() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "Details",
+            title: "查看微信用户",
+            url: "/WeixinManage/WxUsers/Details?keyValue=" + keyValue,
+            width: "450px",
+            height: "500px",
+            btn: null,
+        });
+    }
+    function btn_updateUser() {
+        $.submitPost({
+            title: "确定要更新微信用户吗？",
+            url: "/WeixinManage/WxUsers/GetWeixinUser",
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+    function btn_updateGroup() {
+        $.submitPost({
+            title: "确定要更新分组信息吗？",
+            url: "/WeixinManage/Department/GetDingTalkDepartment",
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+    function btn_sendMsg() {
+        $.submitPost({
+            url: "/WeixinManage/WxUsers/SendWrokMsg",
+            param: { keyValue: $("#gridList").jqGridRowValue().Userid },
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+
+</script>
+
+<div class="topPanel">
+    <div class="toolbar">
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+        </div>
+        <div class="btn-group">
+            <a id="NF-add" authorize="yes" class="btn btn-primary dropdown-text" onclick="btn_updateUser()"><i class="fa fa-plus"></i>更新用户</a>
+        </div>
+        <div class="btn-group">
+            <a id="NF-edit" authorize="yes" class="btn btn-primary dropdown-text" onclick="btn_updateGroup()"><i class="fa fa-plus"></i>更新分组</a>
+        </div>
+        <div class="operate">
+            <ul class="nav nav-pills">
+                <li class="first">已选中<span>1</span>项</li>
+                <li><a id="NF-delete" authorize="yes" onclick="btn_sendMsg()"><i class="fa fa-trash-o"></i>发动消息</a></li>
+                <li><a id="NF-Details" authorize="yes" onclick="btn_details()"><i class="fa fa-search-plus"></i>查看信息</a></li>
+            </ul>
+            <a href="javascript:;" class="close"></a>
+        </div>
+        <script>$('.toolbar').authorizeButton()</script>
+    </div>
+    <div class="search">
+        <table>
+            <tr>
+                <td>
+                    <div class="input-group">
+                        <input id="txt_keyword" type="text" class="form-control" placeholder="用户姓名/电话" style="width: 200px;">
+                        <span class="input-group-btn">
+                            <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="gridPanel">
+    <table id="gridList"></table>
+</div>

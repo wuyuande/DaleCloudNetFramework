@@ -1,0 +1,243 @@
+﻿
+
+<html>
+<head>
+    <title>常用工具-示值误差计算器</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="~/Content/weui/css/weui.min.css">
+    <link rel="stylesheet" href="~/Content/weui/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="~/Content/weui/css/layout.css">
+    <style>
+        .weui-label {
+    display: block;
+    width: 128px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+    </style>
+</head>
+<body ontouchstart="">
+
+    <header class='header'>
+        <h1 class="header-title">示值误差计算器</h1>
+    </header>
+    <div id="form">
+        <form id="registefrom">
+            <div class="weui-cells_form" style="background-color: #fff;">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">工况压力类型:</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select class="weui-select" id="T_Type" name="T_Type">
+                            <option selected value="AP">绝对压力AP</option>
+                            <option value="GP">表压压力GP</option>
+                        </select>
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell" id="td_AtmP" style="display:none;">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">大气压力kPa:</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" id="AtmP" name="AtmP" value="0" min="0.000" step="0.001" placeholder="kPa">
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">被检表体积Vma:</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" id="Vma" name="Vma" min="0.0" step="0.1" placeholder="50L(升)">
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">被检表压力Pma:</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" id="Pma" name="Pma" min="0" step="1" placeholder="Pa">
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">被检表温度Tma:</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" id="Tma" name="Tma" min="0.0" step="0.1" placeholder="℃">
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">标准器体积Vsa:</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" id="Vsa" name="Vsa" min="0.000" step="0.001" value="" placeholder="50L(升)">
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">标准器压力Psa:</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" id="Psa" name="Psa" min="0" step="1" placeholder="Pa">
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">标准器温度Tsa:</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" id="Tsa" name="Tsa" min="0.0" step="0.1" placeholder="℃">
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cells__title">计算结果</div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">修正后体积Vref:</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="Vref" name="Vref"  readonly>
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">示值误差值E:</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="ErrValue" name="ErrValue"  readonly>
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+            </div>
+
+            <div class="weui-btn-area">
+                <a id="formSubmitBtn" href="javascript:" class="weui-btn weui-btn_primary">计算</a>
+               
+            </div>
+        </form>
+    </div>
+    <div class="weui-footer">
+        <p class="weui-footer__text">宜宾机电一体化研究所</p>
+    </div>
+    <script src="~/Content/weui/js/jquery-2.1.4.js"></script>
+    <script src="~/Content/weui/js/fastclick.js"></script>
+    <script>
+        $(function () {
+            FastClick.attach(document.body);
+        });
+    </script>
+    <script src="~/Content/weui/js/jquery-weui.min.js"></script>
+    <script src="~/Content/weui/js/iTemplate.js"></script>
+    <script src="~/Content/weui/js/jquery.cookie.js"></script>
+
+    <script>
+        var userInfo = '';
+
+        $(document).ready(function () {
+            var type = $("#T_Type").val();
+            if (type == "GP") {
+                $("#td_AtmP").show();
+            } else {
+                $("#td_AtmP").hide();
+            }
+        });
+
+        $("#T_Type").change(function () {
+            var type= $(this).val();
+            if (type=="GP") {
+                $("#td_AtmP").show();
+
+            }else{
+                $("#td_AtmP").hide();
+            }
+        });
+        $("#formSubmitBtn").on('click', function () {
+            var data = {
+                Type: $("#T_Type").val(),
+                AtmP: $("#AtmP").val(),
+                Vma: $("#Vma").val(),
+                Pma: $("#Pma").val(),
+                Tma: $("#Tma").val(),
+                Vsa: $("#Vsa").val(),
+                Psa: $("#Psa").val(),
+                Tsa: $("#Tsa").val()
+            }
+            if (data.Type == "GP" && !data.AtmP) {
+                $.toptip('请输入大气压力值');
+                return;
+            }
+            if (data.Type == "GP" && data.AtmP<85) {
+                $.toptip('请输入正确的大气压力值');
+                return;
+            }
+            if (!data.Vma) {
+                $.toptip('请输入被检表体积');
+                return;
+            }
+            if (!data.Pma) {
+                $.toptip('请输入被检表绝对压力值');
+                return;
+            }
+            if (!data.Tma) {
+                $.toptip('请输入被检表温度值');
+                return;
+            }
+            if (!data.Vsa) {
+                $.toptip('请输入标准器体积值');
+                return;
+            }
+            if (!data.Psa) {
+                $.toptip('请输入标准器绝对压力值');
+                return;
+            }
+            if (!data.Tsa) {
+                $.toptip('请输入标准器温度值');
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/WeixinApp/Tools/GetCaliError",
+                data: data,
+                beforeSend: function (XMLHttpRequest) {
+                    $.showLoading("正在提交");
+                },
+                success: function (data) {
+                    $.hideLoading();
+                    if (data.state == "success") {
+                        $.alert(data.message, "提示！", function () {
+                            $("#Vref").val(data.data.Vref);
+                            $("#ErrValue").val(data.data.Err)
+                        });
+                    } else {
+                        $.alert("" + data.message, "警告！");
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.hideLoading();
+                    $.alert("提交出错，请重试！", "警告！");
+                }
+            });
+
+
+            return false;
+        });
+
+    </script>
+
+
+</body>
+</html>

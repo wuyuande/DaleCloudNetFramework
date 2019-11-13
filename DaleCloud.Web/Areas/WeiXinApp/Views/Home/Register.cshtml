@@ -1,0 +1,172 @@
+﻿
+
+<html>
+<head>
+    <title>客户设备绑定</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="~/Content/weui/css/weui.min.css">
+    <link rel="stylesheet" href="~/Content/weui/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="~/Content/weui/css/layout.css">
+</head>
+<body ontouchstart="">
+
+    <header class='header'>
+        <h1 class="header-title">注册绑定设备</h1>
+    </header>
+    <div id="form">
+        <form id="registefrom">
+            <div class="weui-cells_form" style="background-color: #fff;">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">单位名称</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="Company" name="Company" maxlength="18" placeholder="真实有效的全称">
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">出厂编号</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="SerialNo" name="SerialNo" maxlength="18" placeholder="">
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">昵&nbsp;&nbsp;&nbsp;&nbsp;称</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="NickName" name="NickName" maxlength="18" value="@Model.NickName">
+                        <input type="hidden" id="openid" name="openid" value="@Model.OpenId" />
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">姓&nbsp;&nbsp;&nbsp;&nbsp;名</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="RealName" name="RealName" maxlength="18" placeholder="">
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">手机号</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="tel" id="Mobile" name="Mobile" required pattern="^\d{11}$" maxlength="11" placeholder="输入你现在的手机号" emptytips="请输入手机号" notmatchtips="请输入正确的手机号">
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                
+
+                
+                <label for="weuiAgree" class="weui-agree">
+                    <input id="weuiAgree" class="weui-agree__checkbox" type="checkbox">
+                    <span class="weui-agree__text">
+                        阅读并同意
+                    </span>
+                    <a id="showAgree" href="javascript:" class="open-popup" style="pointer-events:all; " data-target="agreePopup">《相关条款》</a>
+                </label>
+            </div>
+
+            <div class="weui-btn-area">
+                <a id="formSubmitBtn" href="javascript:" class="weui-btn weui-btn_primary">提交</a>
+                <input type="hidden" id="headimgurl" name="headimgurl" value="@Model.Headimgurl" />
+            </div>
+        </form>
+    </div>
+    <div class="weui-footer">
+        <p class="weui-footer__text"></p>
+    </div>
+    <div id="agreePopup" class="weui-popup__container">
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal">
+            <article id="Agreement" class="weui-article"></article>
+            <a href="javascript:;" class="weui-btn weui-btn_primary close-popup">关闭</a>
+        </div>
+    </div>
+    <script src="~/Content/weui/js/jquery-2.1.4.js"></script>
+    <script src="~/Content/weui/js/fastclick.js"></script>
+    <script>
+        $(function () {
+            FastClick.attach(document.body);
+        });
+    </script>
+    <script src="~/Content/weui/js/jquery-weui.min.js"></script>
+    <script src="~/Content/weui/js/iTemplate.js"></script>
+    <script src="~/Content/weui/js/jquery.cookie.js"></script>
+
+    <script>
+        var userInfo = '';
+        
+        $(document).ready(function () {
+
+        });
+
+        $("#formSubmitBtn").on('click', function () {
+            var data = {
+                openid: "@Model.OpenId",
+                nickname: "@Model.NickName",
+                headimgurl: "@Model.Headimgurl",
+                linkman: $("#RealName").val(),
+                mobile: $("#Mobile").val(),
+                company: $("#Company").val(),
+                serialno: $("#SerialNo").val()
+            }
+            if (!data.mobile || !/1[3|4|5|7|8]\d{9}/.test(data.mobile)) {
+                $.toptip('请输入正确手机号');
+                return;
+            }
+            if (!data.linkman) {
+                $.toptip('请输入姓名');
+                return;
+            }
+            if (!data.company) {
+                $.toptip('请输入单位名称');
+                return;
+            }
+            if (!data.serialno) {
+                $.toptip('请输入设备出厂编号');
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/WeixinApp/Home/SubmitRegister",
+                data: data,
+                beforeSend: function (XMLHttpRequest) {
+                    $.showLoading("正在提交");
+                },
+                success: function (data) {
+                    $.hideLoading();
+                    if (data.state == "success") {
+                        $.alert(data.message, "提示！", function () {
+                            window.location.href = "Index?openid=" + data.openid;
+                        });
+                    } else {
+                        $.alert("" + data.message, "警告！");
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.hideLoading();
+                    $.alert("提交出错，请重试！", "警告！");
+                }
+            });
+
+
+            return false;
+        });
+
+    </script>
+
+
+</body>
+</html>

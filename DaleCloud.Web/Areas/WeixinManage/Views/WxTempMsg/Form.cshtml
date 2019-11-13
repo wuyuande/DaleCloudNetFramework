@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = $.request("keyValue");
+    $(function () {
+        if (!!keyValue) {
+            $.ajax({
+                url: "/WeixinManage/WxTempMsg/GetFormJson",
+                data: { keyValue: keyValue },
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    $("#form1").formSerialize(data);
+                }
+            });
+        }
+    });
+   
+    function submitForm() {
+        if (!$('#form1').formValid()) {
+            return false;
+        }
+        $.submitForm({
+            url: "/WeixinManage/WxTempMsg/SubmitForm?keyValue=" + keyValue,
+            param: $("#form1").formSerialize(),
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+
+<form id="form1">
+    <div style="padding-top: 20px; margin-right: 20px;">
+        <table class="form">
+            <tr>
+                <th class="formTitle">账号ID</th>
+                <td class="formValue">
+                    <input id="T_Id" name="T_Id" type="text" class="form-control required" placeholder="请输入字母、数字组合的ID" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">模板代码</th>
+                <td class="formValue">
+                    <input id="T_Code" name="T_Code" type="text" class="form-control required" placeholder="请输入模板代码" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">模板消息id</th>
+                <td class="formValue">
+                    <input id="T_TemplateId" name="T_TemplateId" type="text" class="form-control required" placeholder="请输入员工编号" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">模板消息标题</th>
+                <td class="formValue">
+                    <input id="T_Title" name="T_Title" type="text" class="form-control required" placeholder="请输入员工编号" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">内容抬头</th>
+                <td class="formValue">
+                    <input id="T_Data_First" name="T_Data_First" type="text" style="height: 60px;" class="form-control " placeholder="" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">内容备注</th>
+                <td class="formValue">
+                    <input id="T_Data_Remark" name="T_Data_Remark" type="text" style="height: 60px;" class="form-control " placeholder="" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">跳转地址Url</th>
+                <td class="formValue">
+                    <input id="T_LinkUrl" name="T_LinkUrl" type="text"  class="form-control " placeholder="" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" style="height: 35px;">选项</th>
+                <td class="formValue" style="padding-top: 1px;">
+                    <select id="T_Status" name="T_Status" class="form-control required">
+                        <option value="1">有效</option>
+                        <option value="0">失效</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" valign="top" style="padding-top: 5px;">
+                    创建时间
+                </th>
+                <td class="formValue">
+                    <input id="T_CreateTime" name="T_CreateTime" type="text" class="form-control" />
+                    
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

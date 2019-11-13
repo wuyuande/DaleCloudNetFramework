@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+    $(function () {
+        gridList();
+    })
+    function gridList() {
+        var $gridList = $("#gridList");
+        $gridList.dataGrid({
+            url: "/WeixinManage/WxCode/GetGridJson",
+            height: $(window).height() - 96,
+            colModel: [
+                { label: "主键", name: "T_Id", hidden: true, key: true },
+                { label: '公众号名称', name: 'T_WxName', width: 150, align: 'left' },
+                { label: '微信号', name: 'T_WxCode', width: 150, align: 'left' },
+                { label: '公众号原始ID', name: 'T_WxId', width: 150, align: 'left' },
+                { label: '接口地址', name: 'T_ApiUrl', width: 320, align: 'left' },
+                {
+                    label: "自动回复", name: "T_CloseKW", width: 60, align: "center",
+                    formatter: function (cellvalue) {
+                        return cellvalue == 1 ? "开启" : "关闭";
+                    }
+                },
+                {
+                    label: "状态", name: "T_Status", width: 60, align: "center",
+                    formatter: function (cellvalue) {
+                        return cellvalue == 1 ? "有效" : "失效";
+                    }
+                },
+                { label: '创建时间', name: 'T_CreateTime', width: 150, align: 'left' }
+
+            ]
+        });
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                postData: { keyword: $("#txt_keyword").val() },
+            }).trigger('reloadGrid');
+        });
+    }
+    function btn_add() {
+        $.modalOpen({
+            id: "Form",
+            title: "新增账号",
+            url: "/WeixinManage/WxCode/Form",
+            width: "700px",
+            height: "680px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_edit() {
+        var keyValue = $("#gridList").jqGridRowValue().T_Id;
+        $.modalOpen({
+            id: "Form",
+            title: "修改账号",
+            url: "/WeixinManage/WxCode/Form?keyValue=" + keyValue,
+            width: "700px",
+            height: "680px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_delete() {
+        $.deleteForm({
+            url: "/WeixinManage/WxCode/DeleteForm",
+            param: { keyValue: $("#gridList").jqGridRowValue().T_Id },
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+    function btn_details() {
+        var keyValue = $("#gridList").jqGridRowValue().T_Id;
+        $.modalOpen({
+            id: "Details",
+            title: "查看信息",
+            url: "/WeixinManage/WxCode/Details?keyValue=" + keyValue,
+            width: "700px",
+            height: "680px",
+            btn: null,
+        });
+    }
+</script>
+
+<div class="topPanel">
+    <div class="toolbar">
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+        </div>
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="btn_add()"><i class="fa fa-plus"></i>新建账号</a>
+        </div>
+        <div class="operate">
+            <ul class="nav nav-pills">
+                <li class="first">已选中<span>1</span>项</li>
+                <li><a onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改账号</a></li>
+                <li><a onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除账号</a></li>
+                <li><a onclick="btn_details()"><i class="fa fa-search-plus"></i>查看账号</a></li>
+            </ul>
+            <a href="javascript:;" class="close"></a>
+        </div>
+    </div>
+    <div class="search">
+        <table>
+            <tr>
+                <td>
+                    <div class="input-group">
+                        <input id="txt_keyword" type="text" class="form-control" placeholder="微信账号" style="width: 200px;">
+                        <span class="input-group-btn">
+                            <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="gridPanel">
+    <table id="gridList"></table>
+</div>

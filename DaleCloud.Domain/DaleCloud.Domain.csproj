@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7DC886CD-B8A0-44E8-AADD-57FCB0CFECB8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DaleCloud.Domain</RootNamespace>
+    <AssemblyName>DaleCloud.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ViewModel\AuthorizeActionModel.cs" />
+    <Compile Include="IRepository\SystemManage\IAreaRepository.cs" />
+    <Compile Include="IRepository\SystemManage\IItemsDetailRepository.cs" />
+    <Compile Include="IRepository\SystemManage\IItemsRepository.cs" />
+    <Compile Include="IRepository\SystemManage\IModuleButtonRepository.cs" />
+    <Compile Include="IRepository\SystemManage\IModuleRepository.cs" />
+    <Compile Include="IRepository\SystemManage\IOrganizeRepository.cs" />
+    <Compile Include="IRepository\SystemManage\IRoleAuthorizeRepository.cs" />
+    <Compile Include="IRepository\SystemManage\IRoleRepository.cs" />
+    <Compile Include="IRepository\SystemManage\IUserLogOnRepository.cs" />
+    <Compile Include="IRepository\SystemManage\IUserRepository.cs" />
+    <Compile Include="IRepository\SystemSecurity\IDbBackupRepository.cs" />
+    <Compile Include="IRepository\SystemSecurity\IFilterIPRepository.cs" />
+    <Compile Include="IRepository\SystemSecurity\ILogRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DaleCloud.Code\DaleCloud.Code.csproj">
+      <Project>{db19ce03-c307-43fe-a209-08aa4ae10e21}</Project>
+      <Name>DaleCloud.Code</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DaleCloud.Data\DaleCloud.DataBase.csproj">
+      <Project>{f71003e8-a836-48f4-9df6-df9095cebd18}</Project>
+      <Name>DaleCloud.DataBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DaleCloud.Entity\DaleCloud.Entity.csproj">
+      <Project>{fcfc29e4-c3fd-4f3c-aaf1-60ac22889d30}</Project>
+      <Name>DaleCloud.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entity\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

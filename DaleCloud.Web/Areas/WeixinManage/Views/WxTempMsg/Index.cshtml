@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+    $(function () {
+        gridList();
+    })
+    function gridList() {
+        var $gridList = $("#gridList");
+        $gridList.dataGrid({
+            url: "/WeixinManage/WxTempMsg/GetGridJson",
+            height: $(window).height() - 96,
+            colModel: [
+                { label: "主键", name: "T_Id", hidden: true, key: true },
+                { label: '模板代码', name: 'T_Code', width: 150, align: 'left' },
+                { label: '模板消息Id', name: 'T_TemplateId', width: 150, align: 'left' },
+                { label: '模板消息标题', name: 'T_Title', width: 150, align: 'left' },
+                { label: '内容抬头', name: 'T_Data_First', width: 150, align: 'left' },
+                { label: '内容备注', name: 'T_Data_Remark', width: 320, align: 'left' },
+                { label: '跳转地址Url', name: 'T_LinkUrl', width: 320, align: 'left' },
+                {
+                    label: "状态", name: "T_Status", width: 60, align: "center",
+                    formatter: function (cellvalue) {
+                        return cellvalue == true ? "有效" : "失效";
+                    }
+                },
+                { label: '创建时间', name: 'T_CreateTime', width: 150, align: 'left' }
+
+            ]
+        });
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                postData: { keyword: $("#txt_keyword").val() },
+            }).trigger('reloadGrid');
+        });
+    }
+    function btn_add() {
+        $.modalOpen({
+            id: "Form",
+            title: "新增模板",
+            url: "/WeixinManage/WxTempMsg/Form",
+            width: "750px",
+            height: "680px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_edit() {
+        var keyValue = $("#gridList").jqGridRowValue().T_Id;
+        $.modalOpen({
+            id: "Form",
+            title: "修改模板",
+            url: "/WeixinManage/WxTempMsg/Form?keyValue=" + keyValue,
+            width: "750px",
+            height: "680px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_delete() {
+        $.deleteForm({
+            url: "/WeixinManage/WxTempMsg/DeleteForm",
+            param: { keyValue: $("#gridList").jqGridRowValue().T_Id },
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+    function btn_details() {
+        var keyValue = $("#gridList").jqGridRowValue().T_Id;
+        $.modalOpen({
+            id: "Details",
+            title: "查看信息",
+            url: "/WeixinManage/WxTempMsg/Details?keyValue=" + keyValue,
+            width: "750px",
+            height: "680px",
+            btn: null,
+        });
+    }
+</script>
+
+<div class="topPanel">
+    <div class="toolbar">
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+        </div>
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="btn_add()"><i class="fa fa-plus"></i>新建模板</a>
+        </div>
+        <div class="operate">
+            <ul class="nav nav-pills">
+                <li class="first">已选中<span>1</span>项</li>
+                <li><a onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改模板</a></li>
+                <li><a onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除模板</a></li>
+                <li><a onclick="btn_details()"><i class="fa fa-search-plus"></i>查看模板</a></li>
+            </ul>
+            <a href="javascript:;" class="close"></a>
+        </div>
+    </div>
+    <div class="search">
+        <table>
+            <tr>
+                <td>
+                    <div class="input-group">
+                        <input id="txt_keyword" type="text" class="form-control" placeholder="微信模板" style="width: 200px;">
+                        <span class="input-group-btn">
+                            <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="gridPanel">
+    <table id="gridList"></table>
+</div>

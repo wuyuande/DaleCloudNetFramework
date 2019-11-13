@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FCFC29E4-C3FD-4F3C-AAF1-60AC22889D30}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DaleCloud.Entity</RootNamespace>
+    <AssemblyName>DaleCloud.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseDataManage\BaseAttachEntity.cs" />
+    <Compile Include="DingTalkManage\DepartmentEntity.cs" />
+    <Compile Include="DingTalkManage\DingTalkAppConfigEntity.cs" />
+    <Compile Include="DingTalkManage\DingTalkCorpConfigEntity.cs" />
+    <Compile Include="DingTalkManage\DingTalkUserEntity.cs" />
+    <Compile Include="DingTalkManage\MessageSendRecordEntity.cs" />
+    <Compile Include="DingTalkManage\MessageTemplateEntity.cs" />
+    <Compile Include="DingTalkManage\ProcessInstanceEntity.cs" />
+    <Compile Include="DingTalkManage\WorkMessageSendLogEntity.cs" />
+    <Compile Include="InfrastructureV2\BaseEntity.cs" />
+    <Compile Include="InfrastructureV2\ICreationAuditedV2.cs" />
+    <Compile Include="InfrastructureV2\IEntityV2.cs" />
+    <Compile Include="InfrastructureV2\IModificationAuditedV2.cs" />
+    <Compile Include="Infrastructure\BaseEntity.cs" />
+    <Compile Include="Infrastructure\ICreationAudited.cs" />
+    <Compile Include="Infrastructure\IDeleteAudited.cs" />
+    <Compile Include="Infrastructure\IEntity.cs" />
+    <Compile Include="Infrastructure\IModificationAudited.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemManage\AreaEntity.cs" />
+    <Compile Include="SystemManage\ItemsDetailEntity.cs" />
+    <Compile Include="SystemManage\ItemsEntity.cs" />
+    <Compile Include="SystemManage\ModuleButtonEntity.cs" />
+    <Compile Include="SystemManage\ModuleEntity.cs" />
+    <Compile Include="SystemManage\OrganizeEntity.cs" />
+    <Compile Include="SystemManage\RoleAuthorizeEntity.cs" />
+    <Compile Include="SystemManage\RoleEntity.cs" />
+    <Compile Include="SystemManage\UserEntity.cs" />
+    <Compile Include="SystemManage\UserLogOnEntity.cs" />
+    <Compile Include="SystemSecurity\DbBackupEntity.cs" />
+    <Compile Include="SystemSecurity\FilterIPEntity.cs" />
+    <Compile Include="SystemSecurity\LogEntity.cs" />
+    <Compile Include="WeixinMPManage\RequestBaseDataEntity.cs" />
+    <Compile Include="WeixinMPManage\RequestRuleEntity.cs" />
+    <Compile Include="WeixinMPManage\RequestRuleContentEntity.cs" />
+    <Compile Include="WeixinMPManage\ResponseBaseDataEntity.cs" />
+    <Compile Include="WeixinMPManage\TemplateMessageEntity.cs" />
+    <Compile Include="WeixinMPManage\UsersEntity.cs" />
+    <Compile Include="WeixinMPManage\WxPropertyInfoEntity.cs" />
+    <Compile Include="WeixinMPManage\WxBaseConfigEntity.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DaleCloud.Code\DaleCloud.Code.csproj">
+      <Project>{db19ce03-c307-43fe-a209-08aa4ae10e21}</Project>
+      <Name>DaleCloud.Code</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

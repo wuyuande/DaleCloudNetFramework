@@ -1,0 +1,186 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+    $(function () {
+        gridList();
+    })
+
+    function gridList() {
+        $('#dg').treegrid({
+            url: "/SystemManage/Module/GetTreeGridJson",
+            toolbar: '#toolbar',
+            autoRowHeight: false,
+            nowrap: true,
+            singleSelect: true,
+            idField: 'F_Id',
+            treeField: 'F_FullName',
+            method: 'get',
+            columns: [[
+                { field: 'F_Id', hidden: true },
+                { field: 'F_FullName', title: '名称', width: 200, align: 'left' },
+                {
+                    field: 'F_Icon', title: '图标', width: 80, align: 'center',
+                    formatter: function (value, row, index) {
+                        return value == "" ? "<i class=\"fa \"></i>" : "<i class=\"fa " + value + "\"></i>";
+                    }
+                },
+                { field: 'F_UrlAddress', title: '连接', width: 260, align: 'left' },
+                {
+                    field: 'F_Target', title: '目标', width: 60, align: 'center',
+                    formatter: function (value, row, index) {
+                        if (value == "expand") {
+                            return "无页面";
+                        } else if (value == "iframe") {
+                            return "框架页";
+                        } else if (value == "open") {
+                            return "弹出页";
+                        } else if (value == "blank") {
+                            return "value";
+                        }
+                    }
+                },
+                {
+                    field: 'F_IsMenu', title: '菜单', width: 60, align: 'center',
+                    formatter: function (value, row, index) {
+                        return value == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                {
+                    field: 'F_IsExpand', title: '展开', width: 60, align: 'center',
+                    formatter: function (value, row, index) {
+                        return value == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                {
+                    field: 'F_IsPublic', title: '公共', width: 60, align: 'center',
+                    formatter: function (value, row, index) {
+                        return value == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                {
+                    field: 'F_EnabledMark', title: '有效', width: 60, align: 'center',
+                    formatter: function (value, row, index) {
+                        return value == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                { field: 'F_SortCode', title: '排序', width: 60, align: 'center' },
+                {
+                    field: 'F_CreatorTime', title: '创建时间', width: 100, align: 'right',
+                    formatter: function (value, row, index) {
+                        if (value) {
+                            var time = new Date(value);
+                            return time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDate();
+                        }
+                    }
+                },
+                 { field: 'F_Description', title: '介绍', width: 200, align: 'center' },
+            ]]
+        });
+
+        $("#btn_search").click(function () {
+            var queryJson = {
+                keyword: $("#txt_keyword").val()
+            }
+            $('#dg').treegrid('load', queryJson);
+        });
+    }
+    function btn_add() {
+        $.modalOpen({
+            id: "Form",
+            title: "新增菜单",
+            url: "/SystemManage/Module/Form",
+            width: "700px",
+            height: "440px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_edit() {
+        var keyValue = $('#dg').treegrid('getSelected');
+        if (keyValue != null) {
+            $.modalOpen({
+                id: "Form",
+                title: "修改菜单",
+                url: "/SystemManage/Module/Form?keyValue=" + keyValue.F_Id,
+                width: "700px",
+                height: "440px",
+                callBack: function (iframeId) {
+                    top.frames[iframeId].submitForm();
+                }
+            });
+        }
+        else {
+            $.modalMsg("未选中数据", "warning");
+        }
+    }
+    function btn_delete() {
+        var keyValue = $('#dg').treegrid('getSelected');
+        if (keyValue != null) {
+            $.deleteForm({
+                url: "/SystemManage/Module/DeleteForm",
+                param: { keyValue: keyValue.F_Id },
+                success: function () {
+                    $('#dg').treegrid('reload');
+                }
+            })
+        }
+        else {
+            $.modalMsg("未选中数据", "warning");
+        }
+    }
+    function btn_details() {
+        var keyValue = $('#dg').treegrid('getSelected');
+        if (keyValue != null) {
+            $.modalOpen({
+                id: "Details",
+                title: "查看菜单",
+                url: "/SystemManage/Module/Details?keyValue=" + keyValue.F_Id,
+                width: "700px",
+                height: "490px",
+                btn: null,
+            });
+        }
+        else {
+            $.modalMsg("未选中数据", "warning");
+        }
+    }
+
+    function btn_modulebutton() {
+        var keyValue = $('#dg').treegrid('getSelected');
+        if (keyValue != null) {
+            $.modalOpen({
+                id: "modulebutton",
+                title: "系统按钮",
+                url: "/SystemManage/ModuleButton/Index?moduleId=" + keyValue.F_Id,
+                width: "950px",
+                height: "600px",
+                btn: null,
+            });
+        }
+        else {
+            $.modalMsg("未选中数据", "warning");
+        }
+    }
+</script>
+
+<div class="gridPanel" style="height:100%;">
+    <div id="toolbar" style="padding:2px 5px;">
+        <div class="dcui-btn-area">
+            <a href="#" id="NF-add" authorize="yes" class="dcui-btn dcui-btn-green"  plain="true" onclick="btn_add()"><i class="fa fa-plus"></i>新建菜单</a>
+            <a href="#" id="NF-delete" authorize="yes" class="dcui-btn dcui-btn-red"  plain="true" onclick="btn_delete()"><i class="fa fa-trash"></i>删除菜单</a>
+            <a href="#" id="NF-edit" authorize="yes" class="dcui-btn dcui-btn-blue"  plain="true" onclick="btn_edit()"><i class="fa fa-pencil"></i>修改菜单</a>
+            <a href="#" id="NF-details" authorize="yes" class="dcui-btn dcui-btn-purple"  plain="true" onclick="btn_details()"><i class="fa fa-eye"></i>查看菜单</a>
+            <a href="#" id="NF-modulebutton" authorize="yes" class="dcui-btn dcui-btn-orange"  plain="true" onclick="btn_modulebutton()"><i class="fa fa-gavel"></i>按钮管理</a>
+        </div>
+        <script>$('#tb').authorizeButton()</script>
+        <div class="dcui-search-area">
+            查询条件: <input class="easyui-textbox" style="width:110px" id="txt_keyword" placeholder="请输入要查询的关键字">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-search" id="btn_search">查询</a>
+        </div>
+    </div>
+
+    <table id="dg" class="easyui-treegrid" style="width:100%;min-height:600px;height:100%;"></table>
+</div>

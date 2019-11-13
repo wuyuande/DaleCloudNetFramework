@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Excel导入";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    $(function () {
+        
+      
+    })
+    function btnImport() {
+        $.submitPost({
+            title: "需要导入Excel数据么？",
+            url: "//Api/ExcelManage/SubmitImport",
+            param: {
+                keyValue: keyValue,
+                disposeUserId: $("#T_DisposeUserId").val(),
+                copyforUserId: $("#T_CopyforUserId").val(),
+                remark: $("#T_Remark").val()
+            },
+            close: true,
+            success: function () {
+                top.frames["WorkOrder"].bindFormData();
+            }
+        })
+    }
+    function btnClose() {
+       
+    }
+    
+</script>
+
+
+<div style="padding-top: 10px; margin-right: 20px;">
+    @using (Html.BeginForm("SubmitImport", "ExcelManage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    <div style="margin:0px 20px;">
+        <h4>选择你要导入的Excel文件</h4>
+        <a href="@ViewData["templateUrl"]" >点击下载Excel导入模板</a>
+    </div>
+    <div style="margin:10px 20px;">
+        <input type="file" id="file" name="file" />
+        <input type="hidden" id="table" name="table"  value="@ViewData["tableName"]"/>
+        <p style="color: Red; text-align: center;">@ViewBag.error</p>
+    </div>
+    <div class="form-button" id="wizard-actions">
+        <input id="btnImport" type="submit" value="导入" class="btn btn-danger btn-prev" />
+    </div>
+    }
+    
+</div>

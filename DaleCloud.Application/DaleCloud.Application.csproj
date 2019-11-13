@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F2035EE2-B73D-4FB8-A433-CAB465DE6A2A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DaleCloud.Application</RootNamespace>
+    <AssemblyName>DaleCloud.Application</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Senparc.Weixin">
+      <HintPath>..\packages\Senparc.Weixin.6.4.8\lib\net45\Senparc.Weixin.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin.MP">
+      <HintPath>..\packages\Senparc.Weixin.MP.16.7.9\lib\net45\Senparc.Weixin.MP.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.License, Version=1.3.6.40, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Spire.Office\3.6.0\Spire.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=3.9.136.6040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Spire.Office\3.6.0\Spire.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.XLS, Version=7.12.27.6040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Spire.Office\3.6.0\Spire.XLS.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonService\Common\CommonApp.cs" />
+    <Compile Include="CommonService\Common\ExcelExport.cs" />
+    <Compile Include="CommonService\Common\LicenseSecret.cs" />
+    <Compile Include="CommonService\Common\UpLoad.cs" />
+    <Compile Include="CommonService\DdWorkMsg\CommonDdWorkMsg.cs" />
+    <Compile Include="CommonService\Common\BaseAttachApp.cs" />
+    <Compile Include="CommonService\WxTempMsg\SendWxTemplateMsg.cs" />
+    <Compile Include="CommonService\WxTempMsg\WxTemplateMessageServer.cs" />
+    <Compile Include="DingTalkManage\DingTalkApp.cs" />
+    <Compile Include="DingTalkManage\DepartmentApp.cs" />
+    <Compile Include="DingTalkManage\DingTalkWorkMsgApp.cs" />
+    <Compile Include="DingTalkManage\DingTalkUsersApp.cs" />
+    <Compile Include="DingTalkManage\ProcessInstanceApp.cs" />
+    <Compile Include="Infrastructure\DbLogType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemManage\ItemsApp.cs" />
+    <Compile Include="SystemManage\ItemsDetailApp.cs" />
+    <Compile Include="SystemManage\ModuleApp.cs" />
+    <Compile Include="SystemManage\ModuleButtonApp.cs" />
+    <Compile Include="SystemManage\AreaApp.cs" />
+    <Compile Include="SystemManage\OrganizeApp.cs" />
+    <Compile Include="SystemManage\RoleApp.cs" />
+    <Compile Include="SystemManage\UserApp.cs" />
+    <Compile Include="SystemManage\UserLogOnApp.cs" />
+    <Compile Include="SystemManage\DutyApp.cs" />
+    <Compile Include="SystemManage\RoleAuthorizeApp.cs" />
+    <Compile Include="SystemSecurity\DbBackupApp.cs" />
+    <Compile Include="SystemSecurity\FilterIPApp.cs" />
+    <Compile Include="SystemSecurity\LogApp.cs" />
+    <Compile Include="WeixinMPManage\WxTemplateMessageApp.cs" />
+    <Compile Include="WeixinMPManage\WxUsersApp.cs" />
+    <Compile Include="WeixinMPManage\WeixinRequestRuleApp.cs" />
+    <Compile Include="WeixinMPManage\WxTempMsgApp.cs" />
+    <Compile Include="WeixinMPManage\WxPropertyInfoApp.cs" />
+    <Compile Include="WeixinMPManage\WxBaseConfigApp.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DaleCloud.Code\DaleCloud.Code.csproj">
+      <Project>{db19ce03-c307-43fe-a209-08aa4ae10e21}</Project>
+      <Name>DaleCloud.Code</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DaleCloud.Data\DaleCloud.DataBase.csproj">
+      <Project>{f71003e8-a836-48f4-9df6-df9095cebd18}</Project>
+      <Name>DaleCloud.DataBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DaleCloud.DBUtility\DaleCloud.DBUtility.csproj">
+      <Project>{2cfdfca0-a3fc-4dde-8448-1769a6e24825}</Project>
+      <Name>DaleCloud.DBUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DaleCloud.DingDing\DaleCloud.DingTalk.csproj">
+      <Project>{2036c349-0fc2-4c80-85cb-d033988e6d12}</Project>
+      <Name>DaleCloud.DingTalk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DaleCloud.Domain\DaleCloud.Domain.csproj">
+      <Project>{7dc886cd-b8a0-44e8-aadd-57fcb0cfecb8}</Project>
+      <Name>DaleCloud.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DaleCloud.Entity\DaleCloud.Entity.csproj">
+      <Project>{fcfc29e4-c3fd-4f3c-aaf1-60ac22889d30}</Project>
+      <Name>DaleCloud.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DaleCloud.Repository\DaleCloud.Repository.csproj">
+      <Project>{875233bf-ea15-49e0-9a9c-77884a897ff6}</Project>
+      <Name>DaleCloud.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

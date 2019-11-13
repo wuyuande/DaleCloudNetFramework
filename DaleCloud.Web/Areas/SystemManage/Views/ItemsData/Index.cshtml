@@ -1,0 +1,185 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+    $(function () {
+        treeView();
+        gridList();
+    });
+    function treeView() {
+        $('#itemTree').tree({
+            url: '/SystemManage/ItemsType/GetTreeJson',
+            onClick: function (node) {
+                //alert(node.text);  // alert node text property when clicked
+                $("#txt_keyword").val('');
+                $('#btn_search').trigger("click");
+            }
+        });
+    }
+    function gridList() {
+        $('#dg').datagrid({
+            url: "/SystemManage/ItemsData/GetGridJson",
+            toolbar: '#toolbar',
+            autoRowHeight: false,
+            nowrap: true,
+            singleSelect: true,
+            method: 'get',
+            queryParams: {
+                itemId:"~",
+                keyword: "",
+            },
+            columns: [[
+                { field: 'F_Id', hidden: true },
+                { field: 'F_ItemName', title: '名称', width: 200, align: 'center' },
+                { field: 'F_ItemCode', title: '编号', width: 120, align: 'center' },
+                { field: 'F_SortCode', title: '排序', width: 80, align: 'center' },
+                {
+                    field: 'F_IsDefault', title: '默认', width: 60, align: 'center',
+                    formatter: function (value, row, index) {
+                        return value == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                {
+                    field: 'F_EnabledMark', title: '状态', width: 60, align: 'center',
+                    formatter: function (value, row, index) {
+                        if (value == 1) {
+                            return '<span class=\"label label-success\">正常</span>';
+                        } else if (value == 0) {
+                            return '<span class=\"label label-default\">禁用</span>';
+                        }
+                    }
+                },
+                {
+                    field: 'F_CreatorTime', title: '登记时间', width: 130, align: 'right',
+                    formatter: function (value, row, index) {
+                        if (value) {
+                            var time = new Date(value);
+                            return time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDate();
+                        }
+                    }
+                },
+                { field: 'T_Description', title: '备注', width: 200, align: 'right' }
+            ]]
+        });
+
+        $("#btn_search").click(function () {
+            var queryJson = {
+                itemId: $("#itemTree").tree('getSelected').id,
+                keyword: $("#txt_keyword").val()
+            }
+            $('#dg').datagrid('load', queryJson);
+        });
+
+    }
+
+    function btn_add() {
+        var item = $('#itemTree').tree('getSelected');
+        if (!item) {
+            return false;
+        }
+        var itemId = item.id;
+        var itemName = item.text;
+
+        $.modalOpen({
+            id: "Form",
+            title: itemName + " 》新增字典",
+            url: "/SystemManage/ItemsData/Form?itemId=" + itemId,
+            width: "450px",
+            height: "350px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_edit() {
+        var item = $('#itemTree').tree('getSelected');
+        if (!item) {
+            return false;
+        }
+        var itemName = item.text;
+
+        var keyValue = $('#dg').datagrid('getSelected');
+        if (keyValue) {
+            $.modalOpen({
+                id: "Form",
+                title: itemName + " 》修改字典",
+                url: "/SystemManage/ItemsData/Form?keyValue=" + keyValue.F_Id,
+                width: "450px",
+                height: "350px",
+                callBack: function (iframeId) {
+                    top.frames[iframeId].submitForm();
+                }
+            });
+        } else {
+            $.modalMsg("未选中数据", "warning");
+        }
+    }
+    function btn_delete() {
+        var keyValue = $('#dg').datagrid('getSelected');
+        if (keyValue) {
+            $.deleteForm({
+                url: "/SystemManage/ItemsData/DeleteForm",
+                param: { keyValue: keyValue.F_Id },
+                success: function () {
+                    $('#dg').datagrid('reload');
+                }
+            });
+        } else {
+            $.modalMsg("未选中数据", "warning");
+        }
+    }
+    function btn_details() {
+        var keyValue = $('#dg').datagrid('getSelected');
+        if (keyValue) {
+            $.modalOpen({
+                id: "Details",
+                title: "查看字典",
+                url: "/SystemManage/ItemsData/Details?keyValue=" + keyValue.F_Id,
+                width: "450px",
+                height: "470px",
+                btn: null,
+            });
+        } else {
+            $.modalMsg("未选中数据", "warning");
+        }
+    }
+    function btn_itemstype() {
+        $.modalOpen({
+            id: "ItemsType",
+            title: "字典分类",
+            url: "/SystemManage/ItemsType/Index",
+            width: "800px",
+            height: "550px",
+            btn: null,
+        });
+    }
+   
+</script>
+
+<div class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'west',split:true,collapsible:false" style="width:200px;">
+        <ul id="itemTree">
+
+        </ul>
+    </div>
+    <div data-options="region:'center',split:true," style="width:80%;padding:3px;">
+        <div id="toolbar" style="padding:2px 5px;">
+            <div class="dcui-btn-area">
+                <a href="#" id="NF-add" authorize="yes" class="dcui-btn dcui-btn-green" iconCls="icon-add" plain="true" onclick="btn_add()"><i class="fa fa-plus"></i>新建字典</a>
+                <a href="#" id="NF-delete" authorize="yes" class="dcui-btn dcui-btn-red" iconCls="icon-remove" plain="true" onclick="btn_delete()"><i class="fa fa-trash"></i>删除字典</a>
+                <a href="#" id="NF-edit" authorize="yes" class="dcui-btn dcui-btn-blue" iconCls="icon-edit" plain="true" onclick="btn_edit()"><i class="fa fa-pencil"></i>修改字典</a>
+                <a href="#" id="NF-details" authorize="yes" class="dcui-btn dcui-btn-purple" iconCls="icon-man" plain="true" onclick="btn_details()"><i class="fa fa-eye"></i>查看字典</a>
+                <a href="#" id="NF-itemstype" authorize="yes" class="dcui-btn dcui-btn-orange" iconCls="icon-save" plain="true" onclick="btn_itemstype()"><i class="fa fa-key"></i>分类管理</a>
+            </div>
+            <script>$('#tb').authorizeButton()</script>
+            <div class="dcui-search-area">
+                关键字: <input class="easyui-textbox" style="width:110px" id="txt_keyword" placeholder="员工名称/员工编号">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search" id="btn_search">查询</a>
+            </div>
+        </div>
+
+        <table id="dg" class="easyui-datagrid" style="width:100%;min-height:600px;height:100%;"></table>
+    </div>
+
+</div>

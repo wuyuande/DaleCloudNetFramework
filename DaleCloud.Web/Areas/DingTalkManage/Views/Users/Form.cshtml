@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = $.request("keyValue");
+    $(function () {
+        initControl();
+        if (!!keyValue) {
+            $.ajax({
+                url: "/DingTalkManage/Users/GetFormJson",
+                data: { keyValue: keyValue },
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    $("#form1").formSerialize(data);
+                }
+            });
+        }
+    });
+    function initControl() {
+        $("#OrganizeId").bindSelect({
+            url: "/SystemManage/Organize/GetTreeSelectJson",
+        });
+        $("#RoleId").bindSelect({
+            url: "/SystemManage/Role/GetGridJson",
+            id: "F_Id",
+            text: "F_FullName"
+        });
+    }
+    function submitForm() {
+        if (!$('#form1').formValid()) {
+            return false;
+        }
+        $.submitForm({
+            url: "/DingTalkManage/Users/SubmitForm?keyValue=" + keyValue,
+            param: $("#form1").formSerialize(),
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+
+<form id="form1">
+    <div style="padding-top: 20px; margin-right: 20px;">
+        <table class="form">
+            <tr>
+                <th class="formTitle">归属组织</th>
+                <td class="formValue">
+                    <select id="OrganizeId" name="F_OrganizeId" class="form-control required">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">角色</th>
+                <td class="formValue">
+                    <select id="RoleId" name="F_RoleId" class="form-control required">
+                        <option value="">==请选择==</option>
+                    </select>
+                </td>
+            </tr>
+           
+        </table>
+    </div>
+</form>

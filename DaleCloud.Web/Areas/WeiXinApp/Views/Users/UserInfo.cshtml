@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "我的资料";
+    Layout = "~/Views/Shared/WeixinApp/_Form.cshtml";
+    Html.AntiForgeryToken();
+}
+
+<div id="detailform">
+    <form id="form1"> 
+        <div class="weui-cells_form" id="detail_content">
+
+        </div>
+       
+        <div class="weui-btn-area">
+            @*<a id="formSubmitBtn" href="javascript:" class="weui-btn weui-btn_primary">提交保存</a>*@
+        </div>
+    </form>
+</div>
+   
+<div class="weui-footer">
+    <p class="weui-footer__text"></p>
+</div>
+
+<script>
+$(function () {
+    FastClick.attach(document.body);
+});
+</script>
+<script src="~/Content/weui/js/jquery-weui.min.js"></script>
+<script src="~/Content/weui/js/weui.min.js"></script>
+<script src="~/Content/weui/js/weui.expand.js?t=2"></script>
+<script>
+
+    var detailData = [];
+    var openid = $.cookie('openid');
+    var customerId = $.getQueryString("customerId");
+    var keyValue = $.getQueryString("keyValue");
+    $(document).ready(function () {
+        if (dd.version == null) {
+            GetOrder(keyValue);
+        }
+    });
+
+    function GetOrder(keyValue) {
+        var req = {
+            keyValue: openid
+        };
+        $.ajaxGet({
+            data: req,
+            url: '/CustomerManage/Customer/GetContactDetailJson',
+            success: function (oObject) {
+                if (oObject.state != "success") {
+                    $.toptip(oObject.message, 'warning');
+                    $("#detail_content").html(oObject.message);
+                    return false;
+                }
+
+                detailData = oObject.res.data;
+                var htm = template("detail_template", detailData);
+                $("#detail_content").html(htm);
+            }
+        })
+    }
+   
+
+</script>
+
+<script id="detail_template" type="text/html">
+    <div class="weui-cell" style="background-color: #fff;">
+        <div class="weui-cell__hd">
+            <label class="weui-label">微信昵称</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="T_NickName" name="T_NickName" value="{{$data.T_NickName}}" readonly />
+        </div>
+        <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+    </div>
+    <div class="weui-cell" style="background-color: #fff;">
+        <div class="weui-cell__hd">
+            <label class="weui-label">姓名</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="T_Linkman" name="T_Linkman" value="{{$data.T_Linkman}}" readonly>
+        </div>
+        <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+    </div>
+    <div class="weui-cell" style="background-color: #fff;">
+        <div class="weui-cell__hd">
+            <label class="weui-label">电话</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="T_Mobile" name="T_Mobile" value="{{$data.T_Mobile}}" readonly />
+        </div>
+        <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+    </div>
+    <div class="weui-cell" style="background-color: #fff;">
+        <div class="weui-cell__hd">
+            <label class="weui-label">QQ</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="T_QQ" name="T_QQ" value="{{$data.T_QQ}}" readonly>
+        </div>
+        <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+    </div>
+    <div class="weui-cell" style="background-color: #fff;">
+        <div class="weui-cell__hd">
+            <label class="weui-label">电子邮件</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="T_Email" name="T_Email" value="{{$data.T_Email}}" readonly>
+        </div>
+        <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+    </div>
+    <div class="weui-cell" style="background-color: #fff;">
+        <div class="weui-cell__hd">
+            <label class="weui-label">职位</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="T_Position" name="T_Position" value="{{$data.T_Position}}" readonly>
+        </div>
+        <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+    </div>
+    <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">接收消息推送</div>
+        <div class="weui-cell__ft">
+            <input class="weui-switch" type="checkbox" id="T_IsRecvMsg" name="T_IsRecvMsg" value="{{$data.T_IsRecvMsg}}" readonly>
+        </div>
+    </div>
+
+</script>

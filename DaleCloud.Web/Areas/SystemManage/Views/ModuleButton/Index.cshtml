@@ -1,0 +1,153 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+    var moduleId = $.request("moduleId");
+    $(function () {
+        gridList();
+    })
+    function gridList() {
+        $('#dg').datagrid({
+            url: "/SystemManage/ModuleButton/GetTreeGridJson?moduleId=" + moduleId,
+            toolbar: '#toolbar',
+            hideColumn: "F_Id",
+            autoRowHeight: false,
+            nowrap: true,
+            singleSelect: true,
+            method: 'get',
+            queryParams: {
+                keyword: "",
+            },
+            columns: [[
+                { field: 'F_Id', hidden: true },
+                { field: 'F_FullName', title: '名称', width: 150, align: 'center' },
+                {
+                    field: 'F_Location', title: '位置', width: 80, align: 'center',
+                    formatter: function (value, row, index) {
+                        if (value == 1) {
+                            return "初始";
+                        } else {
+                            return "选中";
+                        }
+                    }
+                },
+                { field: 'F_JsEvent', title: '事件', width: 150, align: 'left' },
+                { field: 'F_UrlAddress', title: '连接', width: 300, align: 'left' },
+                {
+                    field: 'F_Split', title: '分开', width: 60, align: 'center',
+                    formatter: function (value, row, index) {
+                        return value == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                {
+                    field: 'F_IsPublic', title: '公共', width: 60, align: 'center',
+                    formatter: function (value, row, index) {
+                        return value == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                 },
+                {
+                    field: 'F_EnabledMark', title: '有效', width: 60, align: 'center',
+                    formatter: function (value, row, index) {
+                        return value == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                }
+            ]]
+        });
+
+        $("#btn_search").click(function () {
+            var queryJson = {
+                keyword: $("#txt_keyword").val()
+            }
+            $('#dg').datagrid('load', queryJson);
+        });
+    }
+    function btn_add() {
+        $.modalOpen({
+            id: "Form",
+            title: "新增按钮",
+            url: "/SystemManage/ModuleButton/Form?moduleId=" + moduleId,
+            width: "700px",
+            height: "440px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_edit() {
+        var keyValue = $('#dg').datagrid('getSelected');
+        if (keyValue != null) {
+            $.modalOpen({
+                id: "Form",
+                title: "修改按钮",
+                url: "/SystemManage/ModuleButton/Form?moduleId=" + moduleId + "&keyValue=" + keyValue.F_Id,
+                width: "700px",
+                height: "440px",
+                callBack: function (iframeId) {
+                    top.frames[iframeId].submitForm();
+                }
+            });
+        } else {
+            $.modalMsg("未选中数据", "warning");
+        }
+    }
+    function btn_delete() {
+        var keyValue = $('#dg').datagrid('getSelected');
+        if (keyValue != null) {
+            $.deleteForm({
+                url: "/SystemManage/ModuleButton/DeleteForm",
+                param: { keyValue: keyValue.F_Id },
+                success: function () {
+                    $('#dg').datagrid('reload');
+                }
+            });
+        } else {
+            $.modalMsg("未选中数据", "warning");
+        }
+    }
+    function btn_details() {
+        var keyValue = $('#dg').datagrid('getSelected');
+        if (keyValue != null) {
+            $.modalOpen({
+                id: "Details",
+                title: "查看按钮",
+                url: "/SystemManage/ModuleButton/Details?moduleId=" + moduleId + "&keyValue=" + keyValue.F_Id,
+                width: "700px",
+                height: "490px",
+                btn: null,
+            });
+        } else {
+            $.modalMsg("未选中数据", "warning");
+        }
+    }
+    function btn_clonebutton() {
+        $.modalOpen({
+            id: "CloneButton",
+            title: "克隆按钮",
+            url: "/SystemManage/ModuleButton/CloneButton?moduleId=" + moduleId,
+            width: "400px",
+            height: "600px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+</script>
+
+<div class="gridPanel" style="height:100%;">
+    <div id="toolbar" style="padding:2px 5px;">
+        <div class="dcui-btn-area">
+            <a href="#" id="NF-add" authorize="yes" class="dcui-btn dcui-btn-green" iconCls="icon-add" plain="true" onclick="btn_add()"><i class="fa fa-plus"></i>新建按钮</a>
+            <a href="#" id="NF-delete" authorize="yes" class="dcui-btn dcui-btn-red" iconCls="icon-remove" plain="true" onclick="btn_delete()"><i class="fa fa-trash"></i>删除按钮</a>
+            <a href="#" id="NF-edit" authorize="yes" class="dcui-btn dcui-btn-blue" iconCls="icon-edit" plain="true" onclick="btn_edit()"><i class="fa fa-pencil"></i>修改按钮</a>
+            <a href="#" id="NF-details" authorize="yes" class="dcui-btn dcui-btn-purple" iconCls="icon-man" plain="true" onclick="btn_details()"><i class="fa fa-eye"></i>查看按钮</a>
+            <a href="#" id="NF-clonebutton" authorize="yes" class="dcui-btn dcui-btn-orange" plain="true" onclick="btn_clonebutton()"><i class="fa fa-paste"></i>克隆按钮</a>
+        </div>
+        <div class="dcui-search-area">
+            关键字: <input class="easyui-textbox" style="width:110px" id="txt_keyword" placeholder="按钮名称/按钮编号">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-search" id="btn_search">查询</a>
+        </div>
+    </div>
+
+    <table id="dg" class="easyui-datagrid" style="width:100%;min-height:500px;height:100%;"></table>
+</div>

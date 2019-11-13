@@ -1,0 +1,502 @@
+﻿@{
+    Layout = null;
+}
+
+<html xmlns:ewsd="http://www.thymeleaf.org" lang="zh-CN">
+<head>
+    <title>生产项目进度表-宜宾机电一体化研究所</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- 浏览器标签图片 -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- FontAwesome字体图标 -->
+    <link type="text/css" href="~/Content/css/framework-font.css" rel="stylesheet">
+    <!-- jQuery相关引用 -->
+    <script type="text/javascript" src="~/Content/js/jquery/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery/jquery.cookie.js"></script>
+    <!-- 报表样式 -->
+    <link type="text/css" href="~/Content/css/report.css" rel="stylesheet">
+    
+
+    <style>
+        .md3 {
+            width: 45%;
+        }
+
+        .md12 {
+            width: 95.5%;
+            margin: 0 auto;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <main>
+        <!-- 工具栏 -->
+        <div class="topjui-row b-title" style="margin: 0;padding-bottom: 0">
+            <div class="topjui-col-sm9 c-title">生产月综合分析-<span class="changeNum">2019-10</span></div>
+            <div class="topjui-col-sm3 date">
+                <form id="queryForm" class="search-box" style="display: inline-block;float:none;width: 100%;">
+                    <div class="topjui-row">
+                        <div class="">
+                            <label class="topjui-form-label" style="color: #fff">选择月份</label>
+                            <div class="topjui-input-block">
+                                <input type="text" class="layui-input" name="yearNum" id="yearNum" placeholder="选择月份" style="display: inline-block;
+                        width: 150px;
+                        height: 30px" lay-key="1">
+                            </div>
+                        </div>
+                        <div class="">
+                            <a href="javascript:void(0)" data-toggle="topjui-menubutton" data-options="method:'query',
+                       iconCls:'fa fa-search',
+                       btnCls:'topjui-btn-green',
+                       form:{id:'queryForm'},
+                       onClick:getAllData
+               " id="288805" class="l-btn topjui-btn-green l-btn-small l-btn-plain" group="" style="height: 28px;"><span class="l-btn-left l-btn-icon-left" style="margin-top: 2px;"><span class="l-btn-text">搜索</span><span class="l-btn-icon fa fa-search">&nbsp;</span></span></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="layui-row layui-col-space30">
+            <div class="md3">
+                <blockquote class="layui-elem-quote title">工作面产量信息</blockquote>
+                <div class="box">
+                    <table class="layui-table" style="background:#102244;color: #fff;">
+                        <thead>
+                            <tr>
+                                <td>工作面名称</td>
+                                <td>回采进尺/m</td>
+                                <td>产量/吨</td>
+                            </tr>
+                        </thead>
+                        <tbody class="yield" id="tbody" style="margin-top: 0px;"><tr class="cole16"><td>回踩计划</td><td>260</td><td>214</td></tr><tr class="cole17"><td>回踩计划</td><td>200</td><td>257</td></tr><tr class="cole18"><td>回踩计划</td><td>315</td><td>373</td></tr><tr class="cole19"><td>回踩计划</td><td>340</td><td>296</td></tr><tr class="cole20"><td>回踩计划</td><td>469</td><td>481</td></tr><tr class="cole21"><td>回踩计划</td><td>451</td><td>433</td></tr><tr class="cole22"><td>回踩计划</td><td>323</td><td>302</td></tr><tr class="cole23"><td>回踩计划</td><td>301</td><td>254</td></tr><tr class="cole24"><td>回踩计划</td><td>417</td><td>440</td></tr><tr class="cole25"><td>回踩计划</td><td>411</td><td>471</td></tr><tr class="cole26"><td>回踩计划</td><td>485</td><td>451</td></tr><tr class="cole0"><td>回踩计划</td><td>421</td><td>483</td></tr><tr class="cole1"><td>回踩计划</td><td>380</td><td>415</td></tr><tr class="cole2"><td>回踩计划</td><td>461</td><td>260</td></tr><tr class="cole3"><td>回踩计划</td><td>306</td><td>316</td></tr><tr class="cole4"><td>回踩计划</td><td>316</td><td>374</td></tr><tr class="cole5"><td>回踩计划</td><td>388</td><td>229</td></tr><tr class="cole6"><td>回踩计划</td><td>321</td><td>236</td></tr><tr class="cole7"><td>回踩计划</td><td>344</td><td>204</td></tr><tr class="cole8"><td>回踩计划</td><td>428</td><td>238</td></tr><tr class="cole9"><td>回踩计划</td><td>376</td><td>390</td></tr><tr class="cole10"><td>回踩计划</td><td>249</td><td>438</td></tr><tr class="cole11"><td>回踩计划</td><td>204</td><td>368</td></tr><tr class="cole12"><td>回踩计划</td><td>426</td><td>430</td></tr><tr class="cole13"><td>回踩计划</td><td>389</td><td>203</td></tr><tr class="cole14"><td>回踩计划</td><td>484</td><td>251</td></tr><tr class="cole15"><td>回踩计划</td><td>424</td><td>499</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="md3">
+                <blockquote class="layui-elem-quote title">掘进进尺</blockquote>
+                <div id="top-center" style="width: 419px; height: 300px; user-select: none; position: relative;" _echarts_instance_="ec_1572341021038"><div style="position: relative; overflow: hidden; width: 419px; height: 300px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas style="position: absolute; left: 0px; top: 0px; width: 419px; height: 300px; user-select: none; padding: 0px; margin: 0px; border-width: 0px;" data-zr-dom-id="zr_0" width="419" height="300"></canvas></div><div style="position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s, top 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s; background-color: rgba(50, 50, 50, 0.7); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font: 14px/21px Microsoft YaHei; padding: 5px; left: 243px; top: 129px;">28<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#4ad2ff;"></span>实际量: 0<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#F08080;"></span>计划量: 0</div></div>
+            </div>
+            <div class="md3">
+                <blockquote class="layui-elem-quote title">回采进尺</blockquote>
+                <div id="top-right" style="width: 419px; height: 300px; user-select: none; position: relative;" _echarts_instance_="ec_1572341021039"><div style="position: relative; overflow: hidden; width: 419px; height: 300px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas style="position: absolute; left: 0px; top: 0px; width: 419px; height: 300px; user-select: none; padding: 0px; margin: 0px; border-width: 0px;" data-zr-dom-id="zr_0" width="419" height="300"></canvas></div><div></div></div>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space30">
+            <div class="md12">
+                <blockquote class="layui-elem-quote title" style="width: 15%;margin-left: 15px">产量分析</blockquote>
+                <div id="bottom" style="width: 1357px; height: 300px; user-select: none; position: relative;" _echarts_instance_="ec_1572341021040"><div style="position: relative; overflow: hidden; width: 1357px; height: 300px; padding: 0px; margin: 0px; border-width: 0px; cursor: pointer;"><canvas style="position: absolute; left: 0px; top: 0px; width: 1357px; height: 300px; user-select: none; padding: 0px; margin: 0px; border-width: 0px;" data-zr-dom-id="zr_0" width="1357" height="300"></canvas></div><div style="position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s, top 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s; background-color: rgba(50, 50, 50, 0.7); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font: 14px/21px Microsoft YaHei; padding: 5px; left: 200px; top: 201px;">02<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#c23531;"></span>实际量: 433<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#2f4554;"></span>计划量: 3.26</div></div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- 存放具体业务页面需要引入的javascript文件 -->
+
+    <script type="text/javascript" src="~/Content/js/echarts/echarts.min.js"></script>
+    <!--时间选择-->
+    <script>
+        var dateTime,
+            proStolist,/*工作面*/
+            incomingRulerArr,/*月掘进实际量*/
+            dayProArr,/*掘进计划量*/
+            dayProArrHC,/*回采进尺实际量*/
+            dayProArrHCJH,/*回采进尺计划量*/
+            meiArr,/*煤采量*/
+            meiArrHCJH,/*计划回采煤量*/
+            startAndCurrentArr;/*日期*/
+        var con = "";
+        var date=new Date();
+        //年
+        var year=date.getFullYear();
+        //月
+        var month=date.getMonth()+1;
+        if(month<10){
+            month = '0'+month
+        }
+        dateTime = year+'-'+month
+        $(".changeNum").html(dateTime)
+
+       
+        function getAllData() {
+            if(!dateTime){
+                dateTime = ''
+            }
+            proStolist=''
+            con = ''
+
+            var ta = document.getElementById('tbody');
+            while(ta.hasChildNodes()){
+                ta.removeChild(ta.lastChild)
+            }
+            $.ajax({
+                type: 'post',
+                data:{
+                    month:dateTime
+                },
+                url: '/coalmine/mkProSto/getMonthComprehensive',
+                dataType: "json",
+                success: function (res) {
+                    proStolist=res.proStolist/*工作面*/
+                    incomingRulerArr=res.incomingRulerArr/*月掘进实际量*/
+                    dayProArr=res.dayProArr/*掘进计划量*/
+                    dayProArrHC=res.dayProArrHC/*回采进尺实际量*/
+                    dayProArrHCJH=res.dayProArrHCJH/*回采进尺计划量*/
+                    meiArr=res.meiArr/*煤采量*/
+                    meiArrHCJH=res.meiArrHCJH/*计划回采煤量*/
+                    startAndCurrentArr=res.startAndCurrentArr/*日期*/
+
+// /*<-------------------------------------------------分割线/*获取表格数据*/-------------------------------------------------------------------->*/
+                    //工作面产量信息
+                    var cont = proStolist;
+
+                    if(cont.length>0){
+                        for(var i=0; i < cont.length; i++) {
+                            con += "<tr class='cole"+i+"'><td>"+ cont[i].stopingWork +"</td><td>"+ cont[i].stopingFootage +"</td><td>"+ cont[i].production +"</td></tr>";
+                        }
+                    }
+                    $(".yield").append(con);
+
+                    // if(cont.length>8){
+                    //     $(".layui-table").find(".cole5").css({display:"none"});
+                    // }
+
+                    // 滚动表格
+                    setInterval(function(){
+                        $(".layui-table").find("tbody").animate({
+                            marginTop:"-18px"
+                        },1000,function(){
+                            $(this).css({marginTop:"0px"}).find("tr:first").appendTo(this);
+                        })
+                    },4000);
+
+// /*<-------------------------------------------------分割线<!--掘进进尺-->-------------------------------------------------------------------->*/
+
+                    var topCenter=echarts.init(document.getElementById('top-center'));
+
+                    option = {
+                        tooltip : {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            data:['实际量','计划量'],
+                            textStyle: {
+                                color: '#fff',//坐标值得具体的颜色
+                            }
+                        },
+                        dataZoom: [{ /*时间选择区*/
+                            type: 'inside',
+                            start: 0,
+                            end: 100,
+                        }, {
+                            start: 0,
+                            end: 10,
+                            handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                            handleSize: '80%',
+                            handleStyle: {
+                                color: '#fff',
+                                shadowBlur: 3,
+                                shadowColor: 'rgba(225, 225, 225, 1)',
+                                shadowOffsetX: 2,
+                                shadowOffsetY: 2
+                            }
+                        }],
+                        xAxis: {
+                            type : 'category',
+                            boundaryGap : false,
+                            data: startAndCurrentArr,
+                            name:'日期',
+                            axisLabel: {
+                                textStyle: {
+                                    color: '#fff',//坐标值得具体的颜色
+                                }
+                            },
+                            splitLine: {
+                                show: false
+                            },
+                            axisLine: { lineStyle: { color: '#fff' } }
+                        },
+                        yAxis: {
+                            type: 'value',
+                            name: '单位：米',
+                            boundaryGap: [0, 0.01],
+                            color: '#fff',//坐标值得具体的颜色
+                            axisLabel: {
+                                textStyle: {
+                                    color: '#fff',//坐标值得具体的颜色
+                                }
+                            },
+                            splitLine: {
+                                show: false
+                            },
+                            axisLine: { lineStyle: { color: '#fff' } }
+                        },
+                        series: [{
+                            name:'实际量',
+                            data: incomingRulerArr,
+                            type: 'line',
+                            areaStyle: {
+                                normal: {
+                                    color: '#4ad2ff' //改变区域颜色
+                                }
+                            },
+                            itemStyle : {
+                                normal : {
+                                    color:'#4ad2ff', //改变折线点的颜色
+                                    lineStyle:{
+                                        color:'#4ad2ff' //改变折线颜色
+                                    }
+                                }
+                            },
+                        },{
+                            name:'计划量',
+                            data: dayProArr,
+                            type: 'line',
+                            areaStyle: {
+                                normal: {
+                                    color: '#F08080' //改变区域颜色
+                                }
+                            },
+                            itemStyle : {
+                                normal : {
+                                    color:'#F08080', //改变折线点的颜色
+                                    lineStyle:{
+                                        color:'#F08080' //改变折线颜色
+                                    }
+                                }
+                            },
+                        }]
+                    };
+
+                    var tc = option;
+                    topCenter.showLoading({
+                        text : 'loading...',
+                        effect: 'spin',
+                        itemStyle:{
+                            fontSize:16
+                        }
+                    });
+                    topCenter.hideLoading();
+                    topCenter.setOption(tc);
+
+ // /*<-------------------------------------------------分割线<!--回采进尺-->-------------------------------------------------------------------->*/
+
+                    var topRight=echarts.init(document.getElementById('top-right'));
+
+                    option = {
+                        tooltip : {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            data:['实际量','计划量'],
+                            textStyle: {
+                                color: '#fff',//坐标值得具体的颜色
+                            }
+                        },
+                        dataZoom: [{ /*时间选择区*/
+                            type: 'inside',
+                            start: 0,
+                            end: 100,
+                        }, {
+                            start: 0,
+                            end: 10,
+                            handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                            handleSize: '80%',
+                            handleStyle: {
+                                color: '#fff',
+                                shadowBlur: 3,
+                                shadowColor: 'rgba(225, 225, 225, 1)',
+                                shadowOffsetX: 2,
+                                shadowOffsetY: 2
+                            }
+                        }],
+                        xAxis: {
+                            type : 'category',
+                            boundaryGap : false,
+                            data: startAndCurrentArr,
+                            name:'日期',
+                            axisLabel: {
+                                textStyle: {
+                                    color: '#fff',//坐标值得具体的颜色
+                                }
+                            },
+                            splitLine: {
+                                show: false
+                            },
+                            axisLine: { lineStyle: { color: '#fff' } }
+                        },
+                        yAxis: {
+                            type: 'value',
+                            name: '单位：米',
+                            boundaryGap: [0, 0.01],
+                            color: '#fff',//坐标值得具体的颜色
+                            axisLabel: {
+                                textStyle: {
+                                    color: '#fff',//坐标值得具体的颜色
+                                }
+                            },
+                            splitLine: {
+                                show: false
+                            },
+                            axisLine: { lineStyle: { color: '#fff' } }
+                        },
+                        series: [{
+                            name:'实际量',
+                            data: dayProArrHC,
+                            type: 'line',
+                            areaStyle: {
+                                normal: {
+                                    color: '#FF4500' //改变区域颜色
+                                }
+                            },
+                            itemStyle : {
+                                normal : {
+                                    color:'#FF4500', //改变折线点的颜色
+                                    lineStyle:{
+                                        color:'#FF4500' //改变折线颜色
+                                    }
+                                }
+                            },
+                        },{
+                            name:'计划量',
+                            data: dayProArrHCJH,
+                            type: 'line',
+                            areaStyle: {
+                                normal: {
+                                    color: '#5F9EA0' //改变区域颜色
+                                }
+                            },
+                            itemStyle : {
+                                normal : {
+                                    color:'#5F9EA0', //改变折线点的颜色
+                                    lineStyle:{
+                                        color:'#5F9EA0' //改变折线颜色
+                                    }
+                                }
+                            },
+                        }]
+                    };
+
+                    var tr = option;
+                    topRight.showLoading({
+                        text : 'loading...',
+                        effect: 'spin',
+                        itemStyle:{
+                            fontSize:16
+                        }
+                    });
+                    topRight.hideLoading();
+                    topRight.setOption(tr);
+
+
+// /*<-------------------------------------------------分割线<!--产量分析-->-------------------------------------------------------------------->*/
+
+                    var bottom=echarts.init(document.getElementById('bottom'));
+                    option = {
+                        tooltip : {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            data:['实际量','计划量'],
+                            textStyle: {
+                                color: '#fff',//坐标值得具体的颜色
+                            }
+                        },
+                        dataZoom: [{ /*时间选择区*/
+                            type: 'inside',
+                            start: 0,
+                            end: 100,
+                        }, {
+                            start: 0,
+                            end: 10,
+                            handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                            handleSize: '80%',
+                            handleStyle: {
+                                color: '#fff',
+                                shadowBlur: 3,
+                                shadowColor: 'rgba(225, 225, 225, 1)',
+                                shadowOffsetX: 2,
+                                shadowOffsetY: 2
+                            }
+                        }],
+                        xAxis: {
+                            type : 'category',
+                            boundaryGap : true,
+                            data: startAndCurrentArr,
+                            name:'日期',
+                            axisLabel: {
+                                textStyle: {
+                                    color: '#fff',//坐标值得具体的颜色
+                                }
+                            },
+                            splitLine: {
+                                show: false
+                            },
+                            axisLine: { lineStyle: { color: '#fff' } }
+                        },
+                        yAxis: {
+                            type: 'value',
+                            name: '单位：米',
+                            boundaryGap: [0, 0.01],
+                            color: '#fff',//坐标值得具体的颜色
+                            axisLabel: {
+                                textStyle: {
+                                    color: '#fff',//坐标值得具体的颜色
+                                }
+                            },
+                            splitLine: {
+                                show: false
+                            },
+                            axisLine: { lineStyle: { color: '#fff' } }
+                        },
+                        series: [{
+                            name:'实际量',
+                            data: meiArr,
+                            type: 'bar'
+
+                        },{
+                            name:'计划量',
+                            data: meiArrHCJH,
+                            type: 'bar'
+                        }]
+                    };
+
+                    var bt = option;
+                    bottom.showLoading({
+                        text : 'loading...',
+                        effect: 'spin',
+                        itemStyle:{
+                            fontSize:16
+                        }
+                    });
+                    bottom.hideLoading();
+                    bottom.setOption(bt);
+
+                    /*自适应宽度*/
+                    var resizeContainer = function () {
+                        document.getElementById('top-center').style.width = $(".md3").width() - 10 + 'px';
+                        document.getElementById('top-right').style.width = $(".md3").width() - 10 + 'px';
+                        document.getElementById('bottom').style.width = $(".md12").width() - 10 + 'px';
+                    };
+                    window.addEventListener("resize", function () {
+                        resizeContainer();
+                        topCenter.resize();
+                        topRight.resize();
+                        bottom.resize();
+                    });
+                }
+            })
+        }
+        getAllData()
+    </script>
+
+
+
+</body>
+</html>

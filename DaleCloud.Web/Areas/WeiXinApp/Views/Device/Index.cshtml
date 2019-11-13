@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "我的产品设备";
+    Layout = "~/Views/Shared/WeixinApp/_Index.cshtml";
+}
+
+<header>
+    @*<h1 class="header-title">客户产品</h1>*@
+    
+</header>
+
+<div class="weui-cells" style="margin-top:0;" id="dataList">
+
+</div>
+
+<div class="weui-footer">
+    <p class="weui-footer__text"></p>
+</div>
+
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script src="~/Content/weui/js/jquery-weui.min.js"></script>
+<script src="~/Content/weui/js/weui.min.js"></script>
+<script src="~/Content/weui/js/weui.expand.js?t=2"></script>
+<script>
+    var userInfo;
+
+    var detailData = [];
+    var openid = $.cookie('openid');
+    var customerId = $.getQueryString("customerId");
+    $(document).ready(function () {
+        getDataList();
+    });
+
+   
+    function getDataList() {
+        var req = {
+            keyValue: customerId,
+            keyword: ""
+        };
+        $.ajaxGet({
+            data: req,
+            url: '/ProductManage/ProductDevice/GetListJson',
+            success: function (oObject) {
+                if (oObject.state != "success") {
+                    $.toptip(oObject.message, 'warning');
+                    return false;
+                }
+                var htm = template("dataList_template", oObject.res);
+                $("#dataList").html(htm);
+                $(".weui-cell_access").click(function () {
+                    var keyValue = $(this).attr("data-id");
+                    var url = "/WeixinApp/Device/Details";
+                    $.redirectTo(url, customerId, keyValue);
+                });
+            }
+        })
+    }
+   
+</script>
+
+<script id="dataList_template" type="text/html">
+    {{ each data as value index }}
+    <a class="weui-cell weui-cell_access" href="javascript:void(0);" data-id="{{value.T_Id}}">
+        <div class="weui-cell__bd">
+            <h4 class="weui-media-box__title">{{value.T_CustomerName}}</h4>
+            <p class="weui-media-box__desc"><span>{{value.T_SerialNo}}</span><span class="desc_padding">{{value.T_ProductName}}/{{value.T_ModelCode}}</span></p>
+        </div>
+        <div class="weui-cell__ft "><span class="label {{if value.T_State }}label-default{{else}}label-warn{{/if}}">{{if value.T_State }}质保期内{{else}}质保到期{{/if}}</span></div>
+    </a>
+    {{ /each }}
+</script>
+
+

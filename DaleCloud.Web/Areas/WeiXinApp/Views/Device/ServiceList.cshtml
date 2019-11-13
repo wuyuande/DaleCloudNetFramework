@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "服务记录";
+    Layout = "~/Views/Shared/WeixinApp/_Index.cshtml";
+}
+
+
+<header>
+    <span class="user-name"></span>
+</header>
+
+<div class="weui-cells" style="margin-top:0;" id="dataList">
+
+</div>
+<div class="weui-footer">
+    <p class="weui-footer__text"></p>
+</div>
+
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script src="~/Content/weui/js/jquery-weui.min.js"></script>
+<script src="~/Content/weui/js/weui.min.js"></script>
+<script src="~/Content/weui/js/weui.expand.js?t=2"></script>
+<script>
+    
+    var openid = $.cookie('openid');
+    var customerId = $.getQueryString("customerId");
+    var keyValue = $.getQueryString("keyValue");
+   
+    $(document).ready(function () {
+        GetOrderList();
+    });
+    function GetOrderList() {
+        var req = {
+            keyValue: keyValue,
+            state: -1,
+            keyword: ""
+        };
+        $.ajaxGet({
+            data: req,
+            url: '/ServiceManage/WorkOrder/GetOrderJsonbyDevice',
+            success: function (oObject) {
+                if (oObject.state != "success") {
+                    $.toptip(oObject.message, 'warning');
+                    return false;
+                }
+                var data = oObject.res;
+                var htm = template("temp1", data);
+                $("#dataList").html(htm);
+                $(".weui-cell_access").click(function () {
+                    var keyValue = $(this).attr("data-id");
+                    var url = "/WeixinApp/WorkOrder/Details";
+                    $.redirectTo(url, customerId, keyValue);
+                });
+            }
+        })
+    }
+   
+   
+</script>
+
+<script id="temp1" type="text/html">
+    {{ each data as value index }}
+    <a class="weui-cell weui-cell_access" href="javascript:void(0);" data-id="{{value.T_Id}}">
+    <div class="weui-cell__bd">
+        <h4 class="weui-media-box__title">{{value.T_Title}}</h4>
+        <p class="weui-media-box__desc">{{value.T_CustomerId}}</p>
+        <p class="weui-media-box__desc"><span>{{value.T_Category}}</span><span class="desc_padding">{{value.T_PlanFinishTime}}</span></p>
+    </div>
+    <div class="weui-cell__ft ">
+        <span class="label {{if value.T_CurrentPlan=="已关闭"}} label-closed  {{else}} label-send {{/if}}">
+        {{if value.T_CurrentPlan=="已关闭"}} 已完成  {{else}} 进行中 {{/if}}</span></div>
+    </a>
+    {{ /each }} 
+</script>
+
+
+
+

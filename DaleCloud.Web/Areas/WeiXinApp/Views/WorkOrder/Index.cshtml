@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "我的服务单";
+    Layout = "~/Views/Shared/WeixinApp/_Index.cshtml";
+}
+
+
+<header>
+    <span class="user-name"></span>
+</header>
+
+<div class="weui-tab__bd">
+    <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+
+        <!--start列表盒子-->
+        <div class="weui-cells" style="margin-top:0;" id="dataList">
+
+        </div>
+        <!--end列表盒子-->
+    </div>
+
+</div>
+<div class="weui-footer">
+    <p class="weui-footer__text"></p>
+</div>
+<style>
+    .desc_padding{
+        border-left: solid 1px #bbb;
+        padding-left: 5px;
+        margin-left: 5px;
+    }
+</style>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script src="~/Content/weui/js/jquery-weui.min.js"></script>
+<script src="~/Content/weui/js/weui.min.js"></script>
+<script src="~/Content/weui/js/weui.expand.js?t=2"></script>
+<script src="~/Content/weui/js/common.js" charset="utf-8"></script>
+<script>
+    var detailData = [];
+    var openid = $.cookie('openid');
+    var customerId = $.getQueryString("customerId");
+    $(document).ready(function () {
+        GetOrderList(customerId);
+    });
+    function GetOrderList(userId) {
+        var req = {
+            customerId: customerId,
+            state: -1,
+            keyword: ""
+        };
+        //alert(userId);
+        ajaxGet(req, { 'url': '/ServiceManage/MyOrder/GetOrderJsonbyCustomer', 'funname': viewListHtml, 'funobj': {} });
+    }
+   
+    function viewListHtml(oObject) {
+        if (oObject.state != "success") {
+            $.toptip(oObject.message, 'warning');
+            return false;
+        }
+        var data = oObject.res;
+        var htm = template("temp1", data);
+        $("#dataList").html(htm);
+        $(".weui-cell_access").click(function () {
+            var keyValue = $(this).attr("data-id");
+            $.redirectTo("/WeixinApp/WorkOrder/Detail", customerId, keyValue);
+        });
+    }
+</script>
+
+<script id="temp1" type="text/html">
+    {{ each data as value index }}
+    <a class="weui-cell weui-cell_access" href="javascript:void(0);" data-id="{{value.T_Id}}">
+    <div class="weui-cell__bd">
+        <h4 class="weui-media-box__title">{{value.T_Title}}</h4>
+        <p class="weui-media-box__desc">{{value.T_CustomerName}}</p>
+        <p class="weui-media-box__desc"><span>{{value.T_Category}}</span><span class="desc_padding">{{value.T_PlanFinishTime}}</span></p>
+    </div>
+    <div class="weui-cell__ft ">
+        <span class="label {{if value.T_CurrentPlan=="未派单"}} label-unsend {{else if value.T_CurrentPlan=="已派单"}} label-send {{else if value.T_CurrentPlan=="已接单"}} label-taked {{else if value.T_CurrentPlan=="已完成"}} label-finish {{else}} label-closed {{/if}}">
+        {{value.T_CurrentPlan}}</span></div>
+    </a>
+    {{ /each }} 
+</script>
+
+
+
+

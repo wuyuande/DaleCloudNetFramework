@@ -1,0 +1,198 @@
+﻿
+
+<html>
+<head>
+    <title>用户中心</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="~/Content/weui/css/weui.min.css">
+    <link rel="stylesheet" href="~/Content/weui/css/jquery-weui.min.css">
+
+</head>
+<body ontouchstart="">
+
+    <div class="weui-tab">
+        <div class="weui-tab__bd">
+
+            <div class="weui-flex " style="background-color: #01A9DA;padding: 6px;">
+                <a href="#">
+                    <div style="margin: 5px 5px; width: 80px; height: 80px; border-radius: 80px; overflow: hidden; background-color: #0094ff; float: left; border: solid 2px #63E9F3;">
+                        <img id="UserAvatar" src="@ViewData["headimgurl"]" style="margin: 0; width: 110px; height: 100%;" />
+                    </div>
+                    <div style="margin: 6px 10px; color: white; float: left;">
+                        <h3 id="UserName">@ViewData["nickname"] （@ViewData["username"]）</h3>
+                        <div class="weui-flex"><span id="">@ViewData["mobile"]</span></div>
+                        <div class="weui-flex" style="color: orangered;">@ViewData["company"]</div> 
+                    </div>
+                </a>
+            </div>
+            <div class="weui-grids" style="background-color: #fff;">
+                <a href="javascript:void(0)" id="WorkOrderForm" data-url="/WeixinApp/WorkOrder/Form" data-title="故障申报" class="weui-grid " style="width: 33.3%;">
+                    <div class="weui-grid__icon">
+                        <img src="~/Content/weui/icon/icon_dialog_info.png" alt="" />
+                    </div>
+                    <p class="weui-grid__label">
+                        故障申报
+                    </p>
+                </a>
+                <a href="javascript:void(0)" data-url="/WeixinApp/Suggestion/Form" data-title="提建议" class="weui-grid " style="width: 33.3%;">
+                    <div class="weui-grid__icon">
+                        <img src="~/Content/weui/icon/icon_swap.png" alt="" />
+                    </div>
+                    <p class="weui-grid__label">
+                        提建议
+                    </p>
+                </a>
+                <a href="javascript:void(0)" data-url="/WeixinApp/Complaints/Form" data-title="投诉表扬" class="weui-grid " style="width: 33.3%;">
+                    <div class="weui-grid__icon">
+                        <img src="~/Content/weui/icon/icon_forwarded.png" alt="" />
+                    </div>
+                    <p class="weui-grid__label">
+                        投诉表扬
+                    </p>
+                </a>
+
+            </div>
+            <div style="height:455px;">
+                <!--start业务-->
+                <div class="weui-cells__title">业务</div>
+                <div class="weui-cells">
+                    <a class="weui-cell weui-cell_access" href="javascript:void(0)" id="WorkOrderList" data-url="/WeixinApp/WorkOrder/Index" data-title="我的工单">
+                        <div class="weui-cell__hd">
+                            <img src="~/Content/weui/icon/icon_subject.png" alt="" style="width: 20px; margin-right: 5px; display: block" />
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>我的工单</p>
+                        </div>
+                        <div class="weui-cell__ft"></div>
+                    </a>
+                    <a class="weui-cell weui-cell_access" href="javascript:void(0)" id="Device" data-url="/WeixinApp/Device/Index" data-title="我的设备">
+                        <div class="weui-cell__hd">
+                            <img src="~/Content/weui/icon/icon_toc.png" alt="" style="width: 20px; margin-right: 5px; display: block" />
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>我的设备</p>
+                        </div>
+                        <div class="weui-cell__ft"></div>
+                    </a>
+                    <a class="weui-cell weui-cell_access" href="javascript:void(0)" id="CustomerDetail" data-url="/WeixinApp/Users/CustomerDetail" data-title="单位信息">
+                        <div class="weui-cell__hd">
+                            <img src="~/Content/weui/icon/icon_alarm.png" alt="" style="width: 20px; margin-right: 5px; display: block" />
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>单位信息</p>
+                        </div>
+                        <div class="weui-cell__ft"></div>
+                    </a>
+                    
+                </div>
+                <!--end订单-->
+                <!--start更多功能-->
+                <div class="weui-cells__title">更多</div>
+                <div class="weui-cells">
+                    <a class="weui-cell weui-cell_access" href="javascript:void(0)" data-url="/WeixinApp/Suggestion/Index" data-title="">
+                        <div class="weui-cell__hd">
+                            <img src="~/Content/weui/icon/icon_order.net.png" alt="" style="width: 20px; margin-right: 5px; display: block" />
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>建议意见</p>
+                        </div>
+                        <div class="weui-cell__ft"></div>
+                    </a>
+                    <a class="weui-cell weui-cell_access" href="javascript:void(0)" data-url="/WeixinApp/Complaints/Index" data-title="投诉表扬">
+                        <div class="weui-cell__hd">
+                            <img src="~/Content/weui/icon/icon_order.net.png" alt="" style="width: 20px; margin-right: 5px; display: block" />
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>投诉表扬</p>
+                        </div>
+                        <div class="weui-cell__ft"></div>
+                    </a>
+                    <a class="weui-cell weui-cell_access" href="javascript:void(0)" data-url="/WeixinApp/Tools/CaliErrorCalculator" data-title="误差计算器">
+                        <div class="weui-cell__hd">
+                            <img src="~/Content/weui/icon/icon_order.net.png" alt="" style="width: 20px; margin-right: 5px; display: block" />
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>误差计算器</p>
+                        </div>
+                        <div class="weui-cell__ft"></div>
+                    </a>
+                    <a class="weui-cell weui-cell_access" href="javascript:void(0)" id="UserInfo" data-url="/WeixinApp/Users/UserInfo" data-title="我的资料">
+                        <div class="weui-cell__hd">
+                            <img src="~/Content/weui/icon/icon_set.png" alt="" style="width: 20px; margin-right: 5px; display: block">
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>我的资料</p>
+                        </div>
+                        <div class="weui-cell__ft  orangered small-font"></div>
+                    </a>
+                </div>
+                <!--end更多功能-->
+            </div>
+           
+        </div>
+       
+    </div>
+    <script src="~/Content/weui/js/jquery-2.1.4.js"></script>
+    <script src="~/Content/weui/js/fastclick.js"></script>
+    <script>
+        $(function () {
+            FastClick.attach(document.body);
+        });
+    </script>
+    <script src="~/Content/weui/js/jquery-weui.min.js"></script>
+    <script src="~/Content/weui/js/iTemplate.js"></script>
+    <script src="~/Content/weui/js/jquery.cookie.js"></script>
+
+    <script>
+        var userInfo = '';
+        var IsBinding=@ViewData["IsBind"];
+        $(function () {
+
+        })
+        $(document).ready(function () {
+            if (!IsBinding) {
+                $.confirm({
+                    title: '系统提示',
+                    text: '您尚未绑定我司设备，是否前往绑定设备？',
+                    onOK: function () {
+                        window.location.href = 'Register?openid=@ViewData["openid"]';
+                    },
+                    onCancel: function () {
+                        
+                    }
+                });
+                //$('.weui-grid').attr('readonly','');
+                //$('.weui-cell').attr('readonly','');
+                $('#WorkOrderForm').attr('readonly','');
+                $('#Device').attr('readonly','');
+                $('#UserInfo').attr('readonly','');
+                $('#CustomerDetail').attr('readonly','');
+                $('#WorkOrderList').attr('readonly','');
+            }
+            $.cookie('customerId',"@ViewData["customerId"]", { expires: 1, path: '/' });
+            $.cookie('openid',"@ViewData["openid"]", { expires: 1, path: '/' })
+        });
+
+        $('.weui-grid').on("click", function () {
+            var url = this.getAttribute("data-url");
+            var title = this.getAttribute("data-title");
+            if (url != "") {
+                window.location.href = url + "?customerId=@ViewData["customerId"]&openid=@ViewData["openid"]";
+            }
+        });
+
+        $('.weui-cell').on("click", function () {
+            var url = this.getAttribute("data-url");
+            var title = this.getAttribute("data-title");
+            if (url != "") {
+                window.location.href = url + "?customerId=@ViewData["customerId"]&openid=@ViewData["openid"]";
+            }
+        });
+    </script>
+
+
+</body>
+</html>

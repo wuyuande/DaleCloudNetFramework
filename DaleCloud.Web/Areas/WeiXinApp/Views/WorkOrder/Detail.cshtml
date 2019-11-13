@@ -1,0 +1,397 @@
+﻿@{
+    ViewBag.Title = "服务单详情";
+    Layout = "~/Views/Shared/WeixinApp/_Detail.cshtml";
+}
+
+
+
+<header>
+    <span class="user-name"></span>
+</header>
+
+<div class="weui-cells" style="margin-top:0;">
+    <!---工单详情-->
+    <div class="page-service-detail">
+        <div class="content">
+            <div class="aftermain" id="detail_content">
+               
+            </div>
+            <script id="orderdetail_template" type="text/html">
+                <div class="aftermian-head">
+                    <div class="aftermian-head-text" style="font-size:14px;" >{{$data.T_OrderNo}}</div>
+                   
+                    {{if $data.T_State==0}}
+                    <div class="aftermian-head-btn"  style="background-color: #43c4ff;"><span>尚未派单</span></div>
+                    {{/if}}
+                </div>
+                <div class="aftermian-doubleline"></div>
+                <div class="aftermian-timeline ui-box">
+                    <div class="aftermian-timeline-box ui-box-flex ui-box {{if $data.T_State>=1}} Y{{/if}} " id="step-1">
+                        <div class="aftermian-timeline-item"><div class="aftermian-timeline-item-text">已派单</div></div>
+                        <div class="aftermian-timeline-itemline ui-box-flex"></div>
+                    </div>
+                    <div class="aftermian-timeline-box ui-box-flex ui-box {{if $data.T_State>=2}} Y{{/if}}" id="step-2">
+                        <div class="aftermian-timeline-item"><div class="aftermian-timeline-item-text">已接单</div></div>
+                        <div class="aftermian-timeline-itemline ui-box-flex"></div>
+                    </div>
+                    <div class="aftermian-timeline-box ui-box-flex ui-box {{if $data.T_State>=3}} Y{{/if}}" id="step-3">
+                        <div class="aftermian-timeline-item"><div class="aftermian-timeline-item-text">已处理</div></div>
+                        <div class="aftermian-timeline-itemline ui-box-flex"></div>
+                    </div>
+                    <div class="aftermian-timeline-box ui-box-flex ui-box lastItem {{if $data.T_State>=4}} Y{{/if}}" id="step-4">
+                        <div class="aftermian-timeline-item"><div class="aftermian-timeline-item-text">已关闭</div></div>
+                    </div>
+                </div>
+                <div class="aftermain-palce" style="text-align:left;">问题标题：<span>{{$data.T_Title}}</span></div>
+                <div class="aftermain-info">
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">产品名称：</div><div class="aftermain-info-h2-desc"><span>{{$data.T_ProductName}}</span>/<span>{{$data.T_ModelCode}}</span></div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">出厂编号：</div><div class="aftermain-info-h2-desc">{{$data.T_SerialNo}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">客户名称：</div><div class="aftermain-info-h2-desc">{{$data.T_CustomerName}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">联系人：</div><div class="aftermain-info-h2-desc">{{$data.T_Linkman}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">联系电话：</div><div class="aftermain-info-h2-desc">{{$data.T_Mobile}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">QQ/微信：</div><div class="aftermain-info-h2-desc">{{$data.T_QQ}}</div></div>
+                </div>
+                <div class="aftermain-palce"><span >  </span></div>
+                <div class="aftermain-info">
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">问题类型：</div><div class="aftermain-info-h2-desc">{{$data.T_Category}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">工单等级：</div><div class="aftermain-info-h2-desc">{{$data.T_OrderLevel}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">服务方式：</div><div class="aftermain-info-h2-desc">{{$data.T_WorkWay}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">指派处理：</div><div class="aftermain-info-h2-desc">{{$data.T_DisposeUserId}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">要求完成：</div><div class="aftermain-info-h2-desc">{{$data.T_PlanFinishTime}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">问题描述：</div><div class="aftermain-info-h2-desc">{{$data.T_Description}}</div></div>
+                </div>
+                <div class="aftermian-doubleline"></div>
+                <div class="aftermain-info">
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">症状原因：</div><div class="aftermain-info-h2-desc">{{$data.T_Reasons}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">解决方案：</div><div class="aftermain-info-h2-desc">{{$data.T_Solution}}</div></div>
+                </div>
+            </script>
+        </div>
+    </div>
+    <div class="weui-btn-area">
+        <a id="takeOrderBtn" href="javascript:" style="display:none;" class="weui-btn weui-btn_mini weui-btn_primary">同意接单</a>
+        <a id="untakeOrderBtn" href="javascript:" style="display:none;" class="weui-btn weui-btn_mini weui-btn_primary">拒绝接单</a>
+        <a id="transOrderBtn" href="javascript:" style="display:none;" class="weui-btn weui-btn_mini weui-btn_primary">转单派单</a>
+        <a id="submitBtn" href="javascript:"  style="display:none;" class="weui-btn weui-btn_mini weui-btn_primary">处理意见</a>
+        <a id="finishBtn" href="javascript:" style="display:none;" class="weui-btn weui-btn_mini weui-btn_primary">确认完成</a>
+        <a id="deviceBtn" href="javascript:"  class="weui-btn weui-btn_mini weui-btn_primary">设备档案</a>
+        <a id="moreBtn" href="javascript:" class="weui-btn weui-btn_mini weui-btn_primary">更多信息</a>
+    </div>
+</div>
+<div class="weui-footer">
+    <p class="weui-footer__text"></p>
+</div>
+
+<!---工单处理操作-->
+<div id="formRemarksMask" class="weui-popup__container popup-bottom">
+    <div class="weui-popup__overlay"></div>
+    <div class="weui-popup__modal">
+        <div class="toolbar">
+            <div class="toolbar-inner">
+                <a href="javascript:;" class="picker-button close-popup">关闭</a>
+                <h1 class="title">处理意见</h1>
+            </div>
+        </div>
+        <div class="modal-content" style="text-align: center;">
+            <div class="weui-cells">
+                <div class="weui-cell weui-cell_select">
+                    <div class="weui-cell__bd">
+                        <select class="weui-select" id="WorkWay" name="WorkWay">
+                            <option selected value="电话处理">电话处理</option>
+                            <option value="QQ远程">QQ远程</option>
+                            <option value="上门服务">上门服务</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_switch">
+                    <div class="weui-cell__bd">维修/更换设备配件</div>
+                    <div class="weui-cell__ft">
+                        <label for="IsReplacePart" class="weui-switch-cp">
+                            <input id="IsReplacePart" class="weui-switch-cp__input" type="checkbox" >
+                            <div class="weui-switch-cp__box"></div>
+                        </label>
+
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <textarea id="Content" name="Content" class="weui-textarea" placeholder="请输入评论内容" rows="2"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                <a id="formSubmitBtn" href="javascript:" class="weui-btn weui-btn_primary">提交评论</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!---工单完工操作-->
+<div id="formSolutionMask" class="weui-popup__container popup-bottom">
+    <div class="weui-popup__overlay"></div>
+    <div class="weui-popup__modal">
+        <div class="toolbar">
+            <div class="toolbar-inner">
+                <a href="javascript:;" class="picker-button close-popup">关闭</a>
+                <h1 class="title">处理方案</h1>
+            </div>
+        </div>
+        <div class="modal-content" style="text-align: center;">
+            <div class="weui-cells">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <textarea id="T_Reasons" name="T_Reasons" class="weui-textarea" placeholder="填写症状原因" rows="2"></textarea>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <textarea id="T_Solution" name="T_Solution" class="weui-textarea" placeholder="填写解决方案" rows="2"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                <a id="formFinishBtn" href="javascript:" class="weui-btn weui-btn_primary">完成服务</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!---转单操作-->
+<div id="formTransOrderMask" class="weui-popup__container popup-bottom">
+    <div class="weui-popup__overlay"></div>
+    <div class="weui-popup__modal">
+        <div class="toolbar">
+            <div class="toolbar-inner">
+                <a href="javascript:;" class="picker-button close-popup">关闭</a>
+                <h1 class="title">工单转派处理</h1>
+            </div>
+        </div>
+        <div class="modal-content" style="text-align: center;">
+            <div class="weui-cells">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">处理人</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="TransUserName" name="TransUserName" required placeholder="" >
+                        <input  type="hidden" id="TransUserId" name="TransUserId">
+                    </div>
+                    <div class="weui-cell__ft">
+                        <a href="javascript:;" id="chooseUser" class="weui-btn weui-btn_mini weui-btn_primary">选择</a>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <textarea id="TransMessage" name="TransMessage" class="weui-textarea" placeholder="转单说明" rows="2"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                <a id="formTransOrderBtn" href="javascript:" class="weui-btn weui-btn_primary">确认转单</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!---客户设备详细资料-->
+<div id="formProductMask" class="weui-popup__container ">
+    <div class="weui-popup__overlay"></div>
+    <div class="weui-popup__modal">
+        <div class="toolbar">
+            <div class="toolbar-inner">
+                <a href="javascript:;" class="picker-button close-popup">关闭</a>
+                <h1 class="title">客户及产品资料</h1>
+            </div>
+        </div>
+        <div class="modal-content" style="text-align: center;">
+            <div class="page-service-detail">
+                <div class="content">
+                    <div class="aftermain" id="customer_content">
+                       
+                    </div>
+                    <script id="customer_template" type="text/html">
+                        <div class="aftermain-info">
+                            <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">客户名称：</div><div class="aftermain-info-h2-desc">{{$data.Customer.T_FullName}}</div></div>
+                            <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">送检单位：</div><div class="aftermain-info-h2-desc">{{$data.Customer.T_CaliName}}</div></div>
+                            <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">联系人：</div><div class="aftermain-info-h2-desc">{{$data.Customer.T_Linkman}}</div></div>
+                            <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">联系电话：</div><div class="aftermain-info-h2-desc">{{$data.Customer.T_Mobile}}</div></div>
+                            <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">公司电话：</div><div class="aftermain-info-h2-desc"></div>{{$data.Customer.T_QQ}}</div>
+                            <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">业务员：</div><div class="aftermain-info-h2-desc">{{$data.Customer.T_SalesUserId}}</div></div>
+                            <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">联系地址：</div><div class="aftermain-info-h2-desc">{{$data.Customer.T_Address}}</div></div>
+                        </div>
+                        <div class="aftermian-doubleline"></div>
+                        <div class="aftermain-info">
+                            <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">产品名称：</div><div class="aftermain-info-h2-desc">{{$data.Device.T_ProductName}}</div></div>
+                            <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">型号规格：</div><div class="aftermain-info-h2-desc">{{$data.Device.T_ModelCode}}</div></div>
+                            <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">设备号SN.：</div><div class="aftermain-info-h2-desc">{{$data.Device.T_SerialNo}}</div></div>
+                            <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">安装人员：</div><div class="aftermain-info-h2-desc">{{$data.Device.T_Implementer}}</div></div>
+                            <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">安装日期：</div><div class="aftermain-info-h2-desc">{{$data.Device.T_InstallTime}}</div></div>
+                            <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">验收日期：</div><div class="aftermain-info-h2-desc">{{$data.Device.T_DeliveryTime}}</div></div>
+                            <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">服务到期：</div><div class="aftermain-info-h2-desc">{{$data.Device.T_Implementer}}</div></div>
+                            <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">授权到期：</div><div class="aftermain-info-h2-desc">{{$data.Device.T_LicenseTime}}</div></div>
+                        </div>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<style>
+    .desc_padding {
+        border-left: solid 1px #bbb;
+        padding-left: 5px;
+        margin-left: 5px;
+    }
+</style>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script src="~/Content/weui/js/jquery-weui.min.js"></script>
+<script src="~/Content/weui/js/weui.min.js"></script>
+<script src="~/Content/weui/js/weui.expand.js?t=2"></script>
+<script src="~/Content/weui/js/common.js" charset="utf-8"></script>
+<script>
+
+    var detailData = [];
+    var openid = $.cookie('openid');
+    var customerId = $.getQueryString("customerId");
+    var keyValue = $.getQueryString("keyValue");
+    $(document).ready(function () {
+        GetOrder();
+    });
+    function GetOrder() {
+        var req = {
+            keyValue: keyValue
+        };
+        //alert(userId);
+        ajaxGet(req, { 'url': '/ServiceManage/MyOrder/GetDetailJson', 'funname': viewClist, 'funobj': {} });
+    }
+    function viewClist(oObject) {
+        if (oObject.state != "success") {
+            $.toptip(oObject.message);
+            return false;
+        }
+
+        detailData = oObject.res.data;
+        var now = new Date();
+        detailData.nowtime = now;
+        var htm = template("orderdetail_template", detailData);
+        $("#detail_content").html(htm);
+
+        if (detailData.T_State == 1) {
+            $("#takeOrderBtn").show();
+            $("#untakeOrderBtn").show();
+            $("#transOrderBtn").show();
+        }
+        else if (detailData.T_State == 2) {
+            $("#submitBtn").show();
+            $("#finishBtn").show();
+            $("#takeOrderBtn").hide();
+            $("#untakeOrderBtn").hide();
+            $("#transOrderBtn").hide();
+        }
+        else {
+            $("#submitBtn").hide();
+            $("#finishBtn").hide();
+            $("#takeOrderBtn").hide();
+            $("#untakeOrderBtn").hide();
+            $("#transOrderBtn").hide();
+        }
+        
+    } 
+    function GetCustomerDevice(custid, deviceId) {
+        var req = {
+            keyValue: custid, deviceId: deviceId
+        };
+        ajaxGet(req, { 'url': '/ServiceManage/WorkOrder/GetCustomeraAndDeviceJson', 'funname': viewPlist, 'funobj': {} });
+    }
+    function viewPlist(oObject) {
+        if (oObject.state != "success") {
+
+        }
+        var htm = template("customer_template", oObject.res.data);
+        $("#customer_content").html(htm);
+        $("#formProductMask").popup();
+    }
+
+    $("#takeOrderBtn").on('click', function () {
+        takeOrder(true,'');
+    });
+
+    $("#untakeOrderBtn").on('click', function () {
+        dd.device.notification.prompt({
+            message: "输入不接单原因",
+            title: "提示",
+            defaultText: "",
+            buttonLabels: ['确定', '取消'],
+            onSuccess: function (result) {
+                if (buttonIndex == 0) {
+                    takeOrder(false, value);
+                }
+            },
+            onFail: function (err) { }
+        });
+        return false;
+    });
+
+    function takeOrder(state,msg) {
+        $.ajax({
+            url: "/ServiceManage/MyOrder/SubmitTakeOrder",
+            type: "post",
+            dataType: "json",
+            data: { keyValue: keyValue, userId: userInfo.SysUserId,state:state,message:msg },
+            async: false,
+            success: function (data) {
+                if (data.state == 'success') {
+                    $.toptip("接单成功");
+                } else {
+                    $.toptip(data.message);
+                }
+            }
+        });
+        return false;
+    }
+    $("#transOrderBtn").on('click', function () {
+        $("#formTransOrderMask").popup();
+        return false;
+    });
+
+
+  
+    $("#submitBtn").on('click', function () {
+        $("#formRemarksMask").popup();
+    });
+    $("#finishBtn").on('click', function () {
+        $("#formSolutionMask").popup();
+    });
+    $("#deviceBtn").on('click', function () {
+        GetCustomerDevice(detailData.T_CustomerId, detailData.T_SerialNo);
+
+    });
+    function SubmitMsg() {
+        dd.ui.input.plain({
+            placeholder: '说点什么吧', //占位符
+            text: '', //默认填充文本
+            onSuccess: function (data) {
+                //onSuccess将在点击发送之后调用
+                /*{
+                    text: String
+                }*/
+            },
+            onFail: function () {
+
+            }
+        })
+    }
+</script>
+
+
+

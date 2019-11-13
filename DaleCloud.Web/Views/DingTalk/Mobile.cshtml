@@ -1,0 +1,310 @@
+﻿
+
+<html>
+<head>
+    <title>工作任务台</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="~/Content/weui/css/weui.min.css">
+    <link rel="stylesheet" href="~/Content/weui/css/jquery-weui.min.css">
+
+</head>
+<body ontouchstart="">
+
+    <div class="weui-tab">
+        <div class="weui-tab__bd">
+            <!--tab1-->
+            <div id="tab1" class="weui-tab__bd-item">
+                <header class='demos-header'>
+                    <h1 class="demos-title" style="text-align: center;color: green;">工具</h1>
+                </header>
+                <div class="weui-grids" style="background-color: #fff;">
+                    <a href="javascript:void(0)" data-url="" data-title="电池计算器" class="weui-grid " style="width: 33.3%;">
+                        <div class="weui-grid__icon">
+                            <img src="~/Content/weui/icon/icon_dialog_info.png" alt="" />
+                        </div>
+                        <p class="weui-grid__label">
+                            电池计算器
+                        </p>
+                    </a>
+                    <a href="javascript:void(0)" data-url="/WeixinApp/Tools/CaliErrorCalculator" data-title="误差计算器" class="weui-grid " style="width: 33.3%;">
+                        <div class="weui-grid__icon">
+                            <img src="~/Content/weui/icon/icon_swap.png" alt="" />
+                        </div>
+                        <p class="weui-grid__label">
+                            误差计算器
+                        </p>
+                    </a>
+                    <a href="javascript:void(0)" data-url="*" data-title="压力温度" class="weui-grid " style="width: 33.3%;">
+                        <div class="weui-grid__icon">
+                            <img src="~/Content/weui/icon/icon_forwarded.png" alt="" />
+                        </div>
+                        <p class="weui-grid__label">
+                            压力温度转换
+                        </p>
+                    </a>
+
+                </div>
+            </div>
+            <!--tab2-->
+            <div id="tab2" class="weui-tab__bd-item weui-tab__bd-item--active">
+                <header class='demos-header'>
+                    <h1 class="demos-title" style="text-align: center;color: green;">工作台</h1>
+                </header>
+                <div class="weui-grids" style="background-color: #fff;">
+                    <a href="javascript:void(0)" data-url="/CustomerManage/Customer/AppForm" data-title="客户登记" class="weui-grid " style="width: 33.3%;">
+                        <div class="weui-grid__icon">
+                            <img src="~/Content/weui/icon/icon_dialog_info.png" alt="" />
+                        </div>
+                        <p class="weui-grid__label">
+                            客户登记
+                        </p>
+                    </a>
+                    <a href="javascript:void(0)" data-url="/CustomerManage/VisitingClients/AppIndex" data-title="客户拜访" class="weui-grid " style="width: 33.3%;">
+                        <div class="weui-grid__icon">
+                            <img src="~/Content/weui/icon/icon_swap.png" alt="" />
+                        </div>
+                        <p class="weui-grid__label">
+                            客户拜访
+                        </p>
+                    </a>
+                    <a href="javascript:void(0)" data-url="/CustomerManage/Complaints/AppIndex" data-title="客户投诉" class="weui-grid " style="width: 33.3%;">
+                        <div class="weui-grid__icon">
+                            <img src="~/Content/weui/icon/icon_forwarded.png" alt="" />
+                        </div>
+                        <p class="weui-grid__label">
+                            客户投诉
+                        </p>
+                    </a>
+                    <a href="javascript:void(0)" data-url="/ServiceManage/MyOrder/AppOrderList" data-title="售后工单" class="weui-grid " style="width: 33.3%;">
+                        <div class="weui-grid__icon">
+                            <img src="~/Content/weui/icon/icon_swap.png" alt="" />
+                        </div>
+                        <p class="weui-grid__label">
+                            售后登记
+                        </p>
+                    </a>
+                    <a href="javascript:(0)" data-url="/ProductManage/ProjectPlan/AppIndex" data-title="生产任务" class="weui-grid " style="width: 33.3%;">
+                        <div class="weui-grid__icon">
+                            <img src="~/Content/weui/icon/icon_swap.png" alt="" />
+                        </div>
+                        <p class="weui-grid__label">
+                            生产任务
+                        </p>
+                    </a>
+                    <a href="javascript:(0)" data-url="/ProjectManage/RdProjectTask/AppIndex" data-title="研发任务" class="weui-grid " style="width: 33.3%;">
+                        <div class="weui-grid__icon">
+                            <img src="~/Content/weui/icon/icon_swap.png" alt="" />
+                        </div>
+                        <p class="weui-grid__label">
+                            研发任务
+                        </p>
+                    </a>
+                    <a href="javascript:(0)" data-url="/KnowledgeManage/KnowledgeBase/AppCenter" data-title="产品知识库" class="weui-grid " style="width: 33.3%;">
+                        <div class="weui-grid__icon">
+                            <img src="~/Content/weui/icon/icon_swap.png" alt="" />
+                        </div>
+                        <p class="weui-grid__label">
+                            产品知识库
+                        </p>
+                    </a>
+                    <a href="javascript:void(0)" class="weui-grid " data-url="/ProductManage/ProductDevice/AppIndex" data-title="产品库" style="width: 33.3%;">
+                        <div class="weui-grid__icon">
+                            <img src="~/Content/weui/icon/icon_place.png" alt="" />
+                        </div>
+                        <p class="weui-grid__label">
+                            产品库
+                        </p>
+                    </a>
+                    <a href="javascript:void(0)" data-url="/OaManage/Lunch/OrderLunch" data-title="午餐打卡" class="weui-grid " style="width: 33.3%;">
+                        <div class="weui-grid__icon">
+                            <img src="~/Content/weui/icon/icon_food.png" alt="" />
+                        </div>
+                        <p class="weui-grid__label">
+                            吃饭打卡
+                        </p>
+                    </a>
+                    <a href="javascript:void(0)" data-url="/SysBizSetManage/BizRemindSet/MyRemidList" data-title="我的提醒" class="weui-grid " style="width: 33.3%;">
+                        <div class="weui-grid__icon">
+                            <img src="~/Content/weui/icon/icon_alarm.png" alt="" />
+                        </div>
+                        <p class="weui-grid__label">
+                            我的提醒
+                        </p>
+                    </a>
+                    <a href="javascript:void(0)" data-url="/ProductManage/ProductLicence/AppIndex" data-title="产品授权" class="weui-grid " style="width: 33.3%;">
+                        <div class="weui-grid__icon">
+                            <img src="~/Content/weui/icon/icon_alarm.png" alt="" />
+                        </div>
+                        <p class="weui-grid__label">
+                            产品授权
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <!--tab3-->
+            <div id="tab3" class="weui-tab__bd-item">
+                <div class="weui-flex " style="background-color: #01A9DA;padding: 6px;">
+                    <a href="#">
+                        <div style="margin: 5px 5px; width: 80px; height: 80px; border-radius: 80px; overflow: hidden; background-color: #0094ff; float: left; border: solid 2px #63E9F3;">
+                            <img id="UserAvatar" src="~/Content/img/samples/scarlet-159.png" style="margin: 0; width: 110px; height: 100%;" />
+                        </div>
+                        <div style="margin: 6px 10px; color: white; float: left;">
+                            <h3 id="UserName"></h3>
+                            <div class="weui-flex"><span id=""></span></div>
+                            <div class="weui-flex" style="color: orangered;"></div>
+                        </div>
+                    </a>
+                </div>
+                <div style="height:455px;">
+                    <!--start业务-->
+                    <div class="weui-cells__title">业务</div>
+                    <div class="weui-cells">
+                        <a class="weui-cell weui-cell_access" href="javascript:void(0)" data-url="/ProductManage/ProjectPlan/AppIndex" data-title="生产任务">
+                            <div class="weui-cell__hd">
+                                <img src="~/Content/weui/icon/icon_subject.png" alt="" style="width: 20px; margin-right: 5px; display: block" />
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>我的任务</p>
+                            </div>
+                            <div class="weui-cell__ft"></div>
+                        </a>
+                        <a class="weui-cell weui-cell_access" href="javascript:void(0)" data-url="/ServiceManage/MyOrder/AppOrderList" data-title="我的工单">
+                            <div class="weui-cell__hd">
+                                <img src="~/Content/weui/icon/icon_toc.png" alt="" style="width: 20px; margin-right: 5px; display: block" />
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>我的工单</p>
+                            </div>
+                            <div class="weui-cell__ft"></div>
+                        </a>
+                        <a class="weui-cell weui-cell_access" href="javascript:void(0)" data-url="/CustomerManage/Customer/AppList" data-title="我的客户">
+                            <div class="weui-cell__hd">
+                                <img src="~/Content/weui/icon/icon_alarm.png" alt="" style="width: 20px; margin-right: 5px; display: block" />
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>我的客户</p>
+                            </div>
+                            <div class="weui-cell__ft"></div>
+                        </a>
+                        <a class="weui-cell weui-cell_access" href="javascript:void(0)" data-url="" data-title="">
+                            <div class="weui-cell__hd">
+                                <img src="~/Content/weui/icon/icon_order.net.png" alt="" style="width: 20px; margin-right: 5px; display: block" />
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>我的记录</p>
+                            </div>
+                            <div class="weui-cell__ft"></div>
+                        </a>
+                    </div>
+                    <!--end订单-->
+                    <!--start更多功能-->
+                    <div class="weui-cells__title"></div>
+                    <div class="weui-cells">
+                        <a class="weui-cell weui-cell_access" href="javascript:void(0)" data-url="" data-title="">
+                            <div class="weui-cell__hd">
+                                <img src="~/Content/weui/icon/icon_plus_point.png" alt="" style="width: 20px; margin-right: 5px; display: block">
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>巡检</p>
+                            </div>
+                            <div class="weui-cell__ft orangered small-font"></div>
+                        </a>
+                        <a class="weui-cell weui-cell_access" href="javascript:void(0)" data-url="" data-title="">
+                            <div class="weui-cell__hd">
+                                <img src="~/Content/weui/icon/icon_share_me.png" alt="" style="width: 20px; margin-right: 5px; display: block">
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>其他</p>
+                            </div>
+                            <div class="weui-cell__ft  orangered small-font"></div>
+                        </a>
+                        <a class="weui-cell weui-cell_access" href="javascript:void(0)" data-url="" data-title="">
+                            <div class="weui-cell__hd">
+                                <img src="~/Content/weui/icon/icon_set.png" alt="" style="width: 20px; margin-right: 5px; display: block">
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>设置</p>
+                            </div>
+                            <div class="weui-cell__ft  orangered small-font"></div>
+                        </a>
+                    </div>
+                    <!--end更多功能-->
+                </div>
+            </div>
+
+        </div>
+        <!--start底部菜单-->
+        <div class="weui-tabbar">
+            <a href="#tab1" class="weui-tabbar__item">
+                @*<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>*@
+                <div class="weui-tabbar__icon">
+                    <img src="~/Content/weui/images/icon_nav_button.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">工具</p>
+            </a>
+
+            <a href="#tab2" class="weui-tabbar__item weui-bar__item--on">
+                <div class="weui-tabbar__icon">
+                    <img src="~/Content/weui/images/icon_nav_article.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">业务</p>
+            </a>
+            <a href="#tab3" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img src="~/Content/weui/images/icon_nav_cell.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">我的</p>
+            </a>
+        </div>
+        <!--end底部菜单-->
+    </div>
+    <script src="~/Content/weui/js/jquery-2.1.4.js"></script>
+    <script src="~/Content/weui/js/fastclick.js"></script>
+    <script>
+        $(function () {
+            FastClick.attach(document.body);
+        });
+    </script>
+    <script src="~/Content/weui/js/jquery-weui.min.js"></script>
+    <script src="~/Content/weui/js/iTemplate.js"></script>
+    <script src="~/Content/weui/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/dingtalk-jsapi/2.6.0/dingtalk.open.js"></script>
+    @*<script src="~/Content/dingtalk/js/framework-bizdata.js"></script>*@
+    <script src="~/Content/js/dingtalk/dingtalkinit.js?v=201906011"></script>
+    <script>
+        var userInfo = '';
+        $(function () {
+            CheckUserLogin(function (user) {
+                userInfo = user;
+
+                console.log(user);
+            });
+        })
+        $(document).ready(function () {
+            $("#UserAvatar").attr('src', userInfo.Avatar)
+            $("#UserName").text(userInfo.UserName);
+        });
+
+        $('.weui-grid').on("click", function () {
+            var url = this.getAttribute("data-url");
+            var title = this.getAttribute("data-title");
+            if (url != "") {
+                $.goToPage(url, title);
+            }
+        });
+
+        $('.weui-cell').on("click", function () {
+            var url = this.getAttribute("data-url");
+            var title = this.getAttribute("data-title");
+            if (url != "") {
+                $.goToPage(url, title);
+            }
+        });
+    </script>
+
+
+</body>
+</html>

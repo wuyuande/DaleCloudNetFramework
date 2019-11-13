@@ -1,0 +1,234 @@
+﻿@{
+    ViewBag.Title = "我的资料";
+    Layout = "~/Views/Shared/WeixinApp/_Form.cshtml";
+    Html.AntiForgeryToken();
+}
+
+    <div id="detailform">
+        <form id="form1"> 
+            <div class="weui-cells_form">
+                <div class="weui-cell" style="background-color: #fff;">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">客户名称</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="T_FullName" name="T_FullName" maxlength="50" placeholder="输入客户全称" />
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell" style="background-color: #fff;">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">客户类型</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="T_CustType" name="T_CustType" />
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell" style="background-color: #fff;">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">负责人</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="T_Leader" name="T_Leader" placeholder="输入客户联系人" />
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell" style="background-color: #fff;">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">联系电话</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="T_LdMobile" name="T_LdMobile" placeholder="输入联系电话" >
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell" style="background-color: #fff;">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">联系人</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="T_Linkman" name="T_Linkman"  placeholder="选填"/>
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell" style="background-color: #fff;">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">联系电话</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="T_LdMobile" name="T_LdMobile" placeholder="选填" >
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell" style="background-color: #fff;">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">联系QQ</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="T_QQ" name="T_QQ" placeholder="选填">
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell" style="background-color: #fff;">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">微信号</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="T_Weixin" name="T_Weixin" placeholder="选填">
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cell" style="background-color: #fff;">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">联系地址</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="T_Address" name="T_Address" placeholder="选填">
+                    </div>
+                    <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+                </div>
+                <div class="weui-cells__title">客户备注</div>
+                <div class="weui-cells">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <textarea id="T_Remark" name="T_Remark" class="weui-textarea" placeholder="输入更多描述，诸如：客户意需求等" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                <input type="hidden" id="T_UserId" name="T_UserId" />
+                <input type="hidden" id="T_UserName" name="T_UserName" />
+                <input type="hidden" id="T_SalesUserId" name="T_SalesUserId" />
+                <input type="hidden" id="T_State" name="T_State" value="false" />
+                <a id="formSubmitBtn" href="javascript:" class="weui-btn weui-btn_primary">提交保存</a>
+               
+            </div>
+        </form>
+    </div>
+   
+    <div class="weui-footer">
+        <p class="weui-footer__text"></p>
+    </div>
+
+    <script>
+        $(function () {
+            FastClick.attach(document.body);
+        });
+</script>
+<script src="~/Content/weui/js/jquery-weui.min.js"></script>
+<script src="~/Content/weui/js/weui.min.js"></script>
+<script src="~/Content/weui/js/weui.expand.js?v=1.0.1"></script>
+<script src="~/Content/js/framework-bizdata.js"></script>
+<script src="~/Content/js/dingtalk/dingtalkinit.js"></script>
+<script>
+    var userId;
+    var userInfo = [];
+    var keyValue ='';//= $.request("keyValue");
+    dd.ready(function () {
+        CheckUserLogin(function (user) {
+            //alert(JSON.stringify(user));
+            userId = user.UserId;
+            $("#T_UserId").val(user.UserId);
+            $("#T_UserName").val(user.UserName);
+            $("#T_SalesUserId").val(user.UserId);
+            console.log(user);
+        });
+        initControl();
+
+        function closePage() {
+            dd.biz.navigation.close({
+                onSuccess: function (result) {
+                    /*result结构
+                    {}
+                    */
+                },
+                onFail: function (err) { }
+            })
+            return false;
+        }
+    });
+
+    function initControl() {
+
+        $("#T_CustType").on('click', function () {
+            var items=[
+                {
+                    key: "个人客户",
+                    value: "个人客户",
+                },
+                {
+                    key: "检测机构",
+                    value: "检测机构",
+                },
+                {
+                    key: "燃气公司",
+                    value: "燃气公司",
+                },
+                {
+                    key: "燃气表厂",
+                    value: "燃气表厂",
+                }
+            ]
+            var obj = $(this);
+            dd.biz.util.chosen({
+                source: items,
+                selectedKey: items[0].key, // 默认选中的key
+                onSuccess: function (result) {
+                    //onSuccess将在点击完成之后回调
+                    /*
+                    {
+                        key: '选项2',
+                        value: '234'
+                    }
+                    */
+                    obj.val(result.key);
+                },
+                onFail: function (err) { }
+            })
+        });
+    }
+    
+</script>
+
+
+<script>
+       
+    /*提交*/
+    $("#formSubmitBtn").click(function () {
+        $.submitForm({
+            url: "/CustomerManage/Customer/SubmitForm?keyValue=" + keyValue,
+            param: $("#form1").serialize(),
+            success: function () {
+                if (data.state == 'success') {
+                    dd.device.notification.alert({
+                        message: "提交成功",
+                        title: "提示",//可传空
+                        buttonName: "好的",
+                        onSuccess: function () {
+                            closePage();
+                        },
+                        onFail: function (err) { }
+                    });
+                } else {
+                    dd.device.notification.toast({
+                        icon: 'error',
+                        text: data.message,
+                        onSuccess: function (result) {
+
+                        },
+                        onFail: function (err) { }
+                    })
+                }
+            }
+        })
+      
+        return false;
+    });
+        
+    
+</script>
+
+
+

@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+    $(function () {
+        gridList();
+    })
+    function gridList() {
+        var queryJson = {
+            keyword: $("#txt_keyword").val(),
+            timeType: $('#time_horizon').combobox('getValue')
+        }
+        $('#dg').datagrid({
+            url: '/SystemSecurity/Log/GetGridJson',
+            toolbar: '#toolbar',
+            hideColumn: "F_Id",
+            autoRowHeight: false,
+            nowrap: true,
+            singleSelect: true,
+            method: 'get',
+            pagination: true,
+            pageSize: 20,
+            queryParams: {
+                queryJson: JSON.stringify(queryJson)
+            },
+            columns: [[
+                { field: 'F_Id', hidden: true },
+                {
+                    field: 'F_Date', title: '日期', width: 140, align: 'center'
+                },
+                { field: 'F_Account', title: '账户', width: 100, align: 'center' },
+                { field: 'F_NickName', title: '姓名', width: 100, align: 'center' },
+                { field: 'F_ModuleName', title: '操作菜单', width: 100, align: 'center' },
+                {
+                    field: 'F_Type', title: '操作类型', width: 100, align: 'right',
+                    formatter: function (value, row, index) {
+                        return top.clients.dataItems["DbLogType"][value] == undefined ? "" : top.clients.dataItems["DbLogType"][value]
+                    }
+                },
+                {
+                    field: 'F_IPAddress', title: 'IP地址', width: 230, align: 'right',
+                    formatter: function (value, row, index) {
+                        return value + ";" + row.F_IPAddressName;
+                    }
+                },
+                { field: 'F_Description', title: '备注', width: 300, align: 'right' }
+            ]]
+        });
+
+        $("#btn_search").click(function () {
+            var queryJson = {
+                keyword: $("#txt_keyword").val(),
+                timeType: $('#time_horizon').combobox('getValue')
+            }
+            $('#dg').datagrid('load', { queryJson: JSON.stringify(queryJson) });
+        });
+    }
+
+
+    function btn_removelog() {
+        $.modalOpen({
+            id: "removelog",
+            title: "清空日志",
+            url: "/SystemSecurity/Log/RemoveLog",
+            width: "400px",
+            height: "180px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+</script>
+
+
+
+<div class="gridPanel" style="height:100%;">
+    <div id="toolbar" style="padding:2px 5px;">
+        <div class="dcui-btn-area">
+            <a href="#" id="NF-removelog" authorize="yes" class="dcui-btn dcui-btn-red" iconCls="icon-remove" plain="true" onclick="btn_removelog()"><i class="fa fa-trash"></i>清空日志</a>
+        </div>
+        <script>$('#tb').authorizeButton()</script>
+        <div class="dcui-search-area">
+            日期：
+            <select class="easyui-combobox" id="time_horizon" name="time_horizon" style="width:80px;">
+                <option value="1">今天</option>
+                <option value="2" selected>近7天</option>
+                <option value="3">近1个月</option>
+                <option value="4">近2个月</option>
+                </select>
+            关键字: <input class="easyui-textbox" style="width:110px" id="txt_keyword" placeholder="请输入要查询关键字">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-search" id="btn_search">查询</a>
+        </div>
+    </div>
+
+    <table id="dg" class="easyui-datagrid" style="width:100%;min-height:600px;height:100%;"></table>
+</div>

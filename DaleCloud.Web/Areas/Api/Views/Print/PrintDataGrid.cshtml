@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script src="~/Content/js/jqprint/jquery.jqprint-0.3.js"></script>
+<link media="print" href="~/Content/js/jqprint/jquery.jqprint.css" rel="stylesheet" />
+<script>
+    var title = $.request("html");
+    $(function () {
+        //top.frames["Form"].getIcon(data);
+        var html = $.currentWindow().getPrintHtml();
+        $("#print").html(html);
+    })
+    function btn_print() {
+        $("#print").jqprint();
+    }
+</script>
+<style>
+    .print-box {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #ddd;
+    box-shadow: rgb(189, 189, 189) 0px 0px 10px;
+    background: #fff;
+    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin-top: 65px;
+    padding-bottom: 0px;
+}
+</style>
+<div style="position: absolute; top: 12px; right: 8px;">
+    <a class="btn btn-default " onclick="btn_print()"><i class="fa fa-print" style="margin-right: 5px; font-size: 13px;"></i>直接打印</a>
+</div>
+<div class="print-box">
+    <div id="print">
+       
+    </div>
+</div>

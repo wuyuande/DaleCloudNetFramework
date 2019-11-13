@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "投诉表扬";
+    Layout = "~/Views/Shared/WeixinApp/_Form.cshtml";
+}
+
+<header class='header'>
+    <h1 class="header-title">提交投诉/表扬</h1>
+</header>
+<div id="form">
+    <form id="form1">
+        <div class="weui-cells_form" style="background-color: #fff;">
+            <div class="weui-cell ">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">内容标题</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input type="text" class="weui-input" id="T_Title" name="T_Title" placeholder="必填" />
+                </div>
+                <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">表单类型</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" id="T_Type" name="T_Type">
+                        <option selected value="投诉">投诉</option>
+                        <option value="表扬">表扬</option>
+                    </select>
+                </div>
+                <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">被投诉/表扬人</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" id="T_Respondent" name="T_Respondent" maxlength="20" placeholder="必填">
+                </div>
+                <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">所在单位</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" id="T_CustomerName" name="T_CustomerName" maxlength="20" placeholder="">
+                </div>
+                <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">联系人</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" id="T_Linkman" name="T_Linkman" maxlength="18" placeholder="">
+                </div>
+                <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">联系方式</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="tel" id="T_Mobile" name="T_Mobile" required pattern="^\d{11}$" maxlength="11" placeholder="输入手机号" >
+                </div>
+                <div class="weui-cell__ft"><i class="weui-icon-warn"></i></div>
+            </div>
+            <div class="weui-cells__title">具体内容</div>
+            <div class="weui-cells">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <textarea id="T_Content" name="T_Content" class="weui-textarea" placeholder="请输入更多描述" rows="2"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="weui-btn-area">
+            <input type="hidden" id="T_CustomerId" name="T_CustomerId" />
+            <input type="hidden" id="T_OpenId" name="T_OpenId" />
+            <a id="formSubmitBtn" href="javascript:" class="weui-btn weui-btn_primary">提交</a>
+        </div>
+    </form>
+</div>
+<div class="weui-footer">
+    <p class="weui-footer__text"></p>
+</div>
+
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script src="~/Content/weui/js/jquery-weui.min.js"></script>
+<script src="~/Content/weui/js/weui.min.js"></script>
+<script src="~/Content/weui/js/weui.expand.js?t=2"></script>
+<script>
+    var detailData = [];
+    var openid = $.cookie('openid');
+    var customerId = $.getQueryString("customerId");
+    var keyValue = $.getQueryString("keyValue");
+    $(document).ready(function () {
+        $("#T_CustomerId").val(customerId);
+        $("#T_OpenId").val(openid);
+    });
+
+    $("#formSubmitBtn").on('click', function () {
+        if (!$("#T_OpenId").val()) {
+            $.toptip('表单来源不正确，请重新进入表单');
+            return;
+        }
+        var mobile = $("#T_Mobile").val();
+        if (!mobile || !/1[3|4|5|7|8]\d{9}/.test(mobile)) {
+            $.toptip('请输入正确手机号');
+            return;
+        }
+        if (!$("#T_Linkman").val()) {
+            $.toptip('请输入姓名');
+            return;
+        }
+        if (!$("#T_Title").val()) {
+            $.toptip('请输入建议意见主题');
+            return;
+        }
+        if (!$("#T_Content").val()) {
+            $.toptip('请输入描述内容');
+            return;
+        }
+       
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/WeixinApp/Complaints/SubmitForm",
+            data: $('#form1').serialize(),
+            beforeSend: function (XMLHttpRequest) {
+                $.showLoading("正在提交");
+            },
+            success: function (data) {
+                $.hideLoading();
+                if (data.state == "success") {
+                    $.alert(data.message, "提示！", function () {
+                        $.redirectTo("Index", customerId, "");
+                    });
+                } else {
+                    $.toptip(data.message, 'warning');
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.hideLoading();
+                $.alert("提交出错，请重试！", "警告！");
+            }
+        });
+        return false;
+    });
+</script>
+

@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html style="overflow: hidden;">
+<head>
+    <title>EIMS企业信息管理系统-宜宾机电一体化研究所</title>
+    <link href="~/Content/css/framework-font.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery/jquery-2.1.1.min.js"></script>
+    <script src="~/Content/js/bootstrap/bootstrap.js"></script>
+    <link href="~/Content/js/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/js/dialog/dialog.js"></script>
+    <script src="~/Content/js/cookie/jquery.cookie.js"></script>
+    <link href="~/Content/css/framework-theme.css" rel="stylesheet" />
+    <script src="~/Content/js/framework-ui.js"></script>
+    <script src="~/Content/js/framework-clientdata.js"></script>
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/dingtalk-jsapi/2.6.0/dingtalk.open.js"></script>
+    <script src="~/Content/js/dingtalk/dingtalkinit.js?v=201906001"></script>
+</head>
+<body style="overflow: hidden;">
+    <div id="ajax-loader" style="cursor: progress; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; background: #fff; z-index: 10000; overflow: hidden;">
+        <img src="~/Content/img/ajax-loader.gif" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto;" />
+    </div>
+    <div id="theme-wrapper">
+        <header class="navbar" id="header-navbar">
+            <div class="container" style="padding-right: 0px;">
+                <a href="#" id="logo" class="navbar-brand">EIMS管理系统</a>
+                <div class="clearfix">
+                    <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs">
+                        <ul class="nav navbar-nav pull-left">
+                            <li>
+                                <a class="btn" id="make-small-nav"><i class="fa fa-bars"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-no-collapse pull-right" id="header-nav">
+                        <ul class="nav navbar-nav pull-right">
+                            <li class="mobile-search">
+                                <a class="btn">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                                <div class="drowdown-search">
+                                    <form role="search">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Search...">
+                                            <i class="fa fa-search nav-search-icon"></i>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="dropdown hidden-xs">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-tasks"></i>
+                                    <span class="count">5</span>
+                                </a>
+                            </li>
+                            <li class="dropdown hidden-xs">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-bell"></i>
+                                    <span class="count">8</span>
+                                </a>
+                            </li>
+
+                            <li class="dropdown hidden-xs">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="count">16</span>
+                                </a>
+                            </li>
+                            <li class="dropdown profile-dropdown">
+                                <a href="#" class="dropdown" data-toggle="dropdown">
+                                    <img id="UserAvatar" src="~/Content/img/samples/scarlet-159.png" alt="" />
+                                    <span class="hidden-xs" id="UserName">admin</span>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a class="menuItem" href="#"><i class="fa fa-user"></i>个人中心</a></li>
+                                    <li><a href="javascript:showmsg();"><i class="fa fa-inbox"></i>我的信箱</a></li>
+                                    <li><a href="javascript:havelunch();"><i class="fa fa-inbox"></i>午餐打卡</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div id="page-wrapper" class="container">
+            <div class="row">
+                <div id="nav-col">
+                    <section id="col-left" class="col-left-nano">
+                        <div id="col-left-inner" class="col-left-nano-content">
+                            <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav">
+                                <ul class="nav nav-pills nav-stacked">
+
+                                    <li class="nav-header hidden-sm hidden-xs">
+                                        常用菜单
+                                        <i class="fa fa-gear" style="color: #868b98; font-size: 12px; margin-top: -6px; position: absolute; right: 23px; top: 50%; cursor: pointer;"></i>
+                                    </li>
+                                    <li class="common">
+                                        <a href="javascript:Msg();">
+                                            <i class="fa fa-star-o"></i>
+                                            <span>联系人</span>
+                                        </a>
+                                    </li>
+                                    <li class="common">
+                                        <a href="#">
+                                            <i class="fa fa-star-o"></i>
+                                            <span>合同</span>
+                                        </a>
+                                    </li>
+                                    <li class="common">
+                                        <a href="maps.html">
+                                            <i class="fa fa-star-o"></i>
+                                            <span>产品</span>
+                                        </a>
+                                    </li>
+                                    <li class="common">
+                                        <a href="#">
+                                            <i class="fa fa-star-o"></i>
+                                            <span>客户</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div id="content-wrapper">
+                    <div class="content-iframe" style="background-color: #f9f9f9; overflow: hidden;">
+                        <div class="mainContent" id="content-main" style="margin: 10px; margin-bottom: 0px; padding: 0;">
+                            <iframe class="NFine_iframe" id="center" width="100%" height="100%" src="/Dingtalk/center" frameborder="0" data-id="/DingTalkPC/PCHome/center"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loadingPage" style="display: none;">
+        <div class="loading-shade"></div>
+        <div class="loading-content" onclick="$.loading(false)">数据加载中，请稍后…</div>
+    </div>
+    <script>
+        $(function () {
+            CheckUserLogin(function (user) {
+                $("#UserName").text(user.UserName);
+                $("#UserAvatar").attr('src', user.Avatar);
+                clients = $.clientsInit();
+                GetLoadNav();
+                $.nfinetab.init();
+            });
+        })
+        //$(document).ready(function () {
+        //    InitDingTalk(function (user) {
+        //        $("#UserName").text(user.UserName);
+        //        $("#UserAvatar").attr('src', user.Avatar);
+        //        clients = $.clientsInit();
+        //        GetLoadNav();
+        //        $.nfinetab.init();
+        //    });
+
+        //});
+    </script>
+
+    <script src="~/Content/dingtalk/js/index.js?v=201906011"></script>
+    <script src="~/Content/dingtalk/js/indextab.js?v=201906011"></script>
+    <script src="~/Content/js/loading/pace.min.js"></script>
+
+
+    <script>
+
+        function havelunch() {
+            dd.biz.util.openModal({
+                //size: 'middle',  // modal的尺寸
+                url: domainUrl + '/OaManage/Lunch/OrderLunch', //打开modal的内容的url
+                title: '就餐打卡', //顶部标题
+                onSuccess: function (result) {
+                    /*
+                         调用biz.navigation.quit接口进入onSuccess, result为调用biz.navigation.quit传入的数值
+                     */
+                },
+                onFail: function () {
+                    /*
+                        tips:点击左上角关闭按钮会进入onFail
+                     */
+                }
+            })
+        }
+
+        function openModal(title, url, func) {
+            dd.biz.util.openModal({
+                //size: 'middle',  // modal的尺寸
+                url: domainUrl + url, //打开modal的内容的url
+                title: title, //顶部标题
+                onSuccess: function (result) {
+                    if (typeof (func) == "function") {
+                        func();
+                    }
+                },
+                onFail: function () {
+                    /*
+                        tips:点击左上角关闭按钮会进入onFail
+                     */
+                }
+            })
+        }
+
+        function openModal(title, url, func) {
+            dd.biz.util.openModal({
+                size: 'middle',  // modal的尺寸
+                url: domainUrl + url, //打开modal的内容的url
+                title: title, //顶部标题
+                onSuccess: function (result) {
+                    if (typeof (func) == "function") {
+                        func(result);
+                    }
+                },
+                onFail: function () {
+                    /*
+                        tips:点击左上角关闭按钮会进入onFail
+                     */
+                }
+            })
+
+
+        }
+        function openSlidePanel(title, url, func) {
+            dd.biz.util.openSlidePanel({
+                url: domainUrl + url, //打开侧边栏的url
+                title: title, //侧边栏顶部标题
+                onSuccess: function (result) {
+                    if (typeof (func) == "function") {
+                        func(result);
+                    }
+                },
+                onFail: function () {
+                    //alert("sasa")
+                }
+            })
+        }
+        //
+        function ChooseContact(users) {
+            DingTalkPC.biz.contact.choose({
+                multiple: true, //是否多选： true多选 false单选； 默认true
+                users: ['10001', '10002'], //默认选中的用户列表，员工userid；成功回调中应包含该信息
+                corpId: dingTalkAppConfig.CorpId, //企业id
+                max: 50, //人数限制，当multiple为true才生效，可选范围1-1500
+                onSuccess: function(data) {
+                    /* data结构
+                      [{
+                        "name": "张三", //姓名
+                        "avatar": "http://g.alicdn.com/avatar/zhangsan.png" //头像图片url，可能为空
+                        "emplId": '0573', //员工userid
+                       },
+                       ...
+                      ]
+                    */
+                    for (var i = 0; i < data.length; i++) {
+                        users = users + data[i].emplId + ',';
+                    }
+                    return users;
+                },
+                onFail : function(err) {}
+            });
+        }
+    </script>
+</body>
+</html>

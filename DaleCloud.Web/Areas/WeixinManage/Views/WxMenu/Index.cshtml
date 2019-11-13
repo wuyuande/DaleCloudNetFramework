@@ -1,0 +1,647 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = "";
+    //keyValue = $.request("keyValue");
+    $(function () {
+        $.ajax({
+            url: "/WeixinManage/WxMenu/GetMenu",
+            data: { keyValue: keyValue },
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                if (data.state == "success") {
+                    $("#form1").formSerialize(data.data);
+                } else {
+                    $.modalAlert(data.message, "warning")
+                }
+            }
+        });
+    });
+
+    function btn_createMenu() {
+        if (!$('#form1').formValid()) {
+            return false;
+        }
+        $.submitForm({
+            url: "/WeixinManage/WxMenu/SubmitForm",
+            param: $("#form1").formSerialize(),
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+
+    function btn_RefreshAccessToken() {
+        
+        $.submitPost({
+            title: "是否要刷新AccessToken？",
+            url: "/WeixinManage/WxMenu/RefreshAccessToken",
+            success: function () {
+               
+            }
+        })
+    }
+</script>
+<style type="text/css">
+    thead td {
+        font-weight: bolder;
+        text-align: center;
+        font-size: 18px;
+        height: 30px;
+    }
+
+    tbody tr td label {
+        width: 100px;
+    }
+
+    .txtNameValue, .txtNameKey, .txtNameUrl {
+        padding: 1px 2px;
+        line-height: 20px;
+        border: 1px solid #d4d4d4;
+        background: #fff;
+        vertical-align: middle;
+        color: #333;
+        font-size: 100%;
+        margin: 2px 0px 2px;
+    }
+
+    .txtNameValue {
+        width: 150px;
+    }
+
+    .txtNameKey {
+        width: 150px;
+    }
+
+    .txtNameUrl {
+        width: 200px;
+        margin-right: 10px;
+    }
+
+    .form_table td {
+        border: 1px solid #e1e1e1;
+    }
+
+    .innertable td {
+        border: 0px;
+    }
+
+    .td_shengru {
+        text-align: center;
+        width: 120px;
+    }
+
+    .td_titleName {
+        width: 75px;
+        text-align: center;
+    }
+
+    .chu {
+        font-weight: bolder;
+    }
+
+        
+       
+
+    </style>
+<form id="form1">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">设置自定义菜单</a></li>
+        <li><a href="#tab2" data-toggle="tab" >扩展信息</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="tab1" class="tab-pane fade in active" style="padding-top: 20px; margin-right: 20px;">
+            <table class="form_table">
+                <thead>
+                    <tr>
+                        <td class="td_shengru">深度</td>
+                        <td style="text-align: center;">第一列</td>
+                        <td style="text-align: center;">第二列</td>
+                        <td style="text-align: center;">第三列</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="td_shengru">一级菜单按钮</td>
+                        <td>
+
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Top1" type="text" id="Top1" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Top1Key" type="text" id="Top1Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Top1Url" type="text" id="Top1Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Top2" type="text" id="Top2" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Top2Key" type="text" id="Top2Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Top2Url" type="text" id="Top2Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Top3" type="text"  id="Top3" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Top3Key" type="text" id="Top3Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Top3Url" type="text" id="Top3Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            &nbsp;
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td_shengru">二级菜单No.1</td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Menu11" type="text" id="Menu11" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Menu11Key" type="text" id="Menu11Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Menu11Url" type="text" id="Menu11Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Menu21" type="text"  id="Menu21" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Menu21Key" type="text" id="Menu21Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Menu21Url" type="text"  id="Menu21Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Menu31" type="text" value="" id="Menu31" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Menu31Key" type="text" id="Menu31Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Menu31Url" type="text"  id="Menu31Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td_shengru">二级菜单No.2</td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Menu12" type="text"  id="Menu12" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Menu12Key" type="text" id="Menu12Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Menu12Url" type="text"  id="Menu12Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Menu22" type="text"  id="Menu22" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Menu22Key" type="text" id="Menu22Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Menu22Url" type="text"  id="Menu22Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Menu32" type="text"  id="Menu32" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Menu32Key" type="text" id="Menu32Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Menu32Url" type="text"  id="Menu32Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td_shengru">二级菜单No.3</td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Menu13" type="text"  id="Menu13" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Menu13Key" type="text" id="Menu13Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Menu13Url" type="text" id="Menu13Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Menu23" type="text" id="Menu23" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Menu23Key" type="text" id="Menu23Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Menu23Url" type="text" id="Menu23Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Menu33" type="text"  id="Menu33" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Menu33Key" type="text"  id="Menu33Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Menu33Url" type="text" id="Menu33Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td class="td_shengru">二级菜单No.4</td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Menu14" type="text" id="Menu14" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Menu14Key" type="text" id="Menu14Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Menu14Url" type="text" id="Menu14Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Menu24" type="text" id="Menu24" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Menu24Key" type="text" id="Menu24Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Menu24Url" type="text" id="Menu24Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Menu34" type="text" id="Menu34" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Menu34Key" type="text" id="Menu34Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Menu34Url" type="text" id="Menu34Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="td_shengru">二级菜单No.5</td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Menu15" type="text" id="Menu15" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Menu15Key" type="text" id="Menu15Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Menu15Url" type="text" id="Menu15Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Menu25" type="text" id="Menu25" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Menu25Key" type="text" id="Menu25Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Menu25Url" type="text" id="Menu25Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="innertable" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="td_titleName chu">名称：</td>
+                                        <td>
+                                            <input name="Menu35" type="text" id="Menu35" class="txtNameValue">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td_titleName">关键词:</td>
+                                        <td>
+                                            <input name="Menu35Key" type="text" id="Menu35Key" class="txtNameKey">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_titleName">链接:</td>
+                                        <td>
+                                            <input name="Menu35Url" type="text" id="Menu35Url" class="txtNameUrl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+            <div class="btn-group">
+                <a class="btn btn-primary" onclick="btn_createMenu()">生成自定义菜单</a>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-primary blue-bg" onclick="btn_add()">删除当前菜单</a>
+            </div>
+        </div>
+        <div id="tab2" class="tab-pane fade in " style="padding-top: 20px; margin-right: 20px; ">
+            <div style="padding-left: 20px; padding-bottom: 20px; line-height: 24px; font-size: 16px;">
+                <h3>使用说明及规则，请仔细阅读</h3>
+                <ul style="list-style-type: circle; padding-left: 20px;">
+
+                    <li style="list-style-type: circle;">（1）使用菜单需要成为“服务号”，或通过认证的“订阅号”，且开启了高级功能。到微信后台【高级功能 &gt; 开发模式】下获取AppId和AppSecret，并且将这2个值填写在微信帐号相应位置。</li>
+                    <li style="list-style-type: circle;">（2）一级菜单按钮个数为1-3个</li>
+                    <li style="list-style-type: circle;">（3）如果设置了二级菜单按钮个数为1-5个</li>
+                    <li style="list-style-type: circle;">（4）按钮描述，既按钮名字，不超过16个字节，子菜单不超过40个字节</li>
+                    <li style="list-style-type: circle;">（5）如果名称不填，此按钮将被忽略</li>
+                    <li style="list-style-type: circle;">（6）如果一级菜单为空，该列所有设置的二级菜单都会被忽略</li>
+                    <li style="list-style-type: circle;">（7）“关键词”对应自定义回复管理里的关键词,以及营销工具里每个活动的关键词</li>
+                    <li style="list-style-type: circle;">（8）“链接”为跳转到指定的页面。每个菜单“关键词”和“链接”只能填写一项，如果2个都填写，则按照“链接”跳转来设置</li>
+
+                    <li style="list-style-type: circle;">如果要快速看到微信上的菜单最新状态，需要重新关注，否则需要静静等待N小时</li>
+                    <li style="list-style-type: circle;">
+                        若仍有问题，请点击下面的按钮，更新Access_Token值【注：请慎用】<br>
+                       
+                        <div class="btn-group">
+                            <a class="btn btn-primary" onclick="btn_RefreshAccessToken()">更新Access_Token值</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</form>

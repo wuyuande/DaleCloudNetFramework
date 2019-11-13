@@ -1,0 +1,25 @@
+﻿/*******************************************************************************
+ * Copyright © 2018 DaleCloud 版权所有
+ * Author: DaleCloud
+ * Description: DaleCloud
+ * Website：
+*********************************************************************************/
+
+using DaleCloud.Entity.DingTalkManage;
+using System.Data.Entity.ModelConfiguration;
+
+namespace DaleCloud.Mapping.DingTalkManage 
+{
+	 	//DingTalk_MessageSendRecord
+		public class MessageSendRecordMap : EntityTypeConfiguration<MessageSendRecordEntity>
+	{
+   		     
+		public MessageSendRecordMap()
+        {
+            this.ToTable("DingTalk_MessageSendRecord");
+            this.HasKey(t => t.T_Id);
+        }
+   
+	}
+}
+

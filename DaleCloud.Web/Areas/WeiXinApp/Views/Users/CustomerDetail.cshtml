@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "单位资料";
+    Layout = "~/Views/Shared/WeixinApp/_Detail.cshtml";
+}
+
+
+<header>
+    <span class="user-name"></span>
+</header>
+
+<div class="weui-cells" style="margin-top:0;">
+    <!--工单详情-->
+    <div class="page-service-detail">
+        <div class="content">
+            <div class="aftermain" id="detail_content">
+
+            </div>
+            <script id="customer_template" type="text/html">
+                <div class="aftermain-info">
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">单位名称：</div><div class="aftermain-info-h2-desc">{{$data.T_FullName}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">送检单位：</div><div class="aftermain-info-h2-desc">{{$data.T_CaliName}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">联系人：</div><div class="aftermain-info-h2-desc">{{$data.T_Linkman}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">联系电话：</div><div class="aftermain-info-h2-desc">{{$data.T_Mobile}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">公司电话：</div><div class="aftermain-info-h2-desc"></div>{{$data.T_QQ}}</div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">业务员：</div><div class="aftermain-info-h2-desc">{{$data.T_SalesUserId}}</div></div>
+                    <div class="aftermain-info-h2"><div class="aftermain-info-h2-title">联系地址：</div><div class="aftermain-info-h2-desc">{{$data.T_Address}}</div></div>
+                </div>
+                <div class="aftermian-doubleline"></div>
+                <div class="aftermain-info">
+
+                </div>
+            </script>
+        </div>
+    </div>
+
+</div>
+<div class="weui-footer">
+    <p class="weui-footer__text"></p>
+</div>
+
+
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script src="~/Content/weui/js/jquery-weui.min.js"></script>
+<script src="~/Content/weui/js/weui.min.js"></script>
+<script src="~/Content/weui/js/weui.expand.js?t=2"></script>
+<script>
+
+    var detailData = [];
+    var openid = $.cookie('openid');
+    var customerId = $.getQueryString("customerId");
+    var keyValue = $.getQueryString("keyValue");
+    $(document).ready(function () {
+        GetOrder();
+    });
+
+    function GetOrder() {
+        var req = {
+            keyValue: customerId
+        };
+        $.ajaxGet({
+            data: req,
+            url: '/CustomerManage/Customer/GetDetailJson',
+            success: function (oObject) {
+                if (oObject.state != "success") {
+                    $.toptip(oObject.message, 'warning');
+                    $("#detail_content").html(oObject.message);
+                    return false;
+                }
+
+                detailData = oObject.result.data;
+                var htm = template("customer_template", detailData);
+                $("#detail_content").html(htm);
+            }
+        })
+    }
+
+</script>
+
+
+
