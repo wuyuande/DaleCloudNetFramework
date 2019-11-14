@@ -56,7 +56,7 @@ namespace DaleCloud.Application.DingTalk
         /// <param name="keyValue"></param>
         public void DeleteForm(string keyValue)
         {
-            service.Delete(t => t.uuid == keyValue);
+            service.Delete(t => t.uuId == keyValue);
         }
 
         /// <summary>

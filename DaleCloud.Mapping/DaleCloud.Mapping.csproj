@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseDataManage\BaseAttachMap.cs" />
+    <Compile Include="ArticleManage\BaseAttachMap.cs" />
     <Compile Include="DingTalkManage\DepartmentMap.cs" />
     <Compile Include="DingTalkManage\DingTalkAppConfigMap.cs" />
     <Compile Include="DingTalkManage\DingTalkCorpConfigMap.cs" />
@@ -71,14 +71,14 @@
     <Compile Include="SystemSecurity\DbBackupMap.cs" />
     <Compile Include="SystemSecurity\FilterIPMap.cs" />
     <Compile Include="SystemSecurity\LogMap.cs" />
-    <Compile Include="WeixinMPManage\WRequestBaseDataMap.cs" />
-    <Compile Include="WeixinMPManage\RequestRuleMap.cs" />
-    <Compile Include="WeixinMPManage\RequestRuleContentMap.cs" />
-    <Compile Include="WeixinMPManage\ResponseBaseDataMap.cs" />
-    <Compile Include="WeixinMPManage\TemplateMessageMap.cs" />
-    <Compile Include="WeixinMPManage\UsersMap.cs" />
-    <Compile Include="WeixinMPManage\WxAppConfigMap.cs" />
-    <Compile Include="WeixinMPManage\WxPropertyInfoMap.cs" />
+    <Compile Include="WeixinManage\WRequestBaseDataMap.cs" />
+    <Compile Include="WeixinManage\RequestRuleMap.cs" />
+    <Compile Include="WeixinManage\RequestRuleContentMap.cs" />
+    <Compile Include="WeixinManage\ResponseBaseDataMap.cs" />
+    <Compile Include="WeixinManage\TemplateMessageMap.cs" />
+    <Compile Include="WeixinManage\UsersMap.cs" />
+    <Compile Include="WeixinManage\WxAppConfigMap.cs" />
+    <Compile Include="WeixinManage\WxPropertyInfoMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DaleCloud.Domain\DaleCloud.Domain.csproj">

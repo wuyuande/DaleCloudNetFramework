@@ -14,7 +14,7 @@ namespace DaleCloud.Mapping.DingTalk
         public DingTalkAppConfigMap()
         {
             this.ToTable("DingTalk_AppConfig");
-            this.HasKey(t => t.T_AppCode);
+            this.HasKey(t => t.AppCode);
         }
     }
 }

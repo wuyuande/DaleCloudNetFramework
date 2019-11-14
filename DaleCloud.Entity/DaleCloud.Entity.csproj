@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseDataManage\BaseAttachEntity.cs" />
+    <Compile Include="ArticleManage\BaseAttachEntity.cs" />
     <Compile Include="DingTalkManage\DepartmentEntity.cs" />
     <Compile Include="DingTalkManage\DingTalkAppConfigEntity.cs" />
     <Compile Include="DingTalkManage\DingTalkCorpConfigEntity.cs" />
@@ -74,14 +74,14 @@
     <Compile Include="SystemSecurity\DbBackupEntity.cs" />
     <Compile Include="SystemSecurity\FilterIPEntity.cs" />
     <Compile Include="SystemSecurity\LogEntity.cs" />
-    <Compile Include="WeixinMPManage\RequestBaseDataEntity.cs" />
-    <Compile Include="WeixinMPManage\RequestRuleEntity.cs" />
-    <Compile Include="WeixinMPManage\RequestRuleContentEntity.cs" />
-    <Compile Include="WeixinMPManage\ResponseBaseDataEntity.cs" />
-    <Compile Include="WeixinMPManage\TemplateMessageEntity.cs" />
-    <Compile Include="WeixinMPManage\UsersEntity.cs" />
-    <Compile Include="WeixinMPManage\WxPropertyInfoEntity.cs" />
-    <Compile Include="WeixinMPManage\WxBaseConfigEntity.cs" />
+    <Compile Include="WeixinManage\RequestBaseDataEntity.cs" />
+    <Compile Include="WeixinManage\RequestRuleEntity.cs" />
+    <Compile Include="WeixinManage\RequestRuleContentEntity.cs" />
+    <Compile Include="WeixinManage\ResponseBaseDataEntity.cs" />
+    <Compile Include="WeixinManage\TemplateMessageEntity.cs" />
+    <Compile Include="WeixinManage\UsersEntity.cs" />
+    <Compile Include="WeixinManage\WxPropertyInfoEntity.cs" />
+    <Compile Include="WeixinManage\WxBaseConfigEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DaleCloud.Code\DaleCloud.Code.csproj">

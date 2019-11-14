@@ -16,8 +16,8 @@ namespace DaleCloud.Application.WeixinManage
 {
     public class WeixinRequestRuleApp
     {
-        private WeixinMP_RequestRuleRepository rlservice = new WeixinMP_RequestRuleRepository();
-        private WeixinMP_RequestRuleContentRepository rlcservice = new WeixinMP_RequestRuleContentRepository();
+        private RequestRuleRepository rlservice = new RequestRuleRepository();
+        private RequestRuleContentRepository rlcservice = new RequestRuleContentRepository();
         public List<RequestRuleEntity> GetList()
         {
             return rlservice.IQueryable().ToList();
@@ -55,7 +55,7 @@ namespace DaleCloud.Application.WeixinManage
         /// <returns></returns>
         public string GetRuleId(string keyValue)
         {
-            return rlservice.FindEntity(keyValue).T_Id;
+            return rlservice.FindEntity(keyValue).uuId;
         }
 
         /// <summary>
@@ -71,9 +71,9 @@ namespace DaleCloud.Application.WeixinManage
             RequestRuleEntity model= rlservice.FindEntity(keyValue);
             if (model != null)
             {
-                responseType = model.T_ResponseType;
+                responseType = model.ResponseType;
             }
-            return model.T_Id;
+            return model.uuId;
         }
 
 
@@ -92,22 +92,22 @@ namespace DaleCloud.Application.WeixinManage
             var expression = ExtLinq.True<RequestRuleEntity>();
             if (!string.IsNullOrEmpty(keywords))
             {
-                expression = expression.And(t => t.T_ReqestType.Contains("1"));
-                expression = expression.Or(t => t.T_ReqKeywords.Contains(keywords));
+                expression = expression.And(t => t.ReqestType.Contains("1"));
+                expression = expression.Or(t => t.ReqKeywords.Contains(keywords));
             }
-            list= rlservice.IQueryable(expression).OrderBy(t => t.T_CreateDate).ToList();
+            list= rlservice.IQueryable(expression).OrderBy(t => t.CreateDate).ToList();
             if (list!=null && list.Count > 0)
             {
-                responseType = list[0].T_ResponseType;
-                modelFunctionName = list[0].T_ModelFunctionName;
-                modelFunctionId = list[0].T_ModelFunctionId;
+                responseType = list[0].ResponseType;
+                modelFunctionName = list[0].ModelFunctionName;
+                modelFunctionId = list[0].ModelFunctionId;
             }else
             {
                 responseType = 0;
                 modelFunctionName = string.Empty;
                 modelFunctionId = 0;
             }
-            return list[0].T_Id;
+            return list[0].uuId;
         }
 
 
@@ -122,11 +122,11 @@ namespace DaleCloud.Application.WeixinManage
             
             RequestRuleContentEntity model =new RequestRuleContentEntity();
             var expression = ExtLinq.True<RequestRuleContentEntity>();
-            expression = expression.And(t => t.T_RId==rid);
-            model = rlcservice.IQueryable(expression).OrderBy(t => t.T_CreateDate).FirstOrDefault<RequestRuleContentEntity>();
+            expression = expression.And(t => t.RId==rid);
+            model = rlcservice.IQueryable(expression).OrderBy(t => t.CreateDate).FirstOrDefault<RequestRuleContentEntity>();
             if (model != null)
             {
-                return  model.T_RContent;
+                return  model.RContent;
             }
             return null;
         }
@@ -141,8 +141,8 @@ namespace DaleCloud.Application.WeixinManage
         {
             RequestRuleContentEntity model = new RequestRuleContentEntity();
             var expression = ExtLinq.True<RequestRuleContentEntity>();
-            expression = expression.And(t => t.T_RId == rid);
-            model = rlcservice.IQueryable(expression).OrderBy(t => t.T_CreateDate).FirstOrDefault<RequestRuleContentEntity>();
+            expression = expression.And(t => t.RId == rid);
+            model = rlcservice.IQueryable(expression).OrderBy(t => t.CreateDate).FirstOrDefault<RequestRuleContentEntity>();
             
             return model;
         }
@@ -156,8 +156,8 @@ namespace DaleCloud.Application.WeixinManage
         {
             IList<RequestRuleContentEntity> rcList = new List<RequestRuleContentEntity>();
             var expression = ExtLinq.True<RequestRuleContentEntity>();
-            expression = expression.And(t => t.T_RId == rid);
-            rcList = rlcservice.IQueryable(expression).OrderBy(t => t.T_CreateDate).ToList();
+            expression = expression.And(t => t.RId == rid);
+            rcList = rlcservice.IQueryable(expression).OrderBy(t => t.CreateDate).ToList();
 
             return rcList;
         }

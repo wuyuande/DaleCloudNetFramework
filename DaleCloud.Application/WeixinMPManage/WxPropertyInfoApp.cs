@@ -26,13 +26,13 @@ namespace DaleCloud.Application.WeixinManage
             var expression = ExtLinq.True<WxPropertyInfoEntity>();
             if (!string.IsNullOrEmpty(apiid))
             {
-                expression = expression.And(t => t.T_WxId.Equals(apiid));
+                expression = expression.And(t => t.WxId.Equals(apiid));
             }
             if (!string.IsNullOrEmpty(iName))
             {
-                expression = expression.And(t => t.T_IName.Equals(iName));
+                expression = expression.And(t => t.IName.Equals(iName));
             }
-            return service.IQueryable(expression).OrderBy(t => t.T_WxId).ToList();
+            return service.IQueryable(expression).OrderBy(t => t.WxId).ToList();
         }
         public WxPropertyInfoEntity GetForm(string keyValue)
         {
@@ -44,14 +44,14 @@ namespace DaleCloud.Application.WeixinManage
             try
             {
                 WxPropertyInfoEntity wxProperty = new WxPropertyInfoEntity();
-                wxProperty.T_IName = "access_token";
-                wxProperty.T_TypeId = 1;
-                wxProperty.T_TypeName = "base";
-                wxProperty.T_IContent = access_token;
-                wxProperty.T_ExpiresIn = 1200;
-                wxProperty.T_Count = 1;
-                wxProperty.T_WxId = apiid;
-                wxProperty.T_Status = true;
+                wxProperty.IName = "access_token";
+                wxProperty.TypeId = 1;
+                wxProperty.TypeName = "base";
+                wxProperty.IContent = access_token;
+                wxProperty.ExpiresIn = 1200;
+                wxProperty.Count = 1;
+                wxProperty.WxId = apiid;
+                wxProperty.Status = true;
                 wxProperty.Create();
                 service.Insert(wxProperty);
             }
@@ -63,7 +63,7 @@ namespace DaleCloud.Application.WeixinManage
 
         public bool Exists(string keyValue)
         {
-            WxPropertyInfoEntity entity = service.FindEntity(t => t.T_WxId == keyValue);
+            WxPropertyInfoEntity entity = service.FindEntity(t => t.WxId == keyValue);
             if (entity != null)
             {
                 return true;

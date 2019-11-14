@@ -6,6 +6,9 @@
     var keyValue = "";
     //keyValue = $.request("keyValue");
     $(function () {
+        getMenu();
+    });
+    function getMenu() {
         $.ajax({
             url: "/WeixinManage/WxMenu/GetMenu",
             data: { keyValue: keyValue },
@@ -19,8 +22,7 @@
                 }
             }
         });
-    });
-
+    }
     function btn_createMenu() {
         if (!$('#form1').formValid()) {
             return false;
@@ -29,7 +31,7 @@
             url: "/WeixinManage/WxMenu/SubmitForm",
             param: $("#form1").formSerialize(),
             success: function () {
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
+                getMenu();
             }
         })
     }

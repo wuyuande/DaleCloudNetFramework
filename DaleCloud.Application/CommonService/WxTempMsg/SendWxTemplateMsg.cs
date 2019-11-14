@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using DaleCloud.Code;
 using Senparc.Weixin.MP.AdvancedAPIs.TemplateMessage;
-using DaleCloud.Entity.ProductManage;
-using DaleCloud.Application.ProductManage;
 
 namespace DaleCloud.Application.CommonService
 {
@@ -62,7 +60,7 @@ namespace DaleCloud.Application.CommonService
         /// </summary>
         /// <param name="mEntity"></param>
         /// <returns></returns>
-        public static bool SendFinishWorkOrderMsg(BaseProductInfoEntity mEntity)
+        public static bool SendFinishWorkOrderMsg(string uuid,string procduct,string mode)
         {
             try
             {
@@ -70,7 +68,7 @@ namespace DaleCloud.Application.CommonService
                 users.Add("dd");// openId
                 if (users.Count > 0)
                 {
-                    string url = HttpHelper.GetWebSite() + "/WeixinApp/WorkOrder/Detail?keyValue=" + mEntity.T_Id;
+                    string url = HttpHelper.GetWebSite() + "/WeixinApp/WorkOrder/Detail?keyValue=" + uuid;
                     var template_id = "JOMBZ4cqjRgHEC-v8YBugMyGoBN0KxVtSqPqqy951eo";
                     //{ { first.DATA} }
                     //产品型号：{ { keyword1.DATA} }
@@ -84,8 +82,8 @@ namespace DaleCloud.Application.CommonService
                     var data = new
                     {
                         first = new TemplateDataItem(data_first, "#3990eb"),
-                        keyword1 = new TemplateDataItem(mEntity.T_FullName, "#feb91a"),
-                        keyword2 = new TemplateDataItem(mEntity.T_ModelCode ),
+                        keyword1 = new TemplateDataItem(procduct, "#feb91a"),
+                        keyword2 = new TemplateDataItem(mode),
                         keyword3 = new TemplateDataItem("李四" ),
                         keyword4 = new TemplateDataItem("1822222222"),
                         keyword5 = new TemplateDataItem("无需寄回"),

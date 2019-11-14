@@ -19,7 +19,7 @@
         }
     });
     function initControl() {
-        $("#F_OrganizeId").bindSelect({
+        $("#OrganizeId").bindSelect({
             url: "/SystemManage/Organize/GetTreeSelectJson",
         });
     }
@@ -43,39 +43,39 @@
             <tr>
                 <th class="formTitle">归属组织</th>
                 <td class="formValue">
-                    <select id="F_OrganizeId" name="F_OrganizeId" class="form-control required">
+                    <select id="OrganizeId" name="OrganizeId" class="form-control required">
                     </select>
                 </td>
             </tr>
             <tr>
                 <th class="formTitle">员工名称</th>
                 <td class="formValue">
-                    <input id="F_FullName" name="F_FullName" type="text" class="form-control required" placeholder="请输入员工名称" />
+                    <input id="FullName" name="FullName" type="text" class="form-control required" placeholder="请输入员工名称" />
                 </td>
             </tr>
             <tr>
                 <th class="formTitle">员工编号</th>
                 <td class="formValue">
-                    <input id="F_EnCode" name="F_EnCode" type="text" class="form-control required" placeholder="请输入员工编号" />
+                    <input id="EnCode" name="EnCode" type="text" class="form-control required" placeholder="请输入员工编号" />
                 </td>
             </tr>
             <tr>
                 <th class="formTitle">显示顺序</th>
                 <td class="formValue">
-                    <input id="F_SortCode" name="F_SortCode" type="text" class="form-control required" placeholder="请输入显示顺序" />
+                    <input id="SortCode" name="SortCode" type="text" class="form-control required" placeholder="请输入显示顺序" />
                 </td>
             </tr>
             <tr>
                 <th class="formTitle" style="height: 35px;">选项</th>
                 <td class="formValue" style="padding-top: 1px;">
                     <div class="ckbox">
-                        <input id="F_AllowEdit" name="F_AllowEdit" type="checkbox"><label for="F_AllowEdit">允许编辑</label>
+                        <input id="AllowEdit" name="AllowEdit" type="checkbox"><label for="AllowEdit">允许编辑</label>
                     </div>
                     <div class="ckbox">
-                        <input id="F_AllowDelete" name="F_AllowDelete" type="checkbox"><label for="F_AllowDelete">允许删除</label>
+                        <input id="AllowDelete" name="AllowDelete" type="checkbox"><label for="AllowDelete">允许删除</label>
                     </div>
                     <div class="ckbox">
-                        <input id="F_EnabledMark" name="F_EnabledMark" type="checkbox" checked="checked"><label for="F_EnabledMark">有效</label>
+                        <input id="EnabledMark" name="EnabledMark" type="checkbox" checked="checked"><label for="EnabledMark">有效</label>
                     </div>
                 </td>
             </tr>
@@ -83,7 +83,7 @@
                 <th class="formTitle" valign="top" style="padding-top: 5px;">备注
                 </th>
                 <td class="formValue">
-                    <textarea id="F_Description" name="F_Description" class="form-control" style="height: 60px;"></textarea>
+                    <textarea id="Description" name="Description" class="form-control" style="height: 60px;"></textarea>
                 </td>
             </tr>
         </table>

@@ -10,8 +10,8 @@ namespace DaleCloud.Entity
 {
     public interface IModificationAuditedV2
     {
-        string T_Id { get; set; }
-        string T_ModifyUserId { get; set; }
-        DateTime? T_ModifyTime { get; set; }
+        string uuId { get; set; }
+        string ModifierId { get; set; }
+        DateTime? ModifyTime { get; set; }
     }
 }

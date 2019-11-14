@@ -13,8 +13,6 @@ using System.Web.Mvc;
 using DaleCloud.Code;
 using DaleCloud.Application.SystemManage;
 using DaleCloud.Entity.SystemManage;
-using DaleCloud.Application.ProductManage;
-using DaleCloud.Entity.ProductManage;
 using DaleCloud.Application.DingTalk;
 using DaleCloud.Entity.DingTalk;
 using DaleCloud.DingTalk;

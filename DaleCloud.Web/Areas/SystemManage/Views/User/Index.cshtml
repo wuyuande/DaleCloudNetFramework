@@ -112,7 +112,7 @@
                 url: "/SystemManage/User/DeleteForm",
                 param: { keyValue: selected.F_Id },
                 success: function () {
-                    $.currentWindow().$('#dg').datagrid('load', queryJson);;
+                    $('#dg').datagrid('reload');
                 }
             })
         }
@@ -210,7 +210,7 @@
             <a href="#" id="NF-disabled" authorize="yes" class="dcui-btn dcui-btn-orange" iconCls="icon-save" plain="true" onclick="btn_disabled()"><i class="fa fa-stop-circle"></i>禁用</a>
             <a href="#" id="NF-enabled" authorize="yes" class="dcui-btn dcui-btn-orange" iconCls="icon-save" plain="true" onclick="btn_enabled()"><i class="fa fa-play-circle"></i>启用</a>
         </div>
-        @*<script>$('#tb').authorizeButton()</script>*@
+        <script>$('#toolbar').authorizeButton()</script>
         <div class="dcui-search-area">
             关键字: <input class="easyui-textbox" style="width:110px" id="txt_keyword" placeholder="账户/姓名/手机">
             <a href="#" class="easyui-linkbutton" iconCls="icon-search" id="btn_search" >查询</a>

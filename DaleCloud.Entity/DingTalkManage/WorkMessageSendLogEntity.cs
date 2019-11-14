@@ -14,60 +14,76 @@ namespace DaleCloud.Entity.DingTalkManage
 {
 	public class WorkMessageSendLogEntity : IEntityV2<WorkMessageSendLogEntity>, ICreationAuditedV2,IModificationAuditedV2  
 	{
-   		     
-		/// <summary>
-		/// T_Id
+
+        /// <summary>
+        /// 主键
         /// </summary>		
-        public string T_Id{ get; set; }        
-		/// <summary>
-		/// T_AccessToken
+        public string uuId { get; set; }
+        /// <summary>
+        /// AccessToken
         /// </summary>		
-        public string T_AccessToken{ get; set; }        
+        public string AccessToken{ get; set; }        
 		/// <summary>
-		/// T_AgentId
+		/// AgentId
         /// </summary>		
-        public string T_AgentId{ get; set; }        
+        public string AgentId{ get; set; }        
 		/// <summary>
-		/// T_TaskId
+		/// TaskId
         /// </summary>		
-        public string T_TaskId{ get; set; }        
+        public string TaskId{ get; set; }        
 		/// <summary>
-		/// T_Title
+		/// Title
         /// </summary>		
-        public string T_Title{ get; set; }        
+        public string Title{ get; set; }        
 		/// <summary>
-		/// T_Message
+		/// Message
         /// </summary>		
-        public string T_Message{ get; set; }        
+        public string Message{ get; set; }        
 		/// <summary>
-		/// T_Url
+		/// Url
         /// </summary>		
-        public string T_Url{ get; set; }        
+        public string Url{ get; set; }        
 		/// <summary>
-		/// T_UserId
+		/// UserId
         /// </summary>		
-        public string T_UserId{ get; set; }        
+        public string UserId{ get; set; }        
 		/// <summary>
-		/// T_Remark
+		/// Remark
         /// </summary>		
-        public string T_Remark{ get; set; }        
-		/// <summary>
-		/// 创建人用户ID
+        public string Remark{ get; set; }
+        /// <summary>
+        ///创建人
         /// </summary>		
-        public string T_CreatorUserId{ get; set; }        
-		/// <summary>
+        public string Creator { get; set; }
+        /// <summary>
+		/// 创建人ID
+        /// </summary>		
+        public string CreatorId { get; set; }
+        /// <summary>
 		/// 创建时间
         /// </summary>		
-        public DateTime? T_CreateTime{ get; set; }        
-		/// <summary>
-		/// 更新人用户Id
+        public DateTime? CreateTime { get; set; }
+        /// <summary>
+        /// 修改人
         /// </summary>		
-        public string T_ModifyUserId{ get; set; }        
-		/// <summary>
-		/// 更新时间
+        public string Modifier { get; set; }
+        /// <summary>
+        /// 修改人ID
         /// </summary>		
-        public DateTime? T_ModifyTime{ get; set; }        
-		   
-	}
+        public string ModifierId { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>		
+        public DateTime? ModifyTime { get; set; }
+        /// <summary>
+        /// 删除人ID
+        /// </summary>		
+        public string DeleterId { get; set; }
+        /// <summary>
+        /// 删除时间
+        /// </summary>		
+        public DateTime? DeleteTime { get; set; }
+
+    }
 }
 

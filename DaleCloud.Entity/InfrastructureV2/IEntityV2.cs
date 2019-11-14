@@ -14,25 +14,25 @@ namespace DaleCloud.Entity
         public void Create()
         {
             var entity = this as ICreationAuditedV2;
-            entity.T_Id = CommonUtils.GuId();
+            entity.uuId = CommonUtils.GuId();
             var LoginInfo = OperatorProvider.Provider.GetCurrent();
             if (LoginInfo != null)
             {
-                entity.T_CreatorUserId = LoginInfo.UserId;
+                entity.CreatorId = LoginInfo.UserId;
             }
-            entity.T_CreateTime = DateTime.Now;
+            entity.CreateTime = DateTime.Now;
         }
         
         public void Modify(string keyValue)
         {
             var entity = this as IModificationAuditedV2;
-            entity.T_Id = keyValue;
+            entity.uuId = keyValue;
             var LoginInfo = OperatorProvider.Provider.GetCurrent();
             if (LoginInfo != null)
             {
-                entity.T_ModifyUserId = LoginInfo.UserId;
+                entity.ModifierId = LoginInfo.UserId;
             }
-            entity.T_ModifyTime = DateTime.Now;
+            entity.ModifyTime = DateTime.Now;
         }
         //public void Remove()
         //{

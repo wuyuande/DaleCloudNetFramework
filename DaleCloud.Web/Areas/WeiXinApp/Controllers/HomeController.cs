@@ -41,7 +41,7 @@ namespace DaleCloud.Web.Areas.WeixinApp.Controllers
                 ViewData["username"] = "undefined";
                 ViewData["customerId"] = "undefined";
                 ViewData["company"] = "您尚未关注公众号";
-                ViewData["headimgurl"] = "~/Content/img/samples/scarlet-159.png";
+                ViewData["headimgurl"] = "~/Content/images/samples/scarlet-159.png";
             }
             return View();
         }

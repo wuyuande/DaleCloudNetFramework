@@ -12,14 +12,13 @@ using System.Data;
 
 namespace DaleCloud.Entity.DingTalk 
 {
-    //DingTalk_Processinstance
-    public class ProcessInstanceEntity
+    
+    public class ProcessInstanceEntity : IEntityV2<ProcessInstanceEntity>, ICreationAuditedV2, IModificationAuditedV2
     {
-
         /// <summary>
-        /// uuid
+        /// 主键
         /// </summary>
-        public string uuid { get; set; }
+        public string uuId { get; set; }
         /// <summary>
         /// 审批流的唯一码，process_code就在审批流编辑的页面URL中
         /// </summary>
@@ -51,7 +50,7 @@ namespace DaleCloud.Entity.DingTalk
         /// <summary>
         /// 开始时间
         /// </summary>
-        public string CreateTime { get; set; }
+        public string CreateTime2 { get; set; }
         /// <summary>
         /// 结束时间
         /// </summary>
@@ -85,6 +84,38 @@ namespace DaleCloud.Entity.DingTalk
         /// 已审批任务列表，可以通过此列表获取已审批人
         /// </summary>
         public string Tasks { get; set; }
+        /// <summary>
+        ///创建人
+        /// </summary>		
+        public string Creator { get; set; }
+        /// <summary>
+		/// 创建人ID
+        /// </summary>		
+        public string CreatorId { get; set; }
+        /// <summary>
+		/// 创建时间
+        /// </summary>		
+        public DateTime? CreateTime { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>		
+        public string Modifier { get; set; }
+        /// <summary>
+        /// 修改人ID
+        /// </summary>		
+        public string ModifierId { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>		
+        public DateTime? ModifyTime { get; set; }
+        /// <summary>
+        /// 删除人ID
+        /// </summary>		
+        public string DeleterId { get; set; }
+        /// <summary>
+        /// 删除时间
+        /// </summary>		
+        public DateTime? DeleteTime { get; set; }
     }
 }
 

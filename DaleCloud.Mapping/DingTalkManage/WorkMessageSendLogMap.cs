@@ -15,7 +15,7 @@ namespace DaleCloud.Mapping.DingTalkManage
 		public WorkMessageSendLogMap()
         {
             this.ToTable("DingTalk_WorkMessage_SendLog");
-            this.HasKey(t => t.T_Id);
+            this.HasKey(t => t.uuId);
         }
    
 	}

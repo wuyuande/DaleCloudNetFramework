@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.IO;
-using DaleCloud.Entity.ProductManage;
-using DaleCloud.Application.ProductManage;
 using Spire.Xls;
 using Spire.Pdf;
 

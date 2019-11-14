@@ -26,7 +26,7 @@
             url: "/WeixinManage/WxTempMsg/SubmitForm?keyValue=" + keyValue,
             param: $("#form1").formSerialize(),
             success: function () {
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
+                $.currentWindow().$('#dg').datagrid('reload');;
             }
         })
     }

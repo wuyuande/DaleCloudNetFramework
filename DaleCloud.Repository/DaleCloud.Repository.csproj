@@ -62,14 +62,14 @@
     <Compile Include="SystemSecurity\DbBackupRepository.cs" />
     <Compile Include="SystemSecurity\FilterIPRepository.cs" />
     <Compile Include="SystemSecurity\LogRepository.cs" />
-    <Compile Include="WeixinMPManage\WeixinMP_RequestBaseData.cs" />
-    <Compile Include="WeixinMPManage\WeixinMP_RequestRule.cs" />
-    <Compile Include="WeixinMPManage\WeixinMP_RequestRuleContent.cs" />
-    <Compile Include="WeixinMPManage\WeixinMP_ResponseBaseData.cs" />
-    <Compile Include="WeixinMPManage\WeixinMP_TemplateMessage.cs" />
-    <Compile Include="WeixinMPManage\WeixinMP_Users.cs" />
-    <Compile Include="WeixinMPManage\WxBaseConfigRepository.cs" />
-    <Compile Include="WeixinMPManage\WxPropertyInfoRepository.cs" />
+    <Compile Include="WeixinManage\RequestBaseData.cs" />
+    <Compile Include="WeixinManage\RequestRule.cs" />
+    <Compile Include="WeixinManage\RequestRuleContent.cs" />
+    <Compile Include="WeixinManage\ResponseBaseData.cs" />
+    <Compile Include="WeixinManage\TemplateMessage.cs" />
+    <Compile Include="WeixinManage\Users.cs" />
+    <Compile Include="WeixinManage\WxBaseConfigRepository.cs" />
+    <Compile Include="WeixinManage\WxPropertyInfoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DaleCloud.Code\DaleCloud.Code.csproj">

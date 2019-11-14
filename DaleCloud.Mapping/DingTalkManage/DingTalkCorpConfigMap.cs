@@ -14,7 +14,7 @@ namespace DaleCloud.Mapping.DingTalk
         public DingTalkCorpConfigMap()
         {
             this.ToTable("DingTalk_CorpConfig");
-            this.HasKey(t => t.T_Id);
+            this.HasKey(t => t.uuId);
         }
     }
 }

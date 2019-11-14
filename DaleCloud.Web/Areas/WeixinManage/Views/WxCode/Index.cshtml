@@ -7,36 +7,40 @@
         gridList();
     })
     function gridList() {
-        var $gridList = $("#gridList");
-        $gridList.dataGrid({
+        $('#dg').datagrid({
             url: "/WeixinManage/WxCode/GetGridJson",
-            height: $(window).height() - 96,
-            colModel: [
-                { label: "主键", name: "T_Id", hidden: true, key: true },
-                { label: '公众号名称', name: 'T_WxName', width: 150, align: 'left' },
-                { label: '微信号', name: 'T_WxCode', width: 150, align: 'left' },
-                { label: '公众号原始ID', name: 'T_WxId', width: 150, align: 'left' },
-                { label: '接口地址', name: 'T_ApiUrl', width: 320, align: 'left' },
+            toolbar: '#toolbar',
+            autoRowHeight: false,
+            nowrap: true,
+            singleSelect: true,
+            method: 'get',
+            columns: [[
+                { field: 'uuId', hidden: true },
+                { field: 'WxName', title: '公众号名称', width: 240, align: 'center' },
+                { field: 'WxCode', title: '微信号', width: 120, align: 'center' },
+                { field: 'WxId', title: '公众号原始ID', width: 120, align: 'center' },
+                { field: 'ApiUrl', title: '接口地址', width: 180, align: 'center' },
                 {
-                    label: "自动回复", name: "T_CloseKW", width: 60, align: "center",
-                    formatter: function (cellvalue) {
-                        return cellvalue == 1 ? "开启" : "关闭";
+                    field: 'CloseKW', title: '自动回复', width: 60, align: 'right',
+                    formatter: function (value, row, index) {
+                        return value == 1 ? "开启" : "关闭";
                     }
                 },
                 {
-                    label: "状态", name: "T_Status", width: 60, align: "center",
-                    formatter: function (cellvalue) {
-                        return cellvalue == 1 ? "有效" : "失效";
+                    field: 'Status', title: '状态', width: 60, align: 'right',
+                    formatter: function (value, row, index) {
+                        return value == 1 ? "有效" : "失效";
                     }
                 },
-                { label: '创建时间', name: 'T_CreateTime', width: 150, align: 'left' }
-
-            ]
+                { field: 'CreateTime', title: '创建时间', width: 120, align: 'right' }
+            ]]
         });
+
         $("#btn_search").click(function () {
-            $gridList.jqGrid('setGridParam', {
-                postData: { keyword: $("#txt_keyword").val() },
-            }).trigger('reloadGrid');
+            var queryJson = {
+                keyword: $("#txt_keyword").val()
+            }
+            $('#dg').datagrid('load',queryJson);
         });
     }
     function btn_add() {
@@ -52,73 +56,70 @@
         });
     }
     function btn_edit() {
-        var keyValue = $("#gridList").jqGridRowValue().T_Id;
-        $.modalOpen({
-            id: "Form",
-            title: "修改账号",
-            url: "/WeixinManage/WxCode/Form?keyValue=" + keyValue,
-            width: "700px",
-            height: "680px",
-            callBack: function (iframeId) {
-                top.frames[iframeId].submitForm();
-            }
-        });
+        var selected = $('#dg').datagrid('getSelected');
+        if (selected != null) {
+            $.modalOpen({
+                id: "Form",
+                title: "修改账号",
+                url: "/WeixinManage/WxCode/Form?keyValue=" + selected.uuId,
+                width: "700px",
+                height: "680px",
+                callBack: function (iframeId) {
+                    top.frames[iframeId].submitForm();
+                }
+            });
+        }
+        else {
+            $.modalMsg("未选中数据", "warning");
+        }
     }
     function btn_delete() {
-        $.deleteForm({
-            url: "/WeixinManage/WxCode/DeleteForm",
-            param: { keyValue: $("#gridList").jqGridRowValue().T_Id },
-            success: function () {
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
-            }
-        })
+        var selected = $('#dg').datagrid('getSelected');
+        if (selected != null) {
+            $.deleteForm({
+                url: "/WeixinManage/WxCode/DeleteForm",
+                param: { keyValue: selected.uuId },
+                success: function () {
+                    $('#dg').datagrid('reload');
+                }
+            });
+        }
+        else {
+            $.modalMsg("未选中数据", "warning");
+        }
     }
     function btn_details() {
-        var keyValue = $("#gridList").jqGridRowValue().T_Id;
-        $.modalOpen({
-            id: "Details",
-            title: "查看信息",
-            url: "/WeixinManage/WxCode/Details?keyValue=" + keyValue,
-            width: "700px",
-            height: "680px",
-            btn: null,
-        });
+        var selected = $('#dg').datagrid('getSelected');
+        if (selected != null) {
+            $.modalOpen({
+                id: "Details",
+                title: "查看信息",
+                url: "/WeixinManage/WxCode/Details?keyValue=" + selected.uuId,
+                width: "700px",
+                height: "680px",
+                btn: null,
+            });
+        }
+        else {
+            $.modalMsg("未选中数据", "warning");
+        }
     }
 </script>
 
-<div class="topPanel">
-    <div class="toolbar">
-        <div class="btn-group">
-            <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+<div class="gridPanel" style="height:100%;">
+    <div id="toolbar" style="padding:2px 5px;">
+        <div class="dcui-btn-area">
+            <a href="#" id="NF-add" authorize="yes" class="dcui-btn dcui-btn-green" iconCls="icon-add" plain="true" onclick="btn_add()"><i class="fa fa-plus"></i>新建账号</a>
+            <a href="#" id="NF-delete" authorize="yes" class="dcui-btn dcui-btn-red" iconCls="icon-remove" plain="true" onclick="btn_delete()"><i class="fa fa-trash"></i>删除账号</a>
+            <a href="#" id="NF-edit" authorize="yes" class="dcui-btn dcui-btn-blue" iconCls="icon-edit" plain="true" onclick="btn_edit()"><i class="fa fa-pencil"></i>修改账号</a>
+            <a href="#" id="NF-details" authorize="yes" class="dcui-btn dcui-btn-purple" iconCls="icon-man" plain="true" onclick="btn_details()"><i class="fa fa-eye"></i>查看账号</a>
         </div>
-        <div class="btn-group">
-            <a class="btn btn-primary" onclick="btn_add()"><i class="fa fa-plus"></i>新建账号</a>
-        </div>
-        <div class="operate">
-            <ul class="nav nav-pills">
-                <li class="first">已选中<span>1</span>项</li>
-                <li><a onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改账号</a></li>
-                <li><a onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除账号</a></li>
-                <li><a onclick="btn_details()"><i class="fa fa-search-plus"></i>查看账号</a></li>
-            </ul>
-            <a href="javascript:;" class="close"></a>
+        <script>$('#toolbar').authorizeButton()</script>
+        <div class="dcui-search-area">
+            关键字: <input class="easyui-textbox" style="width:110px" id="txt_keyword" placeholder="请输入要查询关键字">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-search" id="btn_search">查询</a>
         </div>
     </div>
-    <div class="search">
-        <table>
-            <tr>
-                <td>
-                    <div class="input-group">
-                        <input id="txt_keyword" type="text" class="form-control" placeholder="微信账号" style="width: 200px;">
-                        <span class="input-group-btn">
-                            <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
-<div class="gridPanel">
-    <table id="gridList"></table>
+
+    <table id="dg" class="easyui-datagrid" style="width:100%;min-height:600px;height:100%;"></table>
 </div>

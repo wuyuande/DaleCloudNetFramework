@@ -15,6 +15,8 @@ namespace DaleCloud.Application.DingTalk
     {
         private MessageSendRecordRepository service = new MessageSendRecordRepository();
         private WorkMessageSendLogRepository logs = new WorkMessageSendLogRepository();
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -25,10 +27,10 @@ namespace DaleCloud.Application.DingTalk
             var expression = ExtLinq.True<MessageSendRecordEntity>();
             if (!string.IsNullOrEmpty(keyword))
             {
-                expression = expression.And(t => t.T_Code.Contains(keyword));
-                expression = expression.Or(t => t.T_Title.Contains(keyword));
+                expression = expression.And(t => t.Code.Contains(keyword));
+                expression = expression.Or(t => t.Title.Contains(keyword));
             }
-            return service.IQueryable(expression).OrderBy(t => t.T_SendDate).ToList();
+            return service.IQueryable(expression).OrderBy(t => t.SendDate).ToList();
         }
 
         /// <summary>
@@ -46,9 +48,9 @@ namespace DaleCloud.Application.DingTalk
             var expression = ExtLinq.True<MessageSendRecordEntity>();
             if (!string.IsNullOrEmpty(keyValue))
             {
-                expression = expression.And(t => t.T_Code.Contains(keyValue));
+                expression = expression.And(t => t.Code.Contains(keyValue));
             }
-            return service.IQueryable(expression).OrderBy(t => t.T_State).Single();
+            return service.IQueryable(expression).OrderBy(t => t.State).Single();
         }
 
         /// <summary>
@@ -57,7 +59,7 @@ namespace DaleCloud.Application.DingTalk
         /// <param name="keyValue"></param>
         public void DeleteForm(string keyValue)
         {
-            service.Delete(t => t.T_Id == keyValue);
+            service.Delete(t => t.uuId == keyValue);
         }
 
         /// <summary>
@@ -86,11 +88,11 @@ namespace DaleCloud.Application.DingTalk
         {
             WorkMessageSendLogEntity entiy = new WorkMessageSendLogEntity();
             entiy.Create();
-            entiy.T_AccessToken = appId;
-            entiy.T_AgentId = agentId.ToString();
-            entiy.T_Title = title;
-            entiy.T_UserId = userId;
-            entiy.T_Remark = msg;
+            entiy.AccessToken = appId;
+            entiy.AgentId = agentId.ToString();
+            entiy.Title = title;
+            entiy.UserId = userId;
+            entiy.Remark = msg;
             logs.Insert(entiy);
         }
     }

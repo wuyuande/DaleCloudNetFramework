@@ -2,12 +2,33 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
+
+<div class="gridPanel" style="height:100%;">
+    <div id="toolbar" style="padding:2px 5px;">
+        <div class="dcui-btn-area">
+            <a href="#" id="NF-add" authorize="yes" class="dcui-btn dcui-btn-green"   onclick="btn_add()"><i class="fa fa-plus"></i>新建员工</a>
+            <a href="#" id="NF-delete" authorize="yes" class="dcui-btn dcui-btn-red"   onclick="btn_delete()"><i class="fa fa-trash"></i>删除员工</a>
+            <a href="#" id="NF-edit" authorize="yes" class="dcui-btn dcui-btn-blue"   onclick="btn_edit()"><i class="fa fa-pencil"></i>修改员工</a>
+            <a href="#" id="NF-details" authorize="yes" class="dcui-btn dcui-btn-purple" onclick="btn_details()"><i class="fa fa-eye"></i>查看员工</a>
+            <a href="#" id="NF-update" authorize="yes" class="dcui-btn dcui-btn-orange" onclick="btn_update()"><i class="fa fa-reply"></i>更新数据</a>
+            <a href="#" id="NF-createsysuser" authorize="yes" class="dcui-btn dcui-btn-orange" onclick="btn_createSysUser()"><i class="fa fa-user"></i>创建用户</a>
+        </div>
+        <script>$('#toolbar').authorizeButton()</script>
+        <div class="dcui-search-area">
+            关键字: <input class="easyui-textbox" style="width:110px" id="txt_keyword" placeholder="用户名称/手机号码">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-search" id="btn_search">查询</a>
+        </div>
+    </div>
+
+    <table id="dg" class="easyui-datagrid" style="width:100%;min-height:600px;height:100%;"></table>
+</div>
+
 <script>
     $(function () {
         gridList();
     })
     function gridList() {
-      
+
         $('#dg').datagrid({
             url: "/DingTalkManage/Users/GetGridJson",
             toolbar: '#toolbar',
@@ -58,7 +79,7 @@
                         }
                     }
                 }
-                
+
             ]]
         });
 
@@ -72,29 +93,39 @@
     }
 
     function btn_edit() {
-        var keyValue = $("#gridList").jqGridRowValue().UserId;
-        $.modalOpen({
-            id: "Form",
-            title: "修改用户角色",
-            url: "/DingTalkManage/Users/Form?keyValue=" + keyValue,
-            width: "450px",
-            height: "380px",
-            callBack: function (iframeId) {
-                top.frames[iframeId].submitForm();
-            }
-        });
+        var selected = $('#dg').datagrid('getSelected');
+        if (selected != null) {
+            $.modalOpen({
+                id: "Form",
+                title: "修改用户",
+                url: "/DingTalkManage/Users/Form?keyValue=" + selected.UserId,
+                width: "450px",
+                height: "380px",
+                callBack: function (iframeId) {
+                    top.frames[iframeId].submitForm();
+                }
+            });
+        }
+        else {
+            $.modalMsg("未选中数据", "warning");
+        }
     }
 
     function btn_details() {
-        var keyValue = $("#gridList").jqGridRowValue().UserId;
-        $.modalOpen({
-            id: "Details",
-            title: "查看信息",
-            url: "/DingTalkManage/Users/Details?keyValue=" + keyValue,
-            width: "450px",
-            height: "500px",
-            btn: null,
-        });
+        var selected = $('#dg').datagrid('getSelected');
+        if (selected != null) {
+            $.modalOpen({
+                id: "Details",
+                title: "查看信息",
+                url: "/DingTalkManage/Users/Details?keyValue=" + selected.UserId,
+                width: "450px",
+                height: "500px",
+                btn: null,
+            });
+        }
+        else {
+            $.modalMsg("未选中数据", "warning");
+        }
     }
     function btn_update() {
         $.submitPost({
@@ -105,16 +136,7 @@
             }
         })
     }
-    function btn_showDepart() {
-        $.modalOpen({
-            id: "Details",
-            title: "查看部门",
-            url: "/DingTalkManage/Department/Index",
-            width: "450px",
-            height: "500px",
-            btn: null,
-        });
-    }
+
     function btn_sendMsg() {
         $.submitPost({
             title: "确定要发送信息吗？",
@@ -156,25 +178,3 @@
         })
     }
 </script>
-
-
-
-<div class="gridPanel" style="height:100%;">
-    <div id="toolbar" style="padding:2px 5px;">
-        <div class="dcui-btn-area">
-            <a href="#" id="NF-add" authorize="yes" class="dcui-btn dcui-btn-green"   onclick="btn_add()"><i class="fa fa-plus"></i>新建员工</a>
-            <a href="#" id="NF-delete" authorize="yes" class="dcui-btn dcui-btn-red"   onclick="btn_delete()"><i class="fa fa-trash"></i>删除员工</a>
-            <a href="#" id="NF-edit" authorize="yes" class="dcui-btn dcui-btn-blue"   onclick="btn_edit()"><i class="fa fa-pencil"></i>修改员工</a>
-            <a href="#" id="NF-details" authorize="yes" class="dcui-btn dcui-btn-purple" onclick="btn_details()"><i class="fa fa-eye"></i>查看员工</a>
-            <a href="#" id="NF-update" authorize="yes" class="dcui-btn dcui-btn-orange" onclick="btn_update()"><i class="fa fa-reply"></i>更新数据</a>
-            <a href="#" id="NF-createsysuser" authorize="yes" class="dcui-btn dcui-btn-orange" onclick="btn_createSysUser()"><i class="fa fa-user"></i>创建用户</a>
-        </div>
-        <script>$('#tb').authorizeButton()</script>
-        <div class="dcui-search-area">
-            关键字: <input class="easyui-textbox" style="width:110px" id="txt_keyword" placeholder="用户名称/手机号码">
-            <a href="#" class="easyui-linkbutton" iconCls="icon-search" id="btn_search">查询</a>
-        </div>
-    </div>
-
-    <table id="dg" class="easyui-datagrid" style="width:100%;min-height:600px;height:100%;"></table>
-</div>

@@ -26,14 +26,14 @@
             url: "/WeixinManage/WxCode/SubmitForm?keyValue=" + keyValue,
             param: $("#form1").formSerialize(),
             success: function () {
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
+                $.currentWindow().$('#dg').datagrid('reload');;
             }
         })
     }
     function btnCreateUrl () {
         var url=window.location.host+"/api/weixin/index?apiid=";
-        var apiid = $("#T_WxCode").val();
-        $("#T_ApiUrl").val(url + apiid);
+        var apiid = $("#WxCode").val();
+        $("#ApiUrl").val(url + apiid);
     }
 </script>
 
@@ -43,19 +43,19 @@
             <tr>
                 <th class="formTitle">公众号名称</th>
                 <td class="formValue">
-                    <input id="T_WxName" name="T_WxName" type="text" class="form-control required" placeholder="请输入公众帐号名称" />
+                    <input id="WxName" name="WxName" type="text" class="form-control required" placeholder="请输入公众帐号名称" />
                 </td>
             </tr>
             <tr>
                 <th class="formTitle">公众号原始ID</th>
                 <td class="formValue">
-                    <input id="T_WxId" name="T_WxId" type="text" class="form-control required" placeholder="请输入ID" />
+                    <input id="WxId" name="WxId" type="text" class="form-control required" placeholder="请输入ID" />
                 </td>
             </tr>
             <tr>
                 <th class="formTitle">微信号</th>
                 <td class="formValue">
-                    <input id="T_WxCode" name="T_WxCode" type="text" class="form-control required" placeholder="请输入微信号" />
+                    <input id="WxCode" name="WxCode" type="text" class="form-control required" placeholder="请输入微信号" />
                 </td>
             </tr>
             
@@ -63,7 +63,7 @@
                 <th class="formTitle">*接口地址</th>
                 <td class="formValue">
                     <div class="input-group">
-                        <input id="T_ApiUrl" name="T_ApiUrl" type="text" class="form-control required" placeholder="自动生成" />
+                        <input id="ApiUrl" name="ApiUrl" type="text" class="form-control required" placeholder="自动生成" />
                         <span class="input-group-btn">
                             <a class="btn btn-primary" href="javascript:" id="btn_createurl" onclick="btnCreateUrl()">&nbsp;生成&nbsp;</a>
                         </span>
@@ -74,7 +74,7 @@
                 <th class="formTitle">头像</th>
                 <td class="formValue">
                     <div class="input-group">
-                        <input id="T_HeadPic" name="T_HeadPic" type="text" class="form-control" />
+                        <input id="HeadPic" name="HeadPic" type="text" class="form-control" />
                         <span class="input-group-btn">
                             <a class="btn  btn-primary"><i class="fa fa-ellipsis-h"></i></a>
                         </span>
@@ -86,14 +86,14 @@
                     TOKEN值
                 </th>
                 <td class="formValue">
-                    <input id="T_WxToken" name="T_WxToken" type="text" class="form-control required" placeholder="请填写TOKEN值" />
+                    <input id="WxToken" name="WxToken" type="text" class="form-control required" placeholder="请填写TOKEN值" />
 
                 </td>
             </tr>
             <tr>
                 <th class="formTitle" style="height: 35px;">账号状态</th>
                 <td class="formValue" style="padding-top: 1px;">
-                    <select id="T_Status" name="T_Status" class="form-control required">
+                    <select id="Status" name="Status" class="form-control required">
                         <option value="true">有效</option>
                         <option value="false">失效</option>
                     </select>
@@ -102,7 +102,7 @@
             <tr>
                 <th class="formTitle" style="height: 35px;">是否默认</th>
                 <td class="formValue" style="padding-top: 1px;">
-                    <select id="T_Default" name="T_Default" class="form-control required">
+                    <select id="Default" name="Default" class="form-control required">
                         <option value="true">是</option>
                         <option value="false">否</option>
                     </select>
@@ -113,7 +113,7 @@
                     备注
                 </th>
                 <td class="formValue">
-                    <textarea id="T_Remark" name="T_Remark" class="form-control" style="height: 40px;"></textarea>
+                    <textarea id="Remark" name="Remark" class="form-control" style="height: 40px;"></textarea>
                 </td>
             </tr>
             <tr>
@@ -121,7 +121,7 @@
                     创建时间
                 </th>
                 <td class="formValue">
-                    <input id="T_CreateTime" name="T_CreateTime" type="text" class="form-control" disabled="disabled" />
+                    <input id="CreateTime" name="CreateTime" type="text" class="form-control" disabled="disabled" />
                     
                 </td>
             </tr>
@@ -135,19 +135,19 @@
             <tr>
                 <th class="formTitle">AppId</th>
                 <td class="formValue">
-                    <input id="T_AppId" name="T_AppId" type="text" class="form-control " placeholder="" />
+                    <input id="AppId" name="AppId" type="text" class="form-control " placeholder="" />
                 </td>
             </tr>
             <tr>
                 <th class="formTitle">AppSecret</th>
                 <td class="formValue">
-                    <input id="T_AppSecret" name="T_AppSecret" type="text" class="form-control " placeholder="" />
+                    <input id="AppSecret" name="AppSecret" type="text" class="form-control " placeholder="" />
                 </td>
             </tr>
             <tr>
                 <th class="formTitle">Encoding</th>
                 <td class="formValue">
-                    <input id="T_Encoding" name="T_Encoding" type="text" class="form-control " placeholder="" />
+                    <input id="Encoding" name="Encoding" type="text" class="form-control " placeholder="" />
                 </td>
             </tr>
         </table>

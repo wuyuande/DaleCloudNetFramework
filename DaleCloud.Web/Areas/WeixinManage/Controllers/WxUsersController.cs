@@ -74,7 +74,7 @@ namespace DaleCloud.Web.Areas.WeixinManage.Controllers
                 DateTime updateTime = DateTime.Now;
                 try
                 {
-                    string ret = SysPersonFun(0, weixin.T_Id, token.access_token, "", updateTime);
+                    string ret = SysPersonFun(0, weixin.uuId, token.access_token, "", updateTime);
                     //查找此次为同步到的，则为已经跑路的
                     IList<UsersEntity> userlist = app.GetList2(updateTime);
                     if (userlist != null && userlist.Count > 0)
@@ -146,7 +146,7 @@ namespace DaleCloud.Web.Areas.WeixinManage.Controllers
                     WxBaseConfigEntity weixin = config.GetDefaultConfig();
                     weixin.PersonSynDate = updateTime;
                     weixin.OpenidCount = totCount;
-                    config.SubmitForm(weixin,weixin.T_Id);
+                    config.SubmitForm(weixin,weixin.uuId);
                     ret = "粉丝同步成功！";
                 }
                 else

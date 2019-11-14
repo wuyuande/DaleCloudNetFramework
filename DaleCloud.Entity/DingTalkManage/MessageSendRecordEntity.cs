@@ -12,60 +12,90 @@ using System.Data;
 
 namespace DaleCloud.Entity.DingTalkManage 
 {
-	 	//DingTalk_MessageSendRecord
-	 
-	public class MessageSendRecordEntity : IEntityV2<MessageSendRecordEntity>  
-	{
-   		     
-		/// <summary>
-		/// T_Id
+	
+	public class MessageSendRecordEntity : IEntityV2<MessageSendRecordEntity>, ICreationAuditedV2, IModificationAuditedV2
+    {
+
+        /// <summary>
+        /// 主键
         /// </summary>		
-        public string T_Id{ get; set; }        
-		/// <summary>
-		/// T_Code
+        public string uuId { get; set; }
+        /// <summary>
+        /// Code
         /// </summary>		
-        public string T_Code{ get; set; }        
+        public string Code{ get; set; }        
 		/// <summary>
-		/// T_RecType
+		/// RecType
         /// </summary>		
-        public string T_RecType{ get; set; }        
+        public string RecType{ get; set; }        
 		/// <summary>
-		/// T_UseridList
+		/// UseridList
         /// </summary>		
-        public string T_UseridList{ get; set; }        
+        public string UseridList{ get; set; }        
 		/// <summary>
-		/// T_DeptList
+		/// DeptList
         /// </summary>		
-        public string T_DeptList{ get; set; }
+        public string DeptList{ get; set; }
         /// <summary>
         /// 消息类型
         /// </summary>
-        public string T_MsgType { get; set; }
+        public string MsgType { get; set; }
         /// <summary>
-        /// T_Title
+        /// Title
         /// </summary>		
-        public string T_Title{ get; set; }        
+        public string Title{ get; set; }        
 		/// <summary>
-		/// T_Content
+		/// Content
         /// </summary>		
-        public string T_Content{ get; set; }    
+        public string Content{ get; set; }    
         /// <summary>
         /// 链接地址
         /// </summary>
-        public string T_Url { get; set; }
+        public string Url { get; set; }
         /// <summary>
-        /// T_SendType
+        /// SendType
         /// </summary>		
-        public string T_SendType{ get; set; }        
+        public string SendType{ get; set; }        
 		/// <summary>
-		/// T_SendDate
+		/// SendDate
         /// </summary>		
-        public DateTime? T_SendDate{ get; set; }        
+        public DateTime? SendDate{ get; set; }        
 		/// <summary>
-		/// T_State
+		/// State
         /// </summary>		
-        public int T_State{ get; set; }        
-		   
-	}
+        public int State{ get; set; }
+        /// <summary>
+        ///创建人
+        /// </summary>		
+        public string Creator { get; set; }
+        /// <summary>
+		/// 创建人ID
+        /// </summary>		
+        public string CreatorId { get; set; }
+        /// <summary>
+		/// 创建时间
+        /// </summary>		
+        public DateTime? CreateTime { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>		
+        public string Modifier { get; set; }
+        /// <summary>
+        /// 修改人ID
+        /// </summary>		
+        public string ModifierId { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>		
+        public DateTime? ModifyTime { get; set; }
+        /// <summary>
+        /// 删除人ID
+        /// </summary>		
+        public string DeleterId { get; set; }
+        /// <summary>
+        /// 删除时间
+        /// </summary>		
+        public DateTime? DeleteTime { get; set; }
+    }
 }
 

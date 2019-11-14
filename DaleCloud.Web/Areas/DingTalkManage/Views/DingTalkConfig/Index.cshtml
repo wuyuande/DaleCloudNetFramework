@@ -7,157 +7,112 @@
         gridList();
     })
     function gridList() {
-        var $gridList = $("#gridList");
-        $gridList.dataGrid({
-            url: "/DingTalkManage/Users/GetGridJson",
-            height: $(window).height() - 96,
-            colModel: [
-                { label: "主键", name: "Userid", hidden: true, key: true },
-                { label: '用户名称', name: 'Name', width: 150, align: 'left' },
-                { label: '工号', name: 'JobNumber', width: 150, align: 'left' },
-                { label: '职位信息', name: 'Position', width: 150, align: 'left' },
-                { label: '手机号码', name: 'Mobile', width: 150, align: 'left' },
-                { label: '电子邮件', name: 'Email', width: 150, align: 'left' },
+        $('#dg').datagrid({
+            url: "/DingTalkManage/DingTalkConfig/GetGridJson",
+            toolbar: '#toolbar',
+            autoRowHeight: false,
+            nowrap: true,
+            singleSelect: true,
+            method: 'get',
+            columns: [[
+                { field: 'uuId', hidden: true },
+                { field: 'AppName', title: '名称', width: 240, align: 'center' },
+                { field: 'CorpId', title: 'CorpId', width: 120, align: 'center' },
+                { field: 'ApiUrl', title: '接口地址', width: 180, align: 'center' },
                 {
-                    label: "老板", name: "IsBoss", width: 60, align: "center",
-                    formatter: function (cellvalue) {
-                        return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    field: 'Status', title: '状态', width: 60, align: 'right',
+                    formatter: function (value, row, index) {
+                        return value == 1 ? "有效" : "失效";
                     }
                 },
-                {
-                    label: "管理员", name: "IsAdmin", width: 60, align: "center",
-                    formatter: function (cellvalue) {
-                        return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
-                    }
-                },
-                {
-                    label: "激活", name: "Active", width: 60, align: "center",
-                    formatter: function (cellvalue) {
-                        return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
-                    }
-                },
-                { label: '入职时间', name: 'HiredDate', width: 150, align: 'left' }
-
-            ]
+                { field: 'CreateTime', title: '创建时间', width: 120, align: 'right' }
+            ]]
         });
+
         $("#btn_search").click(function () {
-            $gridList.jqGrid('setGridParam', {
-                postData: { keyword: $("#txt_keyword").val() },
-            }).trigger('reloadGrid');
+            var queryJson = {
+                keyword: $("#txt_keyword").val()
+            }
+            $('#dg').datagrid('load',queryJson);
         });
     }
     function btn_add() {
         $.modalOpen({
             id: "Form",
-            title: "新增员工",
-            url: "/DingTalkManage/Users/Form",
-            width: "450px",
-            height: "380px",
+            title: "新增账号",
+            url: "/DingTalkManage/DingTalkConfig/Form",
+            width: "700px",
+            height: "680px",
             callBack: function (iframeId) {
                 top.frames[iframeId].submitForm();
             }
         });
     }
     function btn_edit() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
-        $.modalOpen({
-            id: "Form",
-            title: "修改员工",
-            url: "/DingTalkManage/Users/Form?keyValue=" + keyValue,
-            width: "450px",
-            height: "380px",
-            callBack: function (iframeId) {
-                top.frames[iframeId].submitForm();
-            }
-        });
+        var selected = $('#dg').datagrid('getSelected');
+        if (selected != null) {
+            $.modalOpen({
+                id: "Form",
+                title: "修改账号",
+                url: "/DingTalkManage/DingTalkConfig/Form?keyValue=" + selected.uuId,
+                width: "700px",
+                height: "680px",
+                callBack: function (iframeId) {
+                    top.frames[iframeId].submitForm();
+                }
+            });
+        }
+        else {
+            $.modalMsg("未选中数据", "warning");
+        }
     }
     function btn_delete() {
-        $.deleteForm({
-            url: "/DingTalkManage/Users/DeleteForm",
-            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
-            success: function () {
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
-            }
-        })
+        var selected = $('#dg').datagrid('getSelected');
+        if (selected != null) {
+            $.deleteForm({
+                url: "/DingTalkManage/DingTalkConfig/DeleteForm",
+                param: { keyValue: selected.uuId },
+                success: function () {
+                    $('#dg').datagrid('reload');
+                }
+            });
+        }
+        else {
+            $.modalMsg("未选中数据", "warning");
+        }
     }
     function btn_details() {
-        var keyValue = $("#gridList").jqGridRowValue().Userid;
-        $.modalOpen({
-            id: "Details",
-            title: "查看员工",
-            url: "/DingTalkManage/Users/Details?keyValue=" + keyValue,
-            width: "450px",
-            height: "500px",
-            btn: null,
-        });
+        var selected = $('#dg').datagrid('getSelected');
+        if (selected != null) {
+            $.modalOpen({
+                id: "Details",
+                title: "查看信息",
+                url: "/DingTalkManage/DingTalkConfig/Details?keyValue=" + selected.uuId,
+                width: "700px",
+                height: "680px",
+                btn: null,
+            });
+        }
+        else {
+            $.modalMsg("未选中数据", "warning");
+        }
     }
-    function btn_updateUser() {
-        $.submitPost({
-            title: "确定要更新钉钉用户吗？",
-            url: "/DingTalkManage/Users/GetDingTalkUser",
-            success: function () {
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
-            }
-        })
-    }
-    function btn_updateDepart() {
-        $.submitPost({
-            title: "确定要更新部门信息吗？",
-            url: "/DingTalkManage/Department/GetDingTalkDepartment",
-            success: function () {
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
-            }
-        })
-    }
-    function btn_sendMsg() {
-        $.deleteForm({
-            url: "/DingTalkManage/Users/SendWrokMsg",
-            param: { keyValue: $("#gridList").jqGridRowValue().Userid },
-            success: function () {
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
-            }
-        })
-    }
-
 </script>
 
-<div class="topPanel">
-    <div class="toolbar">
-        <div class="btn-group">
-            <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+<div class="gridPanel" style="height:100%;">
+    <div id="toolbar" style="padding:2px 5px;">
+        <div class="dcui-btn-area">
+            <a href="#" id="NF-add" authorize="yes" class="dcui-btn dcui-btn-green" iconCls="icon-add" plain="true" onclick="btn_add()"><i class="fa fa-plus"></i>新建账号</a>
+            <a href="#" id="NF-delete" authorize="yes" class="dcui-btn dcui-btn-red" iconCls="icon-remove" plain="true" onclick="btn_delete()"><i class="fa fa-trash"></i>删除账号</a>
+            <a href="#" id="NF-edit" authorize="yes" class="dcui-btn dcui-btn-blue" iconCls="icon-edit" plain="true" onclick="btn_edit()"><i class="fa fa-pencil"></i>修改账号</a>
+            <a href="#" id="NF-details" authorize="yes" class="dcui-btn dcui-btn-purple" iconCls="icon-man" plain="true" onclick="btn_details()"><i class="fa fa-eye"></i>查看账号</a>
         </div>
-        <div class="btn-group">
-            <a id="NF-add" authorize="yes" class="btn btn-primary dropdown-text" onclick="btn_updateUser()"><i class="fa fa-plus"></i>更新用户</a>
+        <script>$('#toolbar').authorizeButton()</script>
+        <div class="dcui-search-area">
+            关键字: <input class="easyui-textbox" style="width:110px" id="txt_keyword" placeholder="请输入要查询关键字">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-search" id="btn_search">查询</a>
         </div>
-        <div class="btn-group">
-            <a id="NF-edit" authorize="yes" class="btn btn-primary dropdown-text" onclick="btn_updateDepart()"><i class="fa fa-plus"></i>更新部门</a>
-        </div>
-        <div class="operate">
-            <ul class="nav nav-pills">
-                <li class="first">已选中<span>1</span>项</li>
-                @*<li><a id="NF-edit" authorize="yes" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改员工</a></li>*@
-                <li><a id="NF-delete" authorize="yes" onclick="btn_sendMsg()"><i class="fa fa-trash-o"></i>发动消息</a></li>
-                <li><a id="NF-Details" authorize="yes" onclick="btn_details()"><i class="fa fa-search-plus"></i>查看信息</a></li>
-            </ul>
-            <a href="javascript:;" class="close"></a>
-        </div>
-        <script>$('.toolbar').authorizeButton()</script>
     </div>
-    <div class="search">
-        <table>
-            <tr>
-                <td>
-                    <div class="input-group">
-                        <input id="txt_keyword" type="text" class="form-control" placeholder="用户姓名/电话" style="width: 200px;">
-                        <span class="input-group-btn">
-                            <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
-<div class="gridPanel">
-    <table id="gridList"></table>
+
+    <table id="dg" class="easyui-datagrid" style="width:100%;min-height:600px;height:100%;"></table>
 </div>

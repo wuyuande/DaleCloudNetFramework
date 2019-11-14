@@ -13,72 +13,97 @@ using System.Data;
 namespace DaleCloud.Entity.DingTalk
 {
     //DingTalkCorpConfig
-    public class DingTalkCorpConfigEntity
+    public class DingTalkCorpConfigEntity : IEntityV2<DingTalkCorpConfigEntity>, ICreationAuditedV2, IModificationAuditedV2
     {
-   		     
-      	/// <summary>
-		/// T_Id
-        /// </summary>	
-        public int T_Id{ get; set; }        
-		/// <summary>
-		/// T_CorpId
-        /// </summary>	
-        public string T_CorpId{ get; set; }        
-		/// <summary>
-		/// T_CorpSecret
-        /// </summary>	
-        public string T_CorpSecret{ get; set; }        
-		/// <summary>
-		/// T_AppName
+        /// <summary>
+        /// 主键
         /// </summary>		
-	
-        public string T_AppName{ get; set; }        
-		/// <summary>
-		/// T_HeadPic
+        public string uuId { get; set; }
+        /// <summary>
+        /// CorpId
         /// </summary>	
-        public string T_HeadPic{ get; set; }        
+        public string CorpId{ get; set; }        
 		/// <summary>
-		/// T_ApiUrl
+		/// CorpSecret
         /// </summary>	
-        public string T_ApiUrl{ get; set; }        
+        public string CorpSecret{ get; set; }        
 		/// <summary>
-		/// T_AgentId
+		/// AppName
+        /// </summary>	
+        public string AppName{ get; set; }        
+		/// <summary>
+		/// HeadPic
+        /// </summary>	
+        public string HeadPic{ get; set; }        
+		/// <summary>
+		/// ApiUrl
+        /// </summary>	
+        public string ApiUrl{ get; set; }        
+		/// <summary>
+		/// AgentId
         /// </summary>
-        public string T_AgentId{ get; set; }
+        public string AgentId{ get; set; }
         /// <summary>
         /// AppId
         /// </summary>
-        public string T_AppId { get; set; }
+        public string AppId { get; set; }
         /// <summary>
-        /// T_AppKey
+        /// AppKey
         /// </summary>	
-        public string T_AppKey{ get; set; }        
+        public string AppKey{ get; set; }        
 		/// <summary>
-		/// T_AppSecret
+		/// AppSecret
         /// </summary>	
-        public string T_AppSecret{ get; set; }        
+        public string AppSecret{ get; set; }        
 		/// <summary>
-		/// T_Access_Token
+		/// Access_Token
         /// </summary>	
-        public string T_Access_Token{ get; set; }        
+        public string Access_Token{ get; set; }         
 		/// <summary>
-		/// T_CreateTime
+		/// Status
         /// </summary>	
-        public DateTime T_CreateTime{ get; set; }        
+        public int Status{ get; set; }        
 		/// <summary>
-		/// T_Status
-        /// </summary>	
-        public int T_Status{ get; set; }        
-		/// <summary>
-		/// T_Encoding
+		/// Encoding
         /// </summary>		
-        public string T_Encoding{ get; set; }        
+        public string Encoding{ get; set; }        
 		/// <summary>
-		/// T_Remark
+		/// Remark
         /// </summary>	
-        public string T_Remark{ get; set; }        
-		   
-	}
+        public string Remark{ get; set; }
+        /// <summary>
+        ///创建人
+        /// </summary>		
+        public string Creator { get; set; }
+        /// <summary>
+		/// 创建人ID
+        /// </summary>		
+        public string CreatorId { get; set; }
+        /// <summary>
+		/// 创建时间
+        /// </summary>		
+        public DateTime? CreateTime { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>		
+        public string Modifier { get; set; }
+        /// <summary>
+        /// 修改人ID
+        /// </summary>		
+        public string ModifierId { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>		
+        public DateTime? ModifyTime { get; set; }
+        /// <summary>
+        /// 删除人ID
+        /// </summary>		
+        public string DeleterId { get; set; }
+        /// <summary>
+        /// 删除时间
+        /// </summary>		
+        public DateTime? DeleteTime { get; set; }
+    }
 }
 
 

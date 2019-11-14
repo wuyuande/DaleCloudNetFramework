@@ -16,7 +16,7 @@ namespace DaleCloud.Mapping.DingTalk
         public ProcessInstanceMap()
         {
             this.ToTable("DingTalk_ProcessInstanceList");
-            this.HasKey(t => t.uuid);
+            this.HasKey(t => t.uuId);
         }
 
     }

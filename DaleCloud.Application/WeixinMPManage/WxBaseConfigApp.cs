@@ -30,9 +30,9 @@ namespace DaleCloud.Application.WeixinManage
             {
                 expression = expression.And(t => t.WxName.Contains(keyword));
                 expression = expression.Or(t => t.WxId.Contains(keyword));
-                expression = expression.Or(t => t.T_Id.Contains(keyword));
+                expression = expression.Or(t => t.uuId.Contains(keyword));
             }
-            return service.IQueryable(expression).OrderBy(t => t.T_Id).ToList();
+            return service.IQueryable(expression).OrderBy(t => t.uuId).ToList();
         }
 
         public WxBaseConfigEntity GetForm(string keyValue)
@@ -42,7 +42,7 @@ namespace DaleCloud.Application.WeixinManage
         
         public void SubmitForm(WxBaseConfigEntity mEntity, string keyValue)
         {
-            if (service.IQueryable().Count(t => t.WxCode.Equals(mEntity.WxCode) && !t.T_Id.Equals(keyValue)) > 0)
+            if (service.IQueryable().Count(t => t.WxCode.Equals(mEntity.WxCode) && !t.uuId.Equals(keyValue)) > 0)
             {
                 throw new Exception("微信号已存在");
             }
@@ -61,7 +61,7 @@ namespace DaleCloud.Application.WeixinManage
 
         public void DeleteForm(string keyValue)
         {
-            service.Delete(t => t.T_Id == keyValue);
+            service.Delete(t => t.uuId == keyValue);
         }
 
         public WxBaseConfigEntity GetModel(string keyValue)
@@ -88,7 +88,7 @@ namespace DaleCloud.Application.WeixinManage
             var expression = ExtLinq.True<WxBaseConfigEntity>();
             if (!string.IsNullOrEmpty(apiid))
             {
-                expression = expression.And(t => t.T_Id.Contains(apiid));
+                expression = expression.And(t => t.uuId.Contains(apiid));
                 expression = expression.Or(t => t.WxId.Contains(wxid));
             }
             model = service.IQueryable(expression).FirstOrDefault<WxBaseConfigEntity>();
@@ -105,7 +105,7 @@ namespace DaleCloud.Application.WeixinManage
             var expression = ExtLinq.True<WxBaseConfigEntity>();
             if (!string.IsNullOrEmpty(apiid))
             {
-                expression = expression.And(t => t.T_Id.Contains(apiid));
+                expression = expression.And(t => t.uuId.Contains(apiid));
             }
             model = service.IQueryable(expression).FirstOrDefault<WxBaseConfigEntity>();
             if (model != null)
@@ -127,7 +127,7 @@ namespace DaleCloud.Application.WeixinManage
             model = service.IQueryable(expression).FirstOrDefault<WxBaseConfigEntity>();
             if (model != null)
             {
-                return model.WxToken ;
+                return model.Token ;
             }
             return string.Empty;
         }

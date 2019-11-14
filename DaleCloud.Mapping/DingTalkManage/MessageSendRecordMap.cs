@@ -12,12 +12,12 @@ namespace DaleCloud.Mapping.DingTalkManage
 {
 	 	//DingTalk_MessageSendRecord
 		public class MessageSendRecordMap : EntityTypeConfiguration<MessageSendRecordEntity>
-	{
+    {
    		     
 		public MessageSendRecordMap()
         {
             this.ToTable("DingTalk_MessageSendRecord");
-            this.HasKey(t => t.T_Id);
+            this.HasKey(t => t.uuId);
         }
    
 	}

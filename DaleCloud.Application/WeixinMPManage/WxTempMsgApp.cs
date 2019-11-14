@@ -20,7 +20,7 @@ namespace DaleCloud.Application.WeixinManage
 {
     public class WxTempMsgApp
     {
-        private WeixinMP_TemplateMessageRepository service = new WeixinMP_TemplateMessageRepository();
+        private TemplateMessageRepository service = new TemplateMessageRepository();
 
         public List<TemplateMessageEntity> GetList()
         {
@@ -32,11 +32,11 @@ namespace DaleCloud.Application.WeixinManage
             var expression = ExtLinq.True<TemplateMessageEntity>();
             if (!string.IsNullOrEmpty(keyword))
             {
-                expression = expression.And(t => t.T_Code.Contains(keyword));
-                expression = expression.Or(t => t.T_Title.Contains(keyword));
-                expression = expression.Or(t => t.T_TemplateId.Contains(keyword));
+                expression = expression.And(t => t.Code.Contains(keyword));
+                expression = expression.Or(t => t.Title.Contains(keyword));
+                expression = expression.Or(t => t.TemplateId.Contains(keyword));
             }
-            return service.IQueryable(expression).OrderBy(t => t.T_CreateTime).ToList();
+            return service.IQueryable(expression).OrderBy(t => t.CreateTime).ToList();
         }
 
         public TemplateMessageEntity GetForm(string keyValue)
@@ -59,7 +59,7 @@ namespace DaleCloud.Application.WeixinManage
 
         public void DeleteForm(string keyValue)
         {
-            service.Delete(t => t.T_Id == keyValue);
+            service.Delete(t => t.uuId == keyValue);
 
         }
 

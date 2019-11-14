@@ -15,7 +15,7 @@ namespace DaleCloud.Application.WeixinManage
 {
     public class WxUsersApp
     {
-        private WeixinMP_UsersRepository service = new WeixinMP_UsersRepository();
+        private UsersRepository service = new UsersRepository();
 
         public List<UsersEntity> GetList(string keyword = "")
         {
