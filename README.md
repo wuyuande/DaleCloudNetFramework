@@ -1,5 +1,7 @@
 # DaleCloud.Framework框架介绍：
-DaleCloud.Framework是一款基于NFine.Framework 改进而成的新C#.NET WEB框架，而NFine.Framework又是一套基于ASP.NET MVC+EF6+Bootstrap开发出来的框架，其核心版权最终解释权归《NFine团队》所有，但该团队好像对该框架放弃了，不再更新。原项目地址：https://gitee.com/nfine/NFine
+DaleCloud.Framework是一款基于NFine.Framework 改进而成的新C#.NET WEB框架，而NFine.Framework又是一套基于ASP.NET MVC+EF6+Bootstrap开发出来的框架，其核心版权最终解释权归《NFine团队》所有，但该团队好像对该框架放弃了，不再更新。
+原项目地址：https://gitee.com/nfine/NFine
+原开发者博客：https://www.cnblogs.com/huanglin
 # DaleCloud.Framework改进说明：
 1. 针对原框架诟病的cookie后门，现在已经去除；
 2. 将原版jqgrid数据列表风格改为easyUI—Bootstrap风格，除系统核心功能表单以外，其他form表单改为easyUI框架；
@@ -10,7 +12,7 @@ DaleCloud.Framework是一款基于NFine.Framework 改进而成的新C#.NET WEB�
 7. 支持移动端html5开发，暂时使用jqweui框架，后期有空逐步改为vue版；
 8. 支持阿里云短信平台接口；
 
-# 前端以及后端使用技术介绍（包括原版）：
+# 前端以及后端使用技术介绍（括号内表示新版优化新增部分）：
 
 1、前端技术
 
