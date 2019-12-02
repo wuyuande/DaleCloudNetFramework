@@ -16,7 +16,7 @@
             url: "/SystemManage/ModuleButton/SubmitCloneButton",
             param: { moduleId: moduleId, Ids: String(Ids) },
             success: function () {
-                top.modulebutton.$('#dg').treegrid('reload');
+                top.modulebutton.$('#dg').datagrid('reload');
             }
         })
     }

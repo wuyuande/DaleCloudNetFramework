@@ -28,7 +28,8 @@ namespace DaleCloud.Application.CommonService
             }
             return null;
         }
-        
+
+      
         /// <summary>
         /// 根据UserId获取用户姓名
         /// </summary>
@@ -84,6 +85,36 @@ namespace DaleCloud.Application.CommonService
                     }
                 }
                 return username.ToString();
+            }
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// 根据机构ID或其部门ID
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        public static string GetDepartName(string departmentid)
+        {
+            StringBuilder departname = new StringBuilder();
+            if (!string.IsNullOrEmpty(departmentid))
+            {
+                List<string> liststr = new List<string>();
+                liststr = new List<System.String>(departmentid.Split(','));
+
+                List<OrganizeEntity> list = (new OrganizeApp()).GetList();
+                foreach (string departid in liststr)
+                {
+                    if (!string.IsNullOrEmpty(departid))
+                    {
+                        OrganizeEntity user = list.Find(p => p.F_Id == departid);
+                        if (user != null)
+                        {
+                            departname.Append(user.F_FullName + ",");
+                        }
+                    }
+                }
+                return departname.ToString();
             }
             return string.Empty;
         }
@@ -222,9 +253,7 @@ namespace DaleCloud.Application.CommonService
             return string.Empty;
         }
 
-      
        
-
         /// <summary>
         ///  判断是否拥有权限
         /// </summary>

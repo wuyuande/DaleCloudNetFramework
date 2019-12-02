@@ -36,6 +36,8 @@ namespace DaleCloud.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
+            // 开启Log4Net日志配置
+            LogFactory.LogFactoryConfig();
 
             //注册定时作业任务
             SystemTask.PublicSystemTask t = new SystemTask.PublicSystemTask();

@@ -1,5 +1,5 @@
 ﻿/*******************************************************************************
- * Copyright © 2016 DaleCloud.Framework 版权所有
+ * Copyright © 2016 NFine.Framework 版权所有
  * Author: DaleCloud
  * Description: DaleCloud快速开发平台
  * Website：
@@ -13,8 +13,10 @@ using System.Web.Mvc;
 using DaleCloud.Code;
 using DaleCloud.Application.SystemManage;
 using DaleCloud.Entity.SystemManage;
+using DaleCloud.Entity.BaseDataManage;
 using DaleCloud.Application.DingTalk;
 using DaleCloud.Entity.DingTalk;
+using DaleCloud.Application.CommonService;
 using DaleCloud.DingTalk;
 using DaleCloud.Entity.SystemSecurity;
 using DaleCloud.Application.SystemSecurity;
@@ -22,11 +24,8 @@ using DaleCloud.Application.SystemSecurity;
 
 namespace DaleCloud.Web.Controllers
 {
-
-    /// <summary>
-    /// 日常业务数据获取
-    /// </summary>
     //[HandlerLogin]
+    
     public class BizDataController : ControllerBasev2
     {
         private DingTalkApp ding = new DingTalkApp();
@@ -105,6 +104,10 @@ namespace DaleCloud.Web.Controllers
             {
                 data = userApp.GetUserList("");
             }
+            for(int i = 0; i < data.Count; i++)
+            {
+                data[i].F_DepartmentId = CommonApp.GetDepartName(data[i].F_DepartmentId);
+            }
             return Content(data.ToJson());
         }
 
@@ -124,10 +127,7 @@ namespace DaleCloud.Web.Controllers
             return Content(treeList.TreeSelectJson());
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+
         private object GetDataItemList()
         {
             var itemdata = new ItemsDetailApp().GetList();
@@ -144,7 +144,6 @@ namespace DaleCloud.Web.Controllers
             }
             return dictionaryItem;
         }
-
         private object GetOrganizeList()
         {
             OrganizeApp organizeApp = new OrganizeApp();
@@ -210,7 +209,6 @@ namespace DaleCloud.Web.Controllers
             return dictionary;
         }
 
-       
         private object GetUserItemsList()
         {
             var data = (new UserApp()).GetList("");
@@ -227,6 +225,11 @@ namespace DaleCloud.Web.Controllers
             return dictionary;
         }
 
-       
+
+        #region 此处可以放其他的业务数据
+
+
+        #endregion
+
     }
 }

@@ -23,6 +23,7 @@ $.clientsInit = function () {
                 dataJson.organize = data.organize;
                 dataJson.role = data.role;
                 dataJson.duty = data.duty;
+                dataJson.user = data.user;
                 dataJson.authorizeMenu = eval(data.authorizeMenu);
                 dataJson.authorizeButton = data.authorizeButton;
             }

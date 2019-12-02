@@ -1,5 +1,5 @@
 ﻿/*******************************************************************************
- * Copyright © 2016 DaleCloud.Framework 版权所有
+ * Copyright © 2016 NFine.Framework 版权所有
  * Author: DaleCloud
  * Description: DaleCloud快速开发平台
  * Website：
@@ -27,7 +27,7 @@ namespace DaleCloud.Web.Controllers
                 organize = this.GetOrganizeList(),
                 role = this.GetRoleList(),
                 duty = this.GetDutyList(),
-                user = "",
+                user = this.GetUserList(),
                 authorizeMenu = this.GetMenuList(),
                 authorizeButton = this.GetMenuButtonList(),
             };
@@ -97,6 +97,23 @@ namespace DaleCloud.Web.Controllers
             }
             return dictionary;
         }
+        private object GetUserList()
+        {
+            UserApp userApp = new UserApp();
+            var data = userApp.GetUserList("");
+            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+            foreach (UserEntity item in data)
+            {
+                var fieldItem = new
+                {
+                    encode = item.F_Account,
+                    fullname = item.F_RealName
+                };
+                dictionary.Add(item.F_Id, fieldItem);
+            }
+            return dictionary;
+        }
+
         private object GetMenuList()
         {
             var roleId = OperatorProvider.Provider.GetCurrent().RoleId;
