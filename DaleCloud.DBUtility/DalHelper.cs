@@ -13,12 +13,8 @@ namespace DaleCloud.DBUtility
     public class DALHelper<TEntity> where TEntity : class,new()
     {
         private string databasetablename; //数据库表名前缀
-
-        public DALHelper()
-        {
-            databasetablename = "Buss_";
-        }
-        public DALHelper(string _databaseprefix)
+	    
+        public DALHelper(string _databaseprefix = "Sys_")
         {
             databasetablename = _databaseprefix;
         }
