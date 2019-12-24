@@ -40,7 +40,7 @@ namespace DaleCloud.Web
         {
             return Content(new AjaxResultByEasyUI { success = state, message = message }.ToJson());
         }
-        protected virtual ActionResult DataGrid(int total, object data)
+        protected virtual ActionResult ResultDataGrid(int total, object data)
         {
             return Content(new AjaxResultDataGrid { total = total, rows = data }.ToJson());
         }

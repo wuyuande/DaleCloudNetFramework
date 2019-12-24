@@ -19,10 +19,12 @@ namespace DaleCloud.Web.Areas.SystemManage.Controllers
 
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetGridJson(string keyword)
+        public ActionResult GetGridJson(Pagination pagination, string keyword)
         {
-            var data = dutyApp.GetList(keyword);
-            return Content(data.ToJson());
+            pagination.order = "asc";
+            pagination.sort = "F_EnCode";
+            var data = dutyApp.GetList(pagination,keyword);
+            return ResultDataGrid(pagination.records, data);
         }
         [HttpGet]
         [HandlerAjaxOnly]

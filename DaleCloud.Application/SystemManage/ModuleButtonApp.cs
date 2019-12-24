@@ -63,7 +63,7 @@ namespace DaleCloud.Application.SystemManage
             foreach (string item in ArrayId)
             {
                 ModuleButtonEntity moduleButtonEntity = data.Find(t => t.F_Id == item);
-                moduleButtonEntity.F_Id = CommonUtils.GuId();
+                moduleButtonEntity.F_Id = Utils.GuId();
                 moduleButtonEntity.F_ModuleId = moduleId;
                 entitys.Add(moduleButtonEntity);
             }

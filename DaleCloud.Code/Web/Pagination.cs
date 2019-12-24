@@ -23,11 +23,11 @@ namespace DaleCloud.Code
         /// <summary>
         /// 排序列
         /// </summary>
-        public string sidx { get; set; }
+        public string sort { get; set; }
         /// <summary>
         /// 排序类型
         /// </summary>
-        public string sord { get; set; }
+        public string order { get; set; }
         /// <summary>
         /// 总记录数
         /// </summary>

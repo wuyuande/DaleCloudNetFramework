@@ -10,8 +10,6 @@ namespace DaleCloud.Entity
 {
     public class BaseEntityV2<TEntity>
     {
-        //public int D_Id { get; set; }
-        //public DateTime? D_AddTime { get; set; }
         public void Create()
         {
 

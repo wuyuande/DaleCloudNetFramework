@@ -5222,9 +5222,9 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 .label {
     display: inline;
     padding: .2em .6em .3em;
-    font-size: 75%;
-    font-weight: 700;
-    line-height: 1;
+    font-size: 100%;
+    font-weight: 100;
+    line-height: 1.5;
     color: #fff;
     text-align: center;
     white-space: nowrap;

@@ -27,10 +27,10 @@ namespace DaleCloud.Web.Areas.SystemSecurity.Controllers
         [HandlerAjaxOnly]
         public ActionResult GetGridJson(Pagination pagination, string queryJson)
         {
-            pagination.sord = "asc";
-            pagination.sidx = "F_Date";
+            pagination.order = "asc";
+            pagination.sort = "F_Date";
             var data = logApp.GetList(pagination, queryJson);
-            return DataGrid(pagination.total,data);
+            return ResultDataGrid(pagination.total,data);
         }
         [HttpPost]
         [HandlerAjaxOnly]

@@ -27,7 +27,7 @@ namespace DaleCloud.Code
             var licence = Configs.GetValue("LicenceKey");
             if (string.IsNullOrEmpty(licence))
             {
-                licence = CommonUtils.GuId();
+                licence = Utils.GuId();
                 Configs.SetValue("LicenceKey", licence);
             }
             return Md5.md5(licence, 32);

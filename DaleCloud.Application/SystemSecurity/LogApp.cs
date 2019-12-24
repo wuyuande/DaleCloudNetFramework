@@ -73,7 +73,7 @@ namespace DaleCloud.Application.SystemSecurity
         public void WriteDbLog(bool result, string resultLog)
         {
             LogEntity logEntity = new LogEntity();
-            logEntity.F_Id = CommonUtils.GuId();
+            logEntity.F_Id = Utils.GuId();
             logEntity.F_Date = DateTime.Now;
             logEntity.F_Account = OperatorProvider.Provider.GetCurrent().UserCode;
             logEntity.F_NickName = OperatorProvider.Provider.GetCurrent().UserName;
@@ -86,7 +86,7 @@ namespace DaleCloud.Application.SystemSecurity
         }
         public void WriteDbLog(LogEntity logEntity)
         {
-            logEntity.F_Id = CommonUtils.GuId();
+            logEntity.F_Id = Utils.GuId();
             logEntity.F_Date = DateTime.Now;
             logEntity.F_IPAddress = "117.81.192.182";
             logEntity.F_IPAddressName = Net.GetLocation(logEntity.F_IPAddress);

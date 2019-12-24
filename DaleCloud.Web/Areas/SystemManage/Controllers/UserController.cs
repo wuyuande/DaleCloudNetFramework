@@ -23,10 +23,10 @@ namespace DaleCloud.Web.Areas.SystemManage.Controllers
         [HandlerAjaxOnly]
         public ActionResult GetGridJson(Pagination pagination, string keyword)
         {
-            pagination.sord = "asc";
-            pagination.sidx = "F_DepartmentId";
+            pagination.order = "asc";
+            pagination.sort = "F_DepartmentId";
             var data = userApp.GetList(pagination, keyword);
-            return DataGrid(pagination.records, data);
+            return ResultDataGrid(pagination.records, data);
         }
         [HttpGet]
         [HandlerAjaxOnly]

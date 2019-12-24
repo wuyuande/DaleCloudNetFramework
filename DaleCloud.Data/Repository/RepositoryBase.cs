@@ -133,8 +133,8 @@ namespace DaleCloud.DataBase
         }
         public List<TEntity> FindList<TEntity>(Pagination pagination) where TEntity : class,new()
         {
-            bool isAsc = pagination.sord.ToLower() == "asc" ? true : false;
-            string[] _order = pagination.sidx.Split(',');
+            bool isAsc = pagination.order.ToLower() == "asc" ? true : false;
+            string[] _order = pagination.sort.Split(',');
             MethodCallExpression resultExp = null;
             var tempData = dbcontext.Set<TEntity>().AsQueryable();
             foreach (string item in _order)
@@ -161,8 +161,8 @@ namespace DaleCloud.DataBase
         }
         public List<TEntity> FindList<TEntity>(Expression<Func<TEntity, bool>> predicate, Pagination pagination) where TEntity : class,new()
         {
-            bool isAsc = pagination.sord.ToLower() == "asc" ? true : false;
-            string[] _order = pagination.sidx.Split(',');
+            bool isAsc = pagination.order.ToLower() == "asc" ? true : false;
+            string[] _order = pagination.sort.Split(',');
             MethodCallExpression resultExp = null;
             var tempData = dbcontext.Set<TEntity>().Where(predicate);
             foreach (string item in _order)

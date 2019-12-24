@@ -81,7 +81,6 @@
     <Compile Include="Cache\CacheFactory.cs" />
     <Compile Include="Cache\CacheHelper.cs" />
     <Compile Include="Cache\ICache.cs" />
-    <Compile Include="CommonUtils.cs" />
     <Compile Include="Configs\Configs.cs" />
     <Compile Include="Configs\DBConnection.cs" />
     <Compile Include="Json\JsonHelper.cs" />
@@ -133,7 +132,7 @@
     <Compile Include="Pages\PageTemplate.cs" />
     <Compile Include="Pages\PageValidate.cs" />
     <Compile Include="Pagination\PagingHelper.cs" />
-    <Compile Include="PlatformInfoHandler.cs" />
+    <Compile Include="Templates\PlatformInfoHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QrCode\QrCode.cs" />
     <Compile Include="Regex\RegexHelper.cs" />
@@ -147,7 +146,7 @@
     <Compile Include="Templates\TemplateModel.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Validate\Validate.cs" />
-    <Compile Include="VerifyCode.cs" />
+    <Compile Include="VerifyCode\VerifyCode.cs" />
     <Compile Include="Web\AjaxResult.cs" />
     <Compile Include="Web\Browser.cs" />
     <Compile Include="Web\Combo\ComboSelect.cs" />

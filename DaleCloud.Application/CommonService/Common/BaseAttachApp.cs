@@ -57,7 +57,7 @@ namespace DaleCloud.Application.CommonService
             if (!string.IsNullOrEmpty(objectId))
             {
                 BaseAttachEntity entity = new BaseAttachEntity();
-                entity.T_Id = CommonUtils.GuId();
+                entity.T_Id = Utils.GuId();
                 entity.T_CreateTime = DateTime.Now;
                 entity.T_DocId = objectId;
                 entity.T_Path = filpath;

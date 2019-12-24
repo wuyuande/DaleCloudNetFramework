@@ -19,7 +19,7 @@ namespace DaleCloud.Application.SystemManage
         private ModuleApp moduleApp = new ModuleApp();
         private ModuleButtonApp moduleButtonApp = new ModuleButtonApp();
 
-        public List<RoleEntity> GetList(string keyword = "")
+        public List<RoleEntity> GetList( string keyword = "")
         {
             var expression = ExtLinq.True<RoleEntity>();
             if (!string.IsNullOrEmpty(keyword))
@@ -29,6 +29,17 @@ namespace DaleCloud.Application.SystemManage
             }
             expression = expression.And(t => t.F_Category == 1);
             return service.IQueryable(expression).OrderBy(t => t.F_SortCode).ToList();
+        }
+        public List<RoleEntity> GetList(Pagination pagination, string keyword = "")
+        {
+            var expression = ExtLinq.True<RoleEntity>();
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                expression = expression.And(t => t.F_FullName.Contains(keyword));
+                expression = expression.Or(t => t.F_EnCode.Contains(keyword));
+            }
+            expression = expression.And(t => t.F_Category == 1);
+            return service.FindList(expression, pagination);
         }
         public RoleEntity GetForm(string keyValue)
         {
@@ -56,7 +67,7 @@ namespace DaleCloud.Application.SystemManage
             }
             else
             {
-                roleEntity.F_Id = CommonUtils.GuId();
+                roleEntity.F_Id = Utils.GuId();
             }
             var moduledata = moduleApp.GetList();
             var buttondata = moduleButtonApp.GetList();
@@ -64,7 +75,7 @@ namespace DaleCloud.Application.SystemManage
             foreach (var itemId in permissionIds)
             {
                 RoleAuthorizeEntity roleAuthorizeEntity = new RoleAuthorizeEntity();
-                roleAuthorizeEntity.F_Id = CommonUtils.GuId();
+                roleAuthorizeEntity.F_Id = Utils.GuId();
                 roleAuthorizeEntity.F_ObjectType = 1;
                 roleAuthorizeEntity.F_ObjectId = roleEntity.F_Id;
                 roleAuthorizeEntity.F_ItemId = itemId;

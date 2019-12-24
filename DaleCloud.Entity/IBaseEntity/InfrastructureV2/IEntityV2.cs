@@ -14,7 +14,7 @@ namespace DaleCloud.Entity
         public void Create()
         {
             var entity = this as ICreationAuditedV2;
-            entity.uuId = CommonUtils.GuId();
+            entity.uuId = Utils.GuId();
             var LoginInfo = OperatorProvider.Provider.GetCurrent();
             if (LoginInfo != null)
             {

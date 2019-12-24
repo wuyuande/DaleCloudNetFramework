@@ -10,11 +10,13 @@
         $('#dg').datagrid({
             url: '/SystemManage/Role/GetGridJson',
             toolbar: '#toolbar',
-            hideColumn: "F_Id",
             autoRowHeight: false,
             nowrap: true,
             singleSelect: true,
+            rownumbers:true,
             method: 'get',
+            pagination: true,
+            pageSize: 20,
             queryParams: {
                 keyword: "",
             },
