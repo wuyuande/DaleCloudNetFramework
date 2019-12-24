@@ -28,6 +28,13 @@ namespace DaleCloud.Web.Areas.SystemManage.Controllers
         }
         [HttpGet]
         [HandlerAjaxOnly]
+        public ActionResult GetListJson(string keyword)
+        {
+            var data = dutyApp.GetList(keyword);
+            return Content(data.ToJson());
+        }
+        [HttpGet]
+        [HandlerAjaxOnly]
         public ActionResult GetFormJson(string keyValue)
         {
             var data = dutyApp.GetForm(keyValue);

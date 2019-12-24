@@ -22,6 +22,13 @@ namespace DaleCloud.Web.Areas.SystemManage.Controllers
 
         [HttpGet]
         [HandlerAjaxOnly]
+        public ActionResult GetListJson(string keyword)
+        {
+            var data = roleApp.GetList( keyword);
+            return Content(data.ToJson());
+        }
+        [HttpGet]
+        [HandlerAjaxOnly]
         public ActionResult GetGridJson(Pagination pagination, string keyword)
         {
             pagination.order = "asc";

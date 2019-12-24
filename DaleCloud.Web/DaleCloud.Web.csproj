@@ -1341,6 +1341,7 @@
     <Content Include="Configs\xmlconfig\website.config" />
     <Content Include="Areas\Api\Views\Print\PrintDataGrid.cshtml" />
     <Content Include="Configs\xmlconfig\dingtalk.config" />
+    <Content Include="Areas\ExampleManage\Views\Upload\Index.cshtml" />
     <None Include="Properties\PublishProfiles\METEC.EIMS.pubxml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.pubxml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
