@@ -12,6 +12,9 @@ DaleCloud.Framework是一款基于NFine.Framework 改进而成的新C#.NET WEB�
 7. 支持移动端html5开发，暂时使用jqweui框架，后期有空逐步改为vue版；
 8. 支持阿里云短信平台接口；
 
+![首页底部标注了项目来源，大家在使用的时候注意版权保护](https://img-blog.csdnimg.cn/20191114235639770.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1eXVhbmRlcg==,size_16,color_FFFFFF,t_70)
+
+![业务界面](https://img-blog.csdnimg.cn/20191225172543936.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1eXVhbmRlcg==,size_16,color_FFFFFF,t_70) 
 # 前端以及后端使用技术介绍（括号内表示新版优化新增部分）：
 
 1、前端技术
@@ -48,4 +51,5 @@ DaleCloud.Framework是一款基于NFine.Framework 改进而成的新C#.NET WEB�
     二维码：zxing
 
  #### 由于最近公司项目太忙，没来得及整理说明文档，等过完元旦我便开始陆续整理发布说明文档；有网友私信让我建一个群大家一起合力把这个框架完善。确实，这款框架本身就是开源框架，既然正主没有维护了，那我们就一起努力把他维护好。欢迎大家加群。群名称：NFineFramework（依然沿用原框架名）；群 号：920900045。验证码：dalecloud
+ ![QQ群](https://img-blog.csdnimg.cn/20191217171641858.png)
  
