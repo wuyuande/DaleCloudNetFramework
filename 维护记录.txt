@@ -1,2 +1,8 @@
 1. 优化数据库访问NFineDbContext中，处理全局设置自定义精度。使用方法，在定义字段变量前添加 [DecimalPrecision(18,6)]即可
 2. 前端JS中，更新echarts库。jQuery文件夹新增jquery.form.min.js用于前端验证form表单；
+
+2020-01-15:
+1.修复 重置密码报错问题；
+2.新增 常用示例，新增Bootstrap-FileInput 上传控件示例以及后台接收示例
+3.新增 js中新增百度echarts图形报表；
+4.新增 js中新增PCASclass 省市区县选择控件；
