@@ -1,0 +1,2 @@
+1. 优化数据库访问NFineDbContext中，处理全局设置自定义精度。使用方法，在定义字段变量前添加 [DecimalPrecision(18,6)]即可
+2. 前端JS中，更新echarts库。jQuery文件夹新增jquery.form.min.js用于前端验证form表单；

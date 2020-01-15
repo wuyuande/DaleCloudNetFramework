@@ -176,6 +176,7 @@
     <Compile Include="Areas\ExampleManage\Controllers\SendMailController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\SendMessagesController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\SignetController.cs" />
+    <Compile Include="Areas\ExampleManage\Controllers\UploadController.cs" />
     <Compile Include="Areas\ExampleManage\ExampleManageAreaRegistration.cs" />
     <Compile Include="Areas\ReportManage\Controllers\EchartsController.cs" />
     <Compile Include="Areas\ReportManage\Controllers\HighchartsController.cs" />
@@ -535,6 +536,16 @@
     <Content Include="Content\images\weipayimg.png" />
     <Content Include="Content\images\weixin_nfine.png" />
     <Content Include="Content\js\art-template\dateformate.js" />
+    <Content Include="Content\js\bootstrap-fileinput\css\bootstrap.min.css" />
+    <Content Include="Content\js\bootstrap-fileinput\css\fileinput.css" />
+    <Content Include="Content\js\bootstrap-fileinput\css\fileinput.min.css" />
+    <Content Include="Content\js\bootstrap-fileinput\img\loading-sm.gif" />
+    <Content Include="Content\js\bootstrap-fileinput\img\loading.gif" />
+    <Content Include="Content\js\bootstrap-fileinput\js\bootstrap.min.js" />
+    <Content Include="Content\js\bootstrap-fileinput\js\fileinput.js" />
+    <Content Include="Content\js\bootstrap-fileinput\js\fileinput.min.js" />
+    <Content Include="Content\js\bootstrap-fileinput\js\fileinput_locale_zh.js" />
+    <Content Include="Content\js\bootstrap-fileinput\js\jquery-2.0.3.min.js" />
     <Content Include="Content\js\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\js\bootstrap\bootstrap.bundle.js" />
     <Content Include="Content\js\bootstrap\bootstrap.js" />
@@ -822,10 +833,13 @@
     <Content Include="Content\js\jquery-ui\jquery-ui.min.css" />
     <Content Include="Content\js\jquery-ui\jquery-ui.min.js" />
     <Content Include="Content\js\jquery\jquery-2.1.1.min.js" />
+    <Content Include="Content\js\jquery\jquery.form.min.js" />
+    <Content Include="Content\js\jquery\jquery.query.js" />
     <Content Include="Content\js\layout\jquery.layout.js" />
     <Content Include="Content\js\loading\pace.min.js" />
     <Content Include="Content\js\md5\jquery.md5.js" />
     <Content Include="Content\js\art-template\template-web.js" />
+    <Content Include="Content\js\PCASClass\PCASClass.js" />
     <Content Include="Content\js\qrcode\jquery.qrcode.js" />
     <Content Include="Content\js\qrcode\qrcode.js" />
     <Content Include="Content\js\screenfull.js" />
@@ -845,6 +859,8 @@
     <Content Include="Content\js\tableExport\html2canvas.js" />
     <Content Include="Content\js\tableExport\jquery.base64.js" />
     <Content Include="Content\js\tableExport\tableExport.js" />
+    <Content Include="Content\js\upload\ajaxfileupload.js" />
+    <Content Include="Content\js\upload\jquery.ajaxfileupload.js" />
     <Content Include="Content\js\validate\jquery.validate.min.js" />
     <Content Include="Content\js\wangEditor\wangEditor.css" />
     <Content Include="Content\js\wangEditor\wangEditor.js" />
@@ -1345,6 +1361,7 @@
     <Content Include="Areas\Api\Views\Print\PrintDataGrid.cshtml" />
     <Content Include="Configs\xmlconfig\dingtalk.config" />
     <Content Include="Areas\ExampleManage\Views\Upload\Index.cshtml" />
+    <Content Include="Content\js\bootstrap-fileinput\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Properties\PublishProfiles\METEC.EIMS.pubxml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.pubxml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
