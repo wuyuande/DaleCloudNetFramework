@@ -51,6 +51,16 @@ DaleCloud.Framework是一款基于NFine.Framework 改进而成的新C#.NET WEB�
     微信SDK：Senparc.Weixin.6.4.8，Senparc.Weixin.MP.16.7.9，Senparc.Weixin.MP.MVC.7.2.13
     钉钉SDK：TopSdk
     二维码：zxing
+ 
+# DaleCloud.Framework环境要求：
+要使用本框架源码进行开发，开发环境必须达到如下要求：
+1. VS2015及以上版本；
+2. Net4.0及以上版本；
+3. MVC5.0
+4. SQLSERVER2005及以上版本
+目前暂不支持mysql和oracle数据库，后续尽量支持；
+请将源码下载的本地并解压。源码包不包含所需的SDK动态库。
+请使用VS2015及以上版本打开解决方案，在执行生成的时候，根据提示通过nuget来还原需要的SDK动态库包；
 
  #### 由于最近公司项目太忙，没来得及整理说明文档，等过完元旦我便开始陆续整理发布说明文档；有网友私信让我建一个群大家一起合力把这个框架完善。确实，这款框架本身就是开源框架，既然正主没有维护了，那我们就一起努力把他维护好。欢迎大家加群。群名称：NFineFramework（依然沿用原框架名）；群 号：920900045。验证码：dalecloud
 
