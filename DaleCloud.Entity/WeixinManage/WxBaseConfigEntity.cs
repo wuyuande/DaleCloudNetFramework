@@ -8,7 +8,7 @@ using System;
 
 namespace DaleCloud.Entity.WeixinManage
 {
-    public class WxBaseConfigEntity : IEntityV2<WxBaseConfigEntity>, ICreationAuditedV2, IModificationAuditedV2
+    public class WxBaseConfigEntity 
     {
         /// <summary>
         /// 主键
@@ -47,7 +47,7 @@ namespace DaleCloud.Entity.WeixinManage
         /// </summary>
         public string ApiUrl { get; set; }
         /// <summary>
-        /// _AppId
+        /// AppId
         /// </summary>
         public string AppId { get; set; }
         /// <summary>
@@ -59,13 +59,21 @@ namespace DaleCloud.Entity.WeixinManage
         /// </summary>
         public string Access_Token { get; set; }
         /// <summary>
+        /// AgentId
+        /// </summary>
+        public string AgentId { get; set; }
+        /// <summary>
+        /// AppKey
+        /// </summary>
+        public string AppKey { get; set; }
+        /// <summary>
         /// T_Encoding
         /// </summary>
         public string Encoding { get; set; }
         /// <summary>
         /// 微信类型（0，订阅号，1服务号，2企业号）
         /// </summary>
-        public int WxType { get; set; }
+        public int? WxType { get; set; }
         /// <summary>
         /// 备注
         /// </summary>
@@ -106,37 +114,6 @@ namespace DaleCloud.Entity.WeixinManage
         /// 更新的粉丝数
         /// </summary>
         public int? OpenidCount { get; set; }
-        /// <summary>
-        ///创建人
-        /// </summary>		
-        public string Creator { get; set; }
-        /// <summary>
-		/// 创建人ID
-        /// </summary>		
-        public string CreatorId { get; set; }
-        /// <summary>
-		/// 创建时间
-        /// </summary>		
-        public DateTime? CreateTime { get; set; }
-        /// <summary>
-        /// 修改人
-        /// </summary>		
-        public string Modifier { get; set; }
-        /// <summary>
-        /// 修改人ID
-        /// </summary>		
-        public string ModifierId { get; set; }
-        /// <summary>
-        /// 修改时间
-        /// </summary>		
-        public DateTime? ModifyTime { get; set; }
-        /// <summary>
-        /// 删除人ID
-        /// </summary>		
-        public string DeleterId { get; set; }
-        /// <summary>
-        /// 删除时间
-        /// </summary>		
-        public DateTime? DeleteTime { get; set; }
+        
     }
 }

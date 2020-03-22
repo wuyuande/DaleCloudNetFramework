@@ -13,7 +13,7 @@ using System.Data;
 namespace DaleCloud.Entity.DingTalk
 {
     //DingTalkCorpConfig
-    public class DingTalkCorpConfigEntity : IEntityV2<DingTalkCorpConfigEntity>, ICreationAuditedV2, IModificationAuditedV2
+    public class DingTalkCorpConfigEntity 
     {
         /// <summary>
         /// 主键
@@ -58,11 +58,11 @@ namespace DaleCloud.Entity.DingTalk
 		/// <summary>
 		/// Access_Token
         /// </summary>	
-        public string Access_Token{ get; set; }         
-		/// <summary>
-		/// Status
+        public string Access_Token{ get; set; }
+        /// <summary>
+        /// AppType
         /// </summary>	
-        public int Status{ get; set; }        
+        public int AppType { get; set; }        
 		/// <summary>
 		/// Encoding
         /// </summary>		
@@ -71,38 +71,7 @@ namespace DaleCloud.Entity.DingTalk
 		/// Remark
         /// </summary>	
         public string Remark{ get; set; }
-        /// <summary>
-        ///创建人
-        /// </summary>		
-        public string Creator { get; set; }
-        /// <summary>
-		/// 创建人ID
-        /// </summary>		
-        public string CreatorId { get; set; }
-        /// <summary>
-		/// 创建时间
-        /// </summary>		
-        public DateTime? CreateTime { get; set; }
-        /// <summary>
-        /// 修改人
-        /// </summary>		
-        public string Modifier { get; set; }
-        /// <summary>
-        /// 修改人ID
-        /// </summary>		
-        public string ModifierId { get; set; }
-        /// <summary>
-        /// 修改时间
-        /// </summary>		
-        public DateTime? ModifyTime { get; set; }
-        /// <summary>
-        /// 删除人ID
-        /// </summary>		
-        public string DeleterId { get; set; }
-        /// <summary>
-        /// 删除时间
-        /// </summary>		
-        public DateTime? DeleteTime { get; set; }
+
     }
 }
 

@@ -27,18 +27,12 @@ namespace DaleCloud.Web.Areas.WeixinManage.Controllers
     public class WxMenuController : ControllerBase
     {
         private WxBaseConfigApp app = new WxBaseConfigApp();
-        [HttpGet]
-        [HandlerAjaxOnly]
-        public ActionResult GetGridJson(string keyword)
-        {
-            var data = app.GetList();
-            return Content(data.ToJson());
-        }
+       
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetFormJson(string keyValue)
         {
-            var data = app.GetForm(keyValue);
+            var data = app.GetForm();
             return Content(data.ToJson());
         }
         [HttpPost]
@@ -196,15 +190,7 @@ namespace DaleCloud.Web.Areas.WeixinManage.Controllers
            
         }
 
-        [HttpPost]
-        [HandlerAjaxOnly]
-        [HandlerAuthorize]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteForm(string keyValue)
-        {
-            app.DeleteForm(keyValue);
-            return Success("删除成功。");
-        }
+        
 
         #region 获取最新的菜单=================================
         [HttpGet]

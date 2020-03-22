@@ -51,7 +51,6 @@
     <Compile Include="ArticleManage\BaseAttachMap.cs" />
     <Compile Include="DingTalkManage\DepartmentMap.cs" />
     <Compile Include="DingTalkManage\DingTalkAppConfigMap.cs" />
-    <Compile Include="DingTalkManage\DingTalkCorpConfigMap.cs" />
     <Compile Include="DingTalkManage\DingTalkUserMap.cs" />
     <Compile Include="DingTalkManage\MessageSendRecordMap.cs" />
     <Compile Include="DingTalkManage\MessageTemplateMap.cs" />
@@ -77,7 +76,6 @@
     <Compile Include="WeixinManage\ResponseBaseDataMap.cs" />
     <Compile Include="WeixinManage\TemplateMessageMap.cs" />
     <Compile Include="WeixinManage\UsersMap.cs" />
-    <Compile Include="WeixinManage\WxAppConfigMap.cs" />
     <Compile Include="WeixinManage\WxPropertyInfoMap.cs" />
   </ItemGroup>
   <ItemGroup>

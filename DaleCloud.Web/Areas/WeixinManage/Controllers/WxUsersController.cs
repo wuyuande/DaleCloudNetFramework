@@ -146,7 +146,7 @@ namespace DaleCloud.Web.Areas.WeixinManage.Controllers
                     WxBaseConfigEntity weixin = config.GetDefaultConfig();
                     weixin.PersonSynDate = updateTime;
                     weixin.OpenidCount = totCount;
-                    config.SubmitForm(weixin,weixin.uuId);
+                    config.SubmitForm(weixin);
                     ret = "粉丝同步成功！";
                 }
                 else

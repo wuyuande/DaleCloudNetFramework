@@ -1,0 +1,11 @@
+
+======================DaleCloud.NetFramework说明=====================
++	框架名称：DaleCloud.NetFramework（原NFineFramework）        +       	
++	原 作 者：黄林（https://www.cnblogs.com/huanglin）          +
++	维护作者：德尔（https://blog.csdn.net/wuyuander）	    +
++	更新时间：2020-01-15                                        +
++	项目地址：https://github.com/wuyuande/DaleCloudNetFramework +
++-----------------------------注意事项------------------------------+
++	项目所需的动态库程序包由于文件太大没有将packages打包。      +      
++	使用前请先通过NuGet包管理工具还原所需程序包，否则无法使用   +         
+=====================================================================

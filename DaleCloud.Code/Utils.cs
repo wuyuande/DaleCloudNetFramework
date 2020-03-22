@@ -1045,7 +1045,7 @@ namespace DaleCloud.Code
         #region 获得配置文件节点XML文件的绝对路径
         public static string GetXmlMapPath(string xmlName)
         {
-            return GetMapPath(ConfigurationManager.AppSettings[xmlName].ToString());
+            return GetMapPath(ConfigurationManager.AppSettings[xmlName].ToString(),true);
         }
 
         /// <summary>
@@ -1075,13 +1075,13 @@ namespace DaleCloud.Code
         /// </summary>
         /// <param name="strPath">指定的路径</param>
         /// <returns>绝对路径</returns>
-        public static string GetMapPath(string strPath)
+        public static string GetMapPath(string strPath,bool isDomain=false)
         {
             if (strPath.ToLower().StartsWith("http://"))
             {
                 return strPath;
             }
-            if (HttpContext.Current != null)
+            if (HttpContext.Current != null && !isDomain)
             {
                 return HttpContext.Current.Server.MapPath(strPath);
             }

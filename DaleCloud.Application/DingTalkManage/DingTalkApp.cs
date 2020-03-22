@@ -17,35 +17,53 @@ namespace DaleCloud.Application.DingTalk
 {
     public class DingTalkApp
     {
-        private DingTalkCorpConfigRepository service = new DingTalkCorpConfigRepository();
-        private DingTalkAppConfigRepository app = new DingTalkAppConfigRepository();
-        public List<DingTalkCorpConfigEntity> GetList(string keyword = "")
+      
+       
+        public DingTalkCorpConfigEntity GetForm()
         {
-            var expression = ExtLinq.True<DingTalkCorpConfigEntity>();
-            if (!string.IsNullOrEmpty(keyword))
+            Code.SysConfig.DingTalkConfig entity = new Code.SysConfig.DingTalkConfigApp().LoadConfig();
+            if (entity != null)
             {
-                expression = expression.And(t => t.AppKey.Contains(keyword));
-            }
-            return service.IQueryable(expression).OrderBy(t => t.uuId).ToList();
-        }
-        public DingTalkCorpConfigEntity GetForm(string keyValue)
-        {
-            return service.FindEntity(keyValue);
-        }
-        public void DeleteForm(string keyValue)
-        {
-            service.Delete(t => t.uuId == keyValue);
-        }
-
-        public void SubmitForm(DingTalkCorpConfigEntity roleEntity, string keyValue)
-        {
-            if (!string.IsNullOrEmpty(keyValue))
-            {
-                service.Update(roleEntity);
+                DingTalkCorpConfigEntity model = new DingTalkCorpConfigEntity();
+                model.CorpId = entity.CorpId;
+                model.CorpSecret = entity.CorpSecret;
+                model.AppName = entity.AppName;
+                model.HeadPic = entity.HeadPic;
+                model.ApiUrl = entity.ApiUrl;
+                model.AgentId = entity.AgentId;
+                model.AppKey = entity.AppKey;
+                model.AppSecret = entity.AppSecret;
+                model.Encoding = entity.Encoding;
+                model.AppType = (int)entity.AppType;
+                return model;
             }
             else
             {
-                service.Insert(roleEntity);
+                return null;
+            }
+        }
+      
+        public void SubmitForm(DingTalkCorpConfigEntity mEntity)
+        {
+            try
+            {
+                Code.SysConfig.DingTalkConfig model = new Code.SysConfig.DingTalkConfigApp().LoadConfig();
+                model.CorpId = mEntity.CorpId;
+                model.CorpSecret = mEntity.CorpSecret;
+                model.AppName = mEntity.AppName;
+                model.HeadPic = mEntity.HeadPic;
+                model.ApiUrl = mEntity.ApiUrl;
+                model.AgentId = mEntity.AgentId;
+                model.AppKey = mEntity.AppKey;
+                model.AppSecret = mEntity.AppSecret;
+                model.Encoding = mEntity.Encoding;
+                model.AppType = mEntity.AppType;
+               
+                new Code.SysConfig.DingTalkConfigApp().SaveConifg(model);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("保存出错：" + ex.Message);
             }
         }
 
@@ -55,7 +73,7 @@ namespace DaleCloud.Application.DingTalk
         /// <returns></returns>
         public DingTalkCorpConfig GetCorpConfig()
         {
-            DingTalkCorpConfigEntity entity = service.FindEntity(1);
+            Code.SysConfig.DingTalkConfig entity = new Code.SysConfig.DingTalkConfigApp().LoadConfig();
             if (entity != null)
             {
                 DingTalkCorpConfig config = new DingTalkCorpConfig();
@@ -66,7 +84,7 @@ namespace DaleCloud.Application.DingTalk
                 config.AppName = entity.AppName;
                 config.AppKey = entity.AppKey;
                 config.AppSecret = entity.AppSecret;
-                config.HeadPic = entity.HeadPic;
+                //config.HeadPic = entity.HeadPic;
                 return config;
             }
             else
@@ -81,13 +99,11 @@ namespace DaleCloud.Application.DingTalk
         /// <returns></returns>
         public DingTalkAppConfig GetAppConfig(string appcode)
         {
-            DingTalkAppConfigEntity entity = app.FindEntity(appcode);
+            Code.SysConfig.DingTalkConfig entity = new Code.SysConfig.DingTalkConfigApp().LoadConfig();
             if (entity != null)
             {
                 DingTalkAppConfig config = new DingTalkAppConfig();
-                
                 config.AgentId = entity.AgentId;
-                config.AppId = entity.AppId;
                 config.AppName = entity.AppName;
                 config.AppKey = entity.AppKey;
                 config.AppSecret = entity.AppSecret;

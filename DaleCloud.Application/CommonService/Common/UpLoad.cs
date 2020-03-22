@@ -11,11 +11,11 @@ namespace DaleCloud.Application.CommonService
 {
     public class UpLoad
     {
-        private Code.SysConfig.sysconfig sysConfig;
+        private Code.SysConfig.SiteConfig sysConfig;
 
         public UpLoad()
         {
-            sysConfig = new Code.SysConfig.SysConfigApp().loadConfig();
+            sysConfig = new Code.SysConfig.SiteConfigApp().LoadConfig();
         }
 
         /// <summary>

@@ -26,7 +26,7 @@ a:active {
     margin-bottom: 0;
     font-size: 12px;
     font-weight: 400;
-    line-height: 1.42857143;
+    line-height: 1.5;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
@@ -44,7 +44,7 @@ a:active {
         border-right-color: transparent;
         border-bottom-color: transparent;
         border-left-color: transparent;
-    border-radius: 2px;
+    border-radius: 4px;
     cursor: pointer;
 }
 .dcui-btn{
@@ -60,17 +60,90 @@ a:active {
 .dcui-btn:hover,.dcui-btn:focus{
    color:#fff;
 }
-.dcui-btn-black:hover, .dcui-btn-blue:hover, .dcui-btn-brown:hover, .dcui-btn-green:hover, .dcui-btn-orange:hover, .dcui-btn-purple:hover, .dcui-btn-red:hover {
-    opacity: .7;
-    filter: alpha(opacity=80);
-}
+
 .dcui-btn i {
     margin-right: 5px;
     font-size: 13px;
 }
+.dcui-btn-black:hover, .dcui-btn-blue:hover, .dcui-btn-brown:hover, .dcui-btn-green:hover, .dcui-btn-orange:hover, .dcui-btn-purple:hover, .dcui-btn-red:hover {
+    opacity: .7;
+    filter: alpha(opacity=80);
+}
+.dcui-btn-success:hover, .dcui-btn-danger:hover, .dcui-btn-primary:hover, .dcui-btn-info:hover, .dcui-btn-warning:hover, .dcui-btn-secondary:hover {
+    opacity: .7;
+    filter: alpha(opacity=80);
+}
+
+.dcui-btn-success {
+ border: 1px solid transparent;
+ color:#fff;
+ background-color:#28a745;
+ border-color:#28a745;
+}
+.dcui-btn-success:hover {
+ color:#fff;
+ background-color:#218838;
+ border-color:#1e7e34;
+}
+.dcui-btn-danger {
+ border: 1px solid transparent;
+ color:#fff;
+ background-color:#dc3545;
+ border-color:#dc3545;
+}
+.dcui-btn-danger:hover {
+ color:#fff;
+ background-color:#c82333;
+ border-color:#bd2130;
+}
+.dcui-btn-primary {
+ border: 1px solid transparent;
+ color:#fff;
+ background-color:#007bff;
+ border-color:#007bff;
+}
+.dcui-btn-primary:hover {
+ color:#fff;
+ background-color:#0069d9;
+ border-color:#0062cc;
+}
+.dcui-btn-info {
+ border: 1px solid transparent;
+ color:#fff;
+ background-color:#17a2b8;
+ border-color:#17a2b8;
+}
+.dcui-btn-info:hover {
+ color:#fff;
+ background-color:#138496;
+ border-color:#117a8b;
+}
+.dcui-btn-warning {
+ border: 1px solid transparent;
+ color:#fff;
+ background-color:#ffc107;
+ border-color:#ffc107;
+}
+.dcui-btn-warning:hover {
+ color:#fff;
+ background-color:#e0a800;
+ border-color:#d39e00;
+}
+.dcui-btn-secondary {
+ border: 1px solid transparent;
+ color:#fff;
+ background-color:#6c757d;
+ border-color:#6c757d;
+}
+.dcui-btn-secondary:hover {
+ color:#fff;
+ background-color:#6c757d;
+ border-color:#d39e00;
+}
+
 .dcui-btn-green {
  border:0;
- background:#009688;
+ background:#28a745;
  color:#fff
 }
 .dcui-btn-green:hover {
@@ -134,4 +207,3 @@ a:active {
 }
 
 
-/*----------*/

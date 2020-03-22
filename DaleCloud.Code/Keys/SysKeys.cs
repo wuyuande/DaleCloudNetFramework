@@ -23,18 +23,29 @@ namespace DaleCloud.Code
         /// <summary>
         /// 站点配置文件名
         /// </summary>
-        public const string FILE_SYS_XML_CONFING = "Configpath";
+        public const string FILE_SYS_XML_CONFING = "ConfigPath";
         /// <summary>
-        /// URL配置文件名
+        /// 钉钉平台配置文件名
         /// </summary>
-        public const string FILE_URL_XML_CONFING = "Urlspath";
-       
+        public const string FILE_DINGTALK_XML_CONFING = "DingTalkPath";
+        /// <summary>
+        /// 微信平台配置文件名
+        /// </summary>
+        public const string FILE_WEIXINMP_XML_CONFING = "WeiXinPath";
 
         //Cache======================================================
         /// <summary>
         /// 站点配置
         /// </summary>
         public const string CACHE_SYS_CONFIG = "dt_cache_sys_config";
+        /// <summary>
+        /// 钉钉配置
+        /// </summary>
+        public const string CACHE_DINGTALK_CONFIG = "dt_cache_dingtalk_config";
+        /// <summary>
+        /// 微信配置
+        /// </summary>
+        public const string CACHE_WEIXINMP_CONFIG = "dt_cache_weixin_config";
         /// HttpModule映射类
         /// </summary>
         public const string CACHE_SITE_HTTP_MODULE = "dalecloud_cache_http_module";
@@ -89,11 +100,11 @@ namespace DaleCloud.Code
         public const string COOKIE_URL_REFERRER = "dalecloud_cookie_url_referrer";
 
         /// <summary>
-        /// 用户微信T_OpenId
+        /// 用户微信信息
         /// </summary>
         public const string SESSION_WXUSER_INFO = "dalecloud_session_wxuserinfo";
         /// <summary>
-        /// 用户微信T_OpenId
+        /// 用户微信OpenId
         /// </summary>
         public const string SESSION_OPENID = "dalecloud_session_openid";
         /// <summary>
@@ -101,7 +112,7 @@ namespace DaleCloud.Code
         /// </summary>
         public const string COOKIE_WXUSER_INFO = "dalecloud_cookie_wxuserinfo";
         /// <summary>
-        /// 用户微信T_OpenId
+        /// 用户微信OpenId
         /// </summary>
         public const string COOKIE_OPENID = "dalecloud_cookie_openid";
 

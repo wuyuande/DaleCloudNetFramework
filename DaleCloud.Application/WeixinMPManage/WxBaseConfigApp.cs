@@ -16,98 +16,88 @@ namespace DaleCloud.Application.WeixinManage
 {
     public class WxBaseConfigApp
     {
-        private WxBaseConfigRepository service = new WxBaseConfigRepository();
-
-        public List<WxBaseConfigEntity> GetList()
+       
+        /// <summary>
+        /// 读取配置
+        /// </summary>
+        /// <returns></returns>
+        public WxBaseConfigEntity GetForm()
         {
-            return service.IQueryable().ToList();
-        }
-
-        public List<WxBaseConfigEntity> GetList(string keyword = "")
-        {
-            var expression = ExtLinq.True<WxBaseConfigEntity>();
-            if (!string.IsNullOrEmpty(keyword))
+            Code.SysConfig.WeixinConfig entity = new Code.SysConfig.WeixinConfigApp().LoadConfig();
+            if (entity != null)
             {
-                expression = expression.And(t => t.WxName.Contains(keyword));
-                expression = expression.Or(t => t.WxId.Contains(keyword));
-                expression = expression.Or(t => t.uuId.Contains(keyword));
-            }
-            return service.IQueryable(expression).OrderBy(t => t.uuId).ToList();
-        }
+                WxBaseConfigEntity model = new WxBaseConfigEntity();
+                model.WxName = entity.WxName;
+                model.WxId = entity.WxId;
+                model.WxCode = entity.WxCode;
+                model.HeadPic = entity.HeadPic;
+                model.Token = entity.Token;
+                model.ApiUrl = entity.ApiUrl;
+                model.AppId = entity.AppId;
+                model.AgentId = entity.AgentId;
+                model.AppKey = entity.AppKey;
+                model.AppSecret = entity.AppSecret;
+                model.Encoding = entity.Encoding;
+                model.WxType = entity.WxType;
+                model.CloseKW = entity.CloseKW;
+                model.TimeStamp = entity.TimeStamp;
+                model.PersonSynDate = entity.PersonSynDate;
+                model.OpenidCount = entity.OpenidCount;
 
-        public WxBaseConfigEntity GetForm(string keyValue)
-        {
-            return service.FindEntity(keyValue);
-        }
-        
-        public void SubmitForm(WxBaseConfigEntity mEntity, string keyValue)
-        {
-            if (service.IQueryable().Count(t => t.WxCode.Equals(mEntity.WxCode) && !t.uuId.Equals(keyValue)) > 0)
-            {
-                throw new Exception("微信号已存在");
-            }
-            
-            if (!string.IsNullOrEmpty(keyValue))
-            {
-                mEntity.Modify(keyValue);
-                service.Update(mEntity);
+                return model;
             }
             else
             {
-                mEntity.Create();
-                service.Insert(mEntity);
+                return null;
             }
         }
-
-        public void DeleteForm(string keyValue)
+       
+        /// <summary>
+        /// 保存配置
+        /// </summary>
+        /// <param name="mEntity"></param>
+        public void SubmitForm(WxBaseConfigEntity mEntity)
         {
-            service.Delete(t => t.uuId == keyValue);
-        }
-
-        public WxBaseConfigEntity GetModel(string keyValue)
-        {
-            return service.FindEntity(keyValue);
-        }
-
-        public WxBaseConfigEntity GetDefaultConfig(string apiid="")
-        {
-            WxBaseConfigEntity model = new WxBaseConfigEntity();
-            var expression = ExtLinq.True<WxBaseConfigEntity>();
-            if (!string.IsNullOrEmpty(apiid))
+            try
             {
-                expression = expression.And(t => t.WxCode.Contains(apiid));
+                Code.SysConfig.WeixinConfig model = new Code.SysConfig.WeixinConfigApp().LoadConfig();
+                model.WxName = mEntity.WxName;
+                model.WxId = mEntity.WxId;
+                model.WxCode = mEntity.WxCode;
+                model.HeadPic = mEntity.HeadPic;
+                model.Token = mEntity.Token;
+                model.ApiUrl = mEntity.ApiUrl;
+                model.AppId = mEntity.AppId;
+                model.AgentId = mEntity.AgentId;
+                model.AppKey = mEntity.AppKey;
+                model.AppSecret = mEntity.AppSecret;
+                model.Encoding = mEntity.Encoding;
+                model.WxType = mEntity.WxType;
+                model.CloseKW = mEntity.CloseKW;
+                model.TimeStamp = mEntity.TimeStamp;
+                model.PersonSynDate = mEntity.PersonSynDate;
+                model.OpenidCount = mEntity.OpenidCount;
+                new Code.SysConfig.WeixinConfigApp().SaveConifg(model);
             }
-            expression = expression.And(t => t.Status==true);
-            expression = expression.And(t => t.Status == true);
-            return  model = service.IQueryable(expression).FirstOrDefault<WxBaseConfigEntity>();
+            catch(Exception ex)
+            {
+                throw new Exception("保存出错：" + ex.Message);
+            }
         }
 
-        public bool ExistsWidAndWxId(string apiid, string wxid)
+      
+       
+        public WxBaseConfigEntity GetDefaultConfig()
         {
-            WxBaseConfigEntity model = new WxBaseConfigEntity();
-            var expression = ExtLinq.True<WxBaseConfigEntity>();
-            if (!string.IsNullOrEmpty(apiid))
-            {
-                expression = expression.And(t => t.uuId.Contains(apiid));
-                expression = expression.Or(t => t.WxId.Contains(wxid));
-            }
-            model = service.IQueryable(expression).FirstOrDefault<WxBaseConfigEntity>();
-            if (model != null)
-            {
-                return true;
-            }
-            return false;
+            return GetForm();
         }
+
+        
 
         public bool wxCloseKW(string apiid)
         {
             WxBaseConfigEntity model = new WxBaseConfigEntity();
-            var expression = ExtLinq.True<WxBaseConfigEntity>();
-            if (!string.IsNullOrEmpty(apiid))
-            {
-                expression = expression.And(t => t.uuId.Contains(apiid));
-            }
-            model = service.IQueryable(expression).FirstOrDefault<WxBaseConfigEntity>();
+            model = GetForm();
             if (model != null)
             {
                 return model.CloseKW;
@@ -118,13 +108,7 @@ namespace DaleCloud.Application.WeixinManage
         public string GetWeiXinToken(string apiid)
         {
             WxBaseConfigEntity model = new WxBaseConfigEntity();
-            var expression = ExtLinq.True<WxBaseConfigEntity>();
-            if (!string.IsNullOrEmpty(apiid))
-            {
-                expression = expression.And(t => t.WxCode.Contains(apiid));
-                expression = expression.And(t => t.Status==true);
-            }
-            model = service.IQueryable(expression).FirstOrDefault<WxBaseConfigEntity>();
+            model = GetForm();
             if (model != null)
             {
                 return model.Token ;

@@ -1,4 +1,4 @@
-﻿#define 使用RegisterServices方式注册微信
+﻿//#define 使用RegisterServices方式注册微信
 
 using DaleCloud.Code;
 using System.Web.Mvc;

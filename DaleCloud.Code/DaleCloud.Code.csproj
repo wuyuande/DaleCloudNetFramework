@@ -94,7 +94,11 @@
     <Compile Include="Configs\Configs.cs" />
     <Compile Include="Configs\DBConnection.cs" />
     <Compile Include="Json\JsonHelper.cs" />
-    <Compile Include="SysConfig\SysConfigApp.cs" />
+    <Compile Include="SiteConfig\WeixinConfigApp.cs" />
+    <Compile Include="SiteConfig\WeixinConfigModel.cs" />
+    <Compile Include="SiteConfig\DingTalkConfigModel.cs" />
+    <Compile Include="SiteConfig\DingTalkConfigApp.cs" />
+    <Compile Include="SiteConfig\SiteConfigApp.cs" />
     <Compile Include="Web\Tree2\Tree.cs" />
     <Compile Include="Web\Tree2\TreeModel.cs" />
     <Compile Include="Web\TreeGrid\TreeGrid2.cs" />
@@ -150,7 +154,7 @@
     <Compile Include="Security\Md5.cs" />
     <Compile Include="Serialize.cs" />
     <Compile Include="Serialize\SerializationHelper.cs" />
-    <Compile Include="SysConfig\SysConfigModel.cs" />
+    <Compile Include="SiteConfig\SiteConfigModel.cs" />
     <Compile Include="Templates\Template.cs" />
     <Compile Include="Templates\TemplateConfingItem.cs" />
     <Compile Include="Templates\TemplateModel.cs" />

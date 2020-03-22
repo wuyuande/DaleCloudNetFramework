@@ -42,7 +42,6 @@
     <Compile Include="BaseDataManage\BaseAttachRepository.cs" />
     <Compile Include="DingTalkManage\DepartmentRepository.cs" />
     <Compile Include="DingTalkManage\DingTalkAppConfigRepository.cs" />
-    <Compile Include="DingTalkManage\DingTalkCorpConfigRepository.cs" />
     <Compile Include="DingTalkManage\DingTalkUserRepository.cs" />
     <Compile Include="DingTalkManage\MessageSendRecordRepository.cs" />
     <Compile Include="DingTalkManage\MessageTemplateRepository.cs" />
@@ -68,7 +67,6 @@
     <Compile Include="WeixinManage\ResponseBaseData.cs" />
     <Compile Include="WeixinManage\TemplateMessage.cs" />
     <Compile Include="WeixinManage\Users.cs" />
-    <Compile Include="WeixinManage\WxBaseConfigRepository.cs" />
     <Compile Include="WeixinManage\WxPropertyInfoRepository.cs" />
   </ItemGroup>
   <ItemGroup>

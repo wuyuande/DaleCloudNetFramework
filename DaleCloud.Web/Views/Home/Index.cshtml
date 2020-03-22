@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html style="overflow: hidden;">
 <head>
-    <title>EIMS企业信息管理系统-DaleCloud出品</title>
+    <title>EIMS企业信息管理系统-宜宾机电一体化研究所</title>
     <link href="~/Content/css/framework-font.css" rel="stylesheet" />
     <script src="~/Content/js/jquery/jquery-2.1.1.min.js"></script>
     <script src="~/Content/js/bootstrap/bootstrap.js"></script>
@@ -19,7 +19,7 @@
     <div id="theme-wrapper">
         <header class="navbar" id="header-navbar">
             <div class="container" style="padding-right: 0px;">
-                <a href="#" id="logo" class="navbar-brand">企业信息化管理系统</a>
+                <a href="#" id="logo" class="navbar-brand">EIMS管理系统</a>
                 <div class="clearfix">
                     <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs">
                         <ul class="nav navbar-nav pull-left">
@@ -46,21 +46,39 @@
                             <li class="dropdown hidden-xs">
                                 <a class="btn dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-tasks"></i>
-                                    <span class="count">5</span>
+                                    <span class="count" id="msgUnReadTaskTip">5</span>
                                 </a>
+                                <ul class="dropdown-menu">
+                                    <div class="dropdown-arrow arrow-primary"></div>
+                                    <li class="dropdown-header bg-primary">你有<span id="msgUnReadTask">5</span>个未完成任务</li>
+                                    <li><a href="#">中测院项目抓夹时间</a></li>
+                                    <li><a href="#">Dropdown link</a></li>
+                                </ul>
                             </li>
                             <li class="dropdown hidden-xs">
                                 <a class="btn dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-bell"></i>
-                                    <span class="count">8</span>
+                                    <span class="count" id="msgUnReadNotice">8</span>
                                 </a>
+                                <ul class="dropdown-menu">
+                                    <div class="dropdown-arrow arrow-info"></div>
+                                    <li class="dropdown-header bg-info">你有<span id="msgUnReadNotice">8</span>条未读通知</li>
+                                    <li><a href="#">中测院项目抓夹时间</a></li>
+                                    <li><a href="#">Dropdown link</a></li>
+                                </ul>
                             </li>
 
                             <li class="dropdown hidden-xs">
                                 <a class="btn dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-envelope-o"></i>
-                                    <span class="count">16</span>
+                                    <span class="count" id="msgUnReadMessageTip">16</span>
                                 </a>
+                                <ul class="dropdown-menu">
+                                    <div class="dropdown-arrow arrow-success"></div>
+                                    <li class="dropdown-header bg-success">你有<span id="msgUnReadMessage">16</span>条未读消息</li>
+                                    <li><a href="#">中测院项目抓夹时间</a></li>
+                                    <li><a href="#">Dropdown link</a></li>
+                                </ul>
                             </li>
                             <li class="dropdown profile-dropdown">
                                 <a href="#" class="dropdown" data-toggle="dropdown">

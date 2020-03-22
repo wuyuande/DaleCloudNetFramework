@@ -20,10 +20,15 @@ namespace DaleCloud.Code
             try
             {
                 // open the stream...
-                //fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                 XmlSerializer serializer = new XmlSerializer(type);
                 //return serializer.Deserialize(fs);
-                return serializer.Deserialize(File.OpenRead(filename));
+                if (File.Exists(filename))
+                {
+                    //return serializer.Deserialize(File.OpenRead(filename));
+                    return serializer.Deserialize(fs);
+                }
+                return null;
             }
             catch (Exception ex)
             {

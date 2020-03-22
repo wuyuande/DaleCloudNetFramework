@@ -39,7 +39,7 @@
 .topPanel .toolbar .operate .dropdown-menu li a{padding: 5px 20px;}
 .form{width:100%;margin:0px;padding:0px;border-collapse:collapse;border-width:3px 1px 1px;table-layout:fixed}
 .form .formTitle{position:relative;left:0px;text-align:right;white-space:nowrap;font-weight:normal;width:90px;padding-right:15px;color: #666;}
-.form .formTitle{font-size:12px;}
+.form .formTitle{font-size:14px;}
 .form .formTitle font{color:red;position:absolute;right:0px;}
 .form .formValue{position:relative;padding:5px;width:auto;}
 .form .formValue input.form-control{height:30px;line-height:30px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:5px;resize: none;border-radius: 0px;box-shadow:none;}
@@ -62,9 +62,13 @@
 
 .ui-layout .topPanel{border: none;}
 .ui-layout .ui-jqgrid{border-left:none;border-right:none;border-bottom:none;}
+.article-box{border: 1px solid #ddd;}
+.article-header{background-color: #fff;border-bottom: 1px solid #ddd;font-size: 20px;height:50px;line-height:50px;padding-left:30px;padding-right:30px;}
+.article-body{padding:10px 20px;}
+.article-content{padding:10px 20px;}
 .mail-box{border: 1px solid #ddd;}
 .mail-header{background-color: #fff;border-bottom: 1px solid #ddd;font-size: 20px;height:60px;line-height:60px;padding-left:30px;padding-right:30px;}
-.mail-body{padding: 20px;}
+.mail-body{padding:10px 20px;}
 .price-box{width:860px;margin-left:auto;margin-right:auto;border: 1px solid #ddd;box-shadow: rgb(189, 189, 189) 0px 0px 10px;background: #fff;padding: 50px;padding-top:20px;margin-top: 25px;padding-bottom:0px;}
 .price-title{font-size: 30px;text-align: center;line-height:60px;font-weight: bold;}
 .price-subtitle{text-align: center;}

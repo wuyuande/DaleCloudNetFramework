@@ -47,7 +47,7 @@ namespace DaleCloud.Entity.DingTalk
 		/// <summary>
 		/// Unionid
         /// </summary>		
-        public byte[] Unionid{ get; set; }        
+        public string Unionid { get; set; }        
 		/// <summary>
 		/// 是否部门主管
         /// </summary>		
